@@ -5,15 +5,15 @@ import {
   Logo,
   ProfileIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import headerStyles from "./AppHeader.module.css";
+import headerStyles from "./app-header.module.css";
 import LogoSmall from "../../images/logo.svg";
 import MobileMenuOpener from "../../images/mobile_menu_opener.svg";
 
-class AppHeader extends React.Component {
-  render() {
+
+const AppHeader = () => {
     return (
-      <>
-        <div
+      <header>
+        <nav
           className={[
             headerStyles.container,
             headerStyles.desktop_header,
@@ -39,8 +39,8 @@ class AppHeader extends React.Component {
               <span className="ml-1">Личный кабинет</span>
             </li>
           </ul>
-        </div>
-        <div
+        </nav>
+        <nav
           className={[
             headerStyles.container,
             headerStyles.mobile_header,
@@ -49,10 +49,9 @@ class AppHeader extends React.Component {
         >
           <img src={LogoSmall} alt="" />
           <img src={MobileMenuOpener} alt="" />
-        </div>
-      </>
+        </nav>
+      </header>
     );
-  }
 }
 
 export default AppHeader;

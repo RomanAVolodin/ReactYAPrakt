@@ -5,28 +5,28 @@ import {
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import React from "react";
-import { IngredientModel } from "../../models/IngredientModel";
-import styles from "./BurgerConstructor.module.css";
+import PropTypes from 'prop-types';
+import { IngredientModel } from "../../models/ingredient-model";
+import styles from "./burger-constructor.module.css";
+import ingredientPropType from "../../models/ingredient-model-prop-type";
 
-class BurgerConstructor extends React.Component<{
-  chosen_ingredients: IngredientModel[];
-}> {
-  calculateFinalPrice = () => {
-    return this.props.chosen_ingredients.reduce(
-      (acc: number, ing: IngredientModel) => {
-        const price = ing.type === "bun" ? ing.price * 2 : ing.price;
-        return acc + price;
-      },
-      0
-    );
-  };
-  render() {
+
+const BurgerConstructor = ({chosen_ingredients} : {chosen_ingredients: IngredientModel[]}) => {
+    const calculateFinalPrice = () => {
+      return chosen_ingredients.reduce((acc: number, ing: IngredientModel) => {
+          const price = ing.type === "bun" ? ing.price * 2 : ing.price;
+          return acc + price;
+        },
+        0
+      );
+    };
+
     return (
-      <div className={styles.container}>
-        {this.props.chosen_ingredients
+      <section className={styles.container}>
+        {chosen_ingredients
           .filter((i: IngredientModel) => i.type === "bun")
           .map((ing: IngredientModel, index: number) => (
-            <div key={index} className="mt-3">
+            <div key={index} className="mt-1">
               <ConstructorElement
                 thumbnail={ing.image_mobile}
                 text={ing.name}
@@ -37,12 +37,20 @@ class BurgerConstructor extends React.Component<{
             </div>
           ))}
 
-        <div style={{ maxHeight: 500, overflow: "auto" }}>
-          {this.props.chosen_ingredients
+        <div
+            className={
+                [
+                    styles.ingredients_scrollable_container,
+                    chosen_ingredients.filter((i: IngredientModel) => i.type !== "bun").length > 5 ?
+                        styles.scrollbar_appeared : null
+                ].join(" ")
+            }
+        >
+          {chosen_ingredients
             .filter((i: IngredientModel) => i.type !== "bun")
             .map((ing: IngredientModel, index: number) => (
-              <div key={index} className={styles.constructor_element_container}>
-                <DragIcon type="primary" />
+              <div key={index} className={[styles.constructor_element_container, "mt-1"].join(" ")}>
+                <DragIcon type="primary"  />
                 <ConstructorElement
                   thumbnail={ing.image_mobile}
                   text={ing.name}
@@ -52,10 +60,10 @@ class BurgerConstructor extends React.Component<{
             ))}
         </div>
 
-        {this.props.chosen_ingredients
+        {chosen_ingredients
           .filter((i: IngredientModel) => i.type === "bun")
           .map((ing: IngredientModel, index: number) => (
-            <div key={index} className="mt-3">
+            <div key={index} className="mt-1">
               <ConstructorElement
                 thumbnail={ing.image_mobile}
                 text={ing.name}
@@ -66,10 +74,10 @@ class BurgerConstructor extends React.Component<{
             </div>
           ))}
 
-        {this.calculateFinalPrice() > 0 && (
+        {calculateFinalPrice() > 0 && (
           <div className={[styles.final_price, "mt-3 mb-3"].join(" ")}>
             <span className="text text_type_digits-default mr-1">
-              {this.calculateFinalPrice()}
+              {calculateFinalPrice()}
             </span>
             <CurrencyIcon type="primary" />
 
@@ -80,9 +88,14 @@ class BurgerConstructor extends React.Component<{
             </span>
           </div>
         )}
-      </div>
+      </section>
     );
-  }
+}
+
+BurgerConstructor.propTypes = {
+    chosen_ingredients: PropTypes.arrayOf(
+        ingredientPropType.isRequired
+    )
 }
 
 export default BurgerConstructor;
