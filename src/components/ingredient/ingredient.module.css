@@ -10,10 +10,16 @@
   justify-content: flex-start;
   align-items: center;
   flex-basis: 50%;
-  cursor: pointer;
 }
 
 .ingredient_container p {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+.price {
   text-align: center;
   display: flex;
   align-items: center;
@@ -27,5 +33,24 @@
   max-height: 600px;
   overflow: auto;
   padding: 20px;
-  margin-top: 20px
+  margin-top: 20px;
+}
+
+img {
+  cursor: pointer;
+}
+
+.DetailPopup {
+  position: absolute;
+  top: 5px;
+  left: 25px;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility .7s, opacity 0.7s linear;
+  cursor: pointer;
+}
+
+.ingredient_container:hover .DetailPopup {
+  visibility: visible;
+  opacity: 1;
 }

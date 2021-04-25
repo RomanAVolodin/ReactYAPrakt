@@ -1,3 +1,8 @@
+## sprint-1/step-2
+Демо
+[https://youtu.be/7v5X5cG-9rQ](https://youtu.be/7v5X5cG-9rQ)
+
+
 ## sprint-1/step-1
 
 Разметка главной страницы и немного кода, чтоб не было скучно.
