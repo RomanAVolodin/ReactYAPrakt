@@ -1,7 +1,7 @@
 import React, { ReactChild, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import styles from './modal.module.css';
-import ModalOverlay from './modal-overlay/modal-overlay';
+import ModalOverlay from '../modal-overlay/modal-overlay';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types';
 
@@ -9,16 +9,11 @@ const modalRoot = document.getElementById('modals-container') as HTMLElement;
 
 const Modal = (
   { title, show, children, onCloseClick }:
-    { title?: string | undefined,
+    { title?: string,
       show?: boolean,
       children: ReactChild,
       onCloseClick: () => void }) => {
 
-  if (!show) {
-    return null;
-  }
-
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     const close = (e: KeyboardEvent) => {
       if(e.key === "Escape"){
@@ -27,8 +22,11 @@ const Modal = (
     }
     window.addEventListener('keydown', close)
     return () => window.removeEventListener('keydown', close)
-  },[]) // eslint-disable-line react-hooks/exhaustive-deps
+  },[onCloseClick])
 
+  if (!show) {
+    return null;
+  }
 
   const onclick = (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation();

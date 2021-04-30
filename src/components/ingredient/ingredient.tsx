@@ -3,7 +3,7 @@ import { IngredientModel } from '../../models/ingredient-model';
 import styles from './ingredient.module.css';
 import { CheckMarkIcon, Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import Modal from '../modal-window/modal';
-import IngredientDetails from './modal-detailed/ingredient-details';
+import IngredientDetails from '../ingredient-detailed/ingredient-details';
 import PropTypes from 'prop-types';
 import ingredientPropType from '../../models/ingredient-model-prop-type';
 

@@ -1,9 +1,9 @@
 import React from 'react';
-import { IngredientModel } from '../../../models/ingredient-model';
+import { IngredientModel } from '../../models/ingredient-model';
 import styles from './order-details.module.css';
-import OrderPlacedImage from '../../../images/order_placed.svg';
+import OrderPlacedImage from '../../images/order_placed.svg';
 import PropTypes from 'prop-types';
-import ingredientPropType from '../../../models/ingredient-model-prop-type';
+import ingredientPropType from '../../models/ingredient-model-prop-type';
 
 const OrderDetails = ({ingredients}: {ingredients: IngredientModel[]}) => {
   return (

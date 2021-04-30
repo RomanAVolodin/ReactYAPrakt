@@ -10,7 +10,7 @@ import { IngredientModel } from '../../models/ingredient-model';
 import styles from './burger-constructor.module.css';
 import ingredientPropType from '../../models/ingredient-model-prop-type';
 import Modal from '../modal-window/modal';
-import OrderDetails from '../order/order-details/order-details';
+import OrderDetails from '../order-details/order-details';
 
 const BurgerConstructor = ({ chosen_ingredients }: { chosen_ingredients: IngredientModel[] }) => {
 

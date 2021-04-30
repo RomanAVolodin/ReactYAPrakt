@@ -1,6 +1,6 @@
-import { IngredientModel } from '../../../models/ingredient-model';
+import { IngredientModel } from '../../models/ingredient-model';
 import styles from './modal-detailed.module.css';
-import ingredientPropType from '../../../models/ingredient-model-prop-type';
+import ingredientPropType from '../../models/ingredient-model-prop-type';
 
 
 const IngredientDetails = ({ingredient}: {ingredient: IngredientModel}) => {
