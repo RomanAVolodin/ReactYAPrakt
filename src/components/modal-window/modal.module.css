@@ -1,0 +1,36 @@
+.ModalWindow {
+  width: 550px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 25px;
+  padding: 20px;
+  background: #1C1C21;
+  border: 1px solid #020202;
+  z-index: 999;
+
+  animation-duration: 0.3s;
+  animation-name: slidein;
+}
+
+.TitleAndClose {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media only screen and (max-width: 600px) {
+  .ModalWindow {
+    width: 90%;
+  }
+}
+
+@keyframes slidein {
+  from {
+    transform: scale3d(2, 2, 2) translate(-50%, -50%);
+  }
+
+  to {
+    transform: scale3d(1, 1, 1) translate(-50%, -50%);
+  }
+}

@@ -1,0 +1,31 @@
+.container {
+  width: 540px;
+  padding-top: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding-left: 30px;
+}
+
+.final_price {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 20px 0px;
+}
+
+.constructor_element_container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.ingredients_scrollable_container {
+  overflow: auto;
+  max-height: 500px;
+}
+
+.scrollbar_appeared {
+  margin-right: -20px;
+  padding-right: 12px;
+}
