@@ -4,22 +4,24 @@ import {
   CurrencyIcon,
   DragIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import React, {useState} from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
-import { IngredientModel } from '../../models/ingredient-model';
+import { IngredientModel, IngredientTypes } from '../../models/ingredient-model';
 import styles from './burger-constructor.module.css';
 import ingredientPropType from '../../models/ingredient-model-prop-type';
 import Modal from '../modal-window/modal';
 import OrderDetails from '../order-details/order-details';
+import { ChosenIngredientsContext } from '../services/chosen-ingredients-context';
+import { IngredientsReducerAction } from '../../models/ingredients-reducer-type';
 
-const BurgerConstructor = ({ chosen_ingredients }: { chosen_ingredients: IngredientModel[] }) => {
+const BurgerConstructor = () => {
 
   const [orderCompleted, setOrderCompleted] = useState<boolean>(false)
+  const { chosenIngredients, ingredientsDispatcher } = useContext(ChosenIngredientsContext);
 
   const calculateFinalPrice = () => {
-    return chosen_ingredients.reduce((acc: number, ing: IngredientModel) => {
-      const price = ing.type === 'bun' ? ing.price * 2 : ing.price;
-      return acc + price;
+    return chosenIngredients.reduce((acc: number, ing: IngredientModel) => {
+      return acc + ing.price;
     }, 0);
   };
 
@@ -27,53 +29,55 @@ const BurgerConstructor = ({ chosen_ingredients }: { chosen_ingredients: Ingredi
     setOrderCompleted(!orderCompleted)
   }
 
+  const chosenBun = chosenIngredients[0].type === IngredientTypes.Bun ? chosenIngredients[0] : null
+
   return (
     <section className={styles.container}>
-      {chosen_ingredients
-        .filter((i: IngredientModel) => i.type === 'bun')
-        .map((ing: IngredientModel, index: number) => (
-          <div key={index} className="mt-1">
-            <ConstructorElement
-              thumbnail={ing.image_mobile}
-              text={ing.name}
-              price={ing.price}
-              isLocked={true}
-              type="top"
-            />
-          </div>
-        ))}
+      { chosenBun &&
+        <div className="mt-1">
+          <ConstructorElement
+            thumbnail={chosenBun.image_mobile}
+            text={chosenBun.name}
+            price={chosenBun.price}
+            isLocked={true}
+            type="top"
+          />
+      </div> }
 
       <div
         className={[
           styles.ingredients_scrollable_container,
-          chosen_ingredients.filter((i: IngredientModel) => i.type !== 'bun').length > 5
+          chosenIngredients.filter((i: IngredientModel) => i.type !== IngredientTypes.Bun).length > 5
             ? styles.scrollbar_appeared
             : null,
         ].join(' ')}
       >
-        {chosen_ingredients
-          .filter((i: IngredientModel) => i.type !== 'bun')
+
+        {chosenIngredients
+          .filter((i: IngredientModel) => i.type !== IngredientTypes.Bun)
           .map((ing: IngredientModel, index: number) => (
             <div key={index} className={[styles.constructor_element_container, 'mt-1'].join(' ')}>
               <DragIcon type="primary" />
-              <ConstructorElement thumbnail={ing.image_mobile} text={ing.name} price={ing.price} />
+              <ConstructorElement
+                thumbnail={ing.image_mobile}
+                text={ing.name}
+                price={ing.price}
+                handleClose={() => ingredientsDispatcher({type: IngredientsReducerAction.Remove, ingredient: ing})}
+              />
             </div>
           ))}
       </div>
 
-      {chosen_ingredients
-        .filter((i: IngredientModel) => i.type === 'bun')
-        .map((ing: IngredientModel, index: number) => (
-          <div key={index} className="mt-1">
-            <ConstructorElement
-              thumbnail={ing.image_mobile}
-              text={ing.name}
-              price={ing.price}
-              isLocked={true}
-              type="bottom"
-            />
-          </div>
-        ))}
+      { chosenBun &&
+        <div className="mt-1">
+          <ConstructorElement
+            thumbnail={chosenBun.image_mobile}
+            text={chosenBun.name}
+            price={chosenBun.price}
+            isLocked={true}
+            type="bottom"
+          />
+      </div> }
 
       {calculateFinalPrice() > 0 && (
         <div className={[styles.final_price, 'mt-3 mb-3'].join(' ')}>
@@ -89,7 +93,7 @@ const BurgerConstructor = ({ chosen_ingredients }: { chosen_ingredients: Ingredi
       )}
 
       <Modal show={orderCompleted} onCloseClick={placeOrder}>
-        <OrderDetails ingredients={chosen_ingredients} />
+        <OrderDetails />
       </Modal>
 
     </section>

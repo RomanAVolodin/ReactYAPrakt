@@ -14,6 +14,12 @@ export interface IngredientModel {
   __v: number;
 }
 
+export enum IngredientTypes {
+  Bun = "bun",
+  Sause = "sauce",
+  Main = "main"
+}
+
 export interface IngredientsArray {
   ingredients: IngredientModel[];
 }

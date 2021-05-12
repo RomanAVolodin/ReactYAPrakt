@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="65a7763b-2a8a-420b-abfb-1eeb2dce4a52" name="Default Changelist" comment="" />
+    <list default="true" id="65a7763b-2a8a-420b-abfb-1eeb2dce4a52" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/services/chosen-ingredients-context.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/models/ingredients-reducer-type.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/apiURLs.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/burger-constructor/burger-constructor.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/burger-constructor/burger-constructor.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/burger-ingredients/burger-ingredients.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/burger-ingredients/burger-ingredients.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ingredient/ingredient.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ingredient/ingredient.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/main-page/main-page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/main-page/main-page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/order-details/order-details.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/order-details/order-details.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/ingredient-model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/ingredient-model.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,17 +22,17 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="TypeScript File" />
-        <option value="TypeScript JSX File" />
         <option value="CSS File" />
+        <option value="TypeScript JSX File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="sprint-1/step-1" />
+        <entry key="$PROJECT_DIR$" value="sprint-1/step-2" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -55,6 +67,7 @@
       <updated>1618985878216</updated>
       <workItem from="1618985887240" duration="18062000" />
       <workItem from="1619037788168" duration="8863000" />
+      <workItem from="1620804476541" duration="9062000" />
     </task>
     <servers />
   </component>

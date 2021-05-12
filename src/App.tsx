@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import AppHeader from './components/app-header/app-header';
 import MainPage from './components/main-page/main-page';
 import { IngredientModel } from './models/ingredient-model';
-
-const apiUrl = 'https://norma.nomoreparties.space/api/ingredients';
+import { ingredientsApiUrl } from './utils/apiURLs';
 
 
 function App() {
@@ -14,7 +13,7 @@ function App() {
   }>({ isLoading: false, isErrorOccurred: false, ingredients: [] });
 
   useEffect(() => {
-    fetch(apiUrl)
+    fetch(ingredientsApiUrl)
       .then((resp) => resp.json())
       .then(
         (data) => setState( prevState => (
