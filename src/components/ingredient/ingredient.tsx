@@ -14,7 +14,7 @@ const Ingredient = ({ ingredient }: { ingredient: IngredientModel }) => {
   const { chosenIngredients, ingredientsDispatcher } = useContext(ChosenIngredientsContext);
 
   const increaseAmount = () => {
-    ingredientsDispatcher({ type: IngredientsReducerAction.Add, ingredient });
+    ingredientsDispatcher({ type: IngredientsReducerAction.Add, ingredient: { ...ingredient } });
   };
 
   const amount = () => {
@@ -24,7 +24,11 @@ const Ingredient = ({ ingredient }: { ingredient: IngredientModel }) => {
   }
 
   const showModal = () => {
-    setModalShown(!modalShown);
+    setModalShown(true);
+  }
+
+  const hideModal = () => {
+    setModalShown(false);
   }
 
   return (
@@ -39,7 +43,7 @@ const Ingredient = ({ ingredient }: { ingredient: IngredientModel }) => {
       <p>{ingredient.name}</p>
       {amount() > 0 && <Counter count={amount()} size="small" />}
 
-      <Modal title="Детали ингредиента" show={modalShown} onCloseClick={showModal}>
+      <Modal title="Детали ингредиента" show={modalShown} onCloseClick={hideModal}>
           <IngredientDetails ingredient={ingredient} />
       </Modal>
 

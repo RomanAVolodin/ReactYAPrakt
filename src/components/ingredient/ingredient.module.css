@@ -9,7 +9,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  flex-basis: 50%;
+  flex-basis: 45%;
 }
 
 .ingredient_container p {
@@ -33,7 +33,12 @@
   max-height: 600px;
   overflow: auto;
   padding: 20px;
-  margin-top: 20px;
+}
+
+.ingredients_panel_title {
+  flex-basis: 100%;
+  font-size: 20px;
+  margin-top: 30px;
 }
 
 img {

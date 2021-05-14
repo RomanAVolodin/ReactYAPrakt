@@ -2,17 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="65a7763b-2a8a-420b-abfb-1eeb2dce4a52" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/services/chosen-ingredients-context.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/ingredients-reducer-type.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/apiURLs.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/app/app.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/burger-constructor/burger-constructor.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/burger-constructor/burger-constructor.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/burger-ingredients/burger-ingredients.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/burger-ingredients/burger-ingredients.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ingredient/ingredient.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ingredient/ingredient.module.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/ingredient/ingredient.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ingredient/ingredient.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/main-page/main-page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/main-page/main-page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/modal-overlay/modal-overlay.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/modal-overlay/modal-overlay.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/order-details/order-details.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/order-details/order-details.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/ingredient-model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/ingredient-model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/ingredients-reducer-type.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/ingredients-reducer-type.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,6 +60,11 @@
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components/app" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -67,7 +75,8 @@
       <updated>1618985878216</updated>
       <workItem from="1618985887240" duration="18062000" />
       <workItem from="1619037788168" duration="8863000" />
-      <workItem from="1620804476541" duration="9062000" />
+      <workItem from="1620804476541" duration="9517000" />
+      <workItem from="1620895246598" duration="23243000" />
     </task>
     <servers />
   </component>

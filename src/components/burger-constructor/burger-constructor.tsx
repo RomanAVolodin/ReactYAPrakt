@@ -13,6 +13,7 @@ import Modal from '../modal-window/modal';
 import OrderDetails from '../order-details/order-details';
 import { ChosenIngredientsContext } from '../services/chosen-ingredients-context';
 import { IngredientsReducerAction } from '../../models/ingredients-reducer-type';
+import { toast } from 'react-toastify';
 
 const BurgerConstructor = () => {
 
@@ -26,7 +27,15 @@ const BurgerConstructor = () => {
   };
 
   const placeOrder = () => {
-    setOrderCompleted(!orderCompleted)
+    if (!chosenIngredients.find( ing => ing.type === IngredientTypes.Bun)) {
+      toast.warn('Заказ не может быть сформирован, не выбрана булка :(')
+      return
+    }
+    setOrderCompleted(true)
+  }
+
+  const hideOrder = () => {
+    setOrderCompleted(false)
   }
 
   const chosenBun = chosenIngredients[0].type === IngredientTypes.Bun ? chosenIngredients[0] : null
@@ -92,7 +101,7 @@ const BurgerConstructor = () => {
         </div>
       )}
 
-      <Modal show={orderCompleted} onCloseClick={placeOrder}>
+      <Modal show={orderCompleted} onCloseClick={hideOrder}>
         <OrderDetails />
       </Modal>
 

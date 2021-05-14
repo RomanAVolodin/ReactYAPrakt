@@ -1,12 +1,12 @@
 import React, { useReducer } from 'react';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
-import styles from './main-page.module.css';
 import { IngredientModel, IngredientTypes } from '../../models/ingredient-model';
 import ingredientPropType from '../../models/ingredient-model-prop-type';
 import PropTypes from 'prop-types';
 import { IngredientsReducerAction, IngredientsReducerType } from '../../models/ingredients-reducer-type';
 import { ChosenIngredientsContext } from '../services/chosen-ingredients-context';
+import styles from './main-page.module.css';
 
 
 const MainPage = ({ ingredients }: { ingredients: IngredientModel[] }) => {
@@ -18,11 +18,16 @@ const MainPage = ({ ingredients }: { ingredients: IngredientModel[] }) => {
           chosenIngredients = chosenIngredients.filter((ing: IngredientModel) => ing.type !== IngredientTypes.Bun)
           return [action.ingredient, ...chosenIngredients, action.ingredient];
         }
+        const bun = chosenIngredients.find( ing => ing.type === IngredientTypes.Bun)
+        chosenIngredients = chosenIngredients.filter((ing: IngredientModel) => ing.type !== IngredientTypes.Bun)
+        if (bun) {
+          return [bun, ...chosenIngredients, action.ingredient, bun];
+        }
         return [...chosenIngredients, action.ingredient];
       case IngredientsReducerAction.Remove:
         return chosenIngredients.filter((ing: IngredientModel) => ing !== action.ingredient);
       default:
-        throw new Error(`Wrong type of action: ${action.type}`);
+        return chosenIngredients;
     }
   }
 
@@ -33,7 +38,7 @@ const MainPage = ({ ingredients }: { ingredients: IngredientModel[] }) => {
       <ChosenIngredientsContext.Provider value={{ chosenIngredients, ingredientsDispatcher }}>
         <BurgerIngredients ingredients={ingredients} />
         { chosenIngredients.length > 0 &&
-        <BurgerConstructor />
+          <BurgerConstructor />
         }
       </ChosenIngredientsContext.Provider>
 

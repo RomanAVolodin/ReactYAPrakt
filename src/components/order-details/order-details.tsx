@@ -3,6 +3,7 @@ import styles from './order-details.module.css';
 import OrderPlacedImage from '../../images/order_placed.svg';
 import { ChosenIngredientsContext } from '../services/chosen-ingredients-context';
 import { orderApiUrl } from '../../utils/apiURLs';
+import { toast } from 'react-toastify';
 
 const OrderDetails = () => {
   const { chosenIngredients } = useContext(ChosenIngredientsContext);
@@ -14,19 +15,29 @@ const OrderDetails = () => {
     }
 
     fetch(orderApiUrl, {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json' },
-      body: JSON.stringify(postData)
-    })
-      .then((resp) => resp.json())
-      .then( data => {
-          setOrderNumber(data.order.number)
+        method: 'POST',
+        headers: {'Content-Type': 'application/json' },
+        body: JSON.stringify(postData)
+      })
+      .then((resp) => {
+        if (!resp.ok) {
+          throw new Error('Произошла ошибка сети');
+        }
+        return resp.json()
+      })
+      .then((data) => {
+          if (!data.success) {
+            throw new Error('Ошибка получения данных');
+          }
+        setOrderNumber(data.order.number)
         }
       )
       .catch((err) => {
-        console.error(err);
+        toast.error(err.message)
       });
-  }, [chosenIngredients])
+
+  }, [chosenIngredients]);
+
 
   return (
     <div className={styles.Container}>
