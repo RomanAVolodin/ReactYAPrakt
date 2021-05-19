@@ -2,19 +2,34 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="65a7763b-2a8a-420b-abfb-1eeb2dce4a52" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/ingredient-in-constructor/ingredient-in-constructor.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/ingredient-in-constructor/ingredient-in-constructor.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/models/order.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/actions/burger-constructor.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/actions/ingredient-detail.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/actions/ingredient-dragging.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/actions/ingredients.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/actions/order.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/reducers/burger-constructor.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/reducers/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/reducers/ingredient-detail.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/reducers/ingredient-dragging.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/reducers/ingredients.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/reducers/order.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/app/app.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/app/app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/app/app.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/burger-constructor/burger-constructor.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/burger-constructor/burger-constructor.module.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/burger-constructor/burger-constructor.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/burger-constructor/burger-constructor.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/burger-ingredients/burger-ingredients.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/burger-ingredients/burger-ingredients.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ingredient/ingredient.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ingredient/ingredient.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ingredient-detailed/ingredient-details.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ingredient-detailed/ingredient-details.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/ingredient/ingredient.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ingredient/ingredient.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/main-page/main-page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/main-page/main-page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/modal-overlay/modal-overlay.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/modal-overlay/modal-overlay.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/order-details/order-details.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/order-details/order-details.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/services/chosen-ingredients-context.tsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/ingredients-reducer-type.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/ingredients-reducer-type.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/ingredients-reducer-type.tsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -25,10 +40,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="JavaScript File" />
         <option value="TypeScript File" />
         <option value="CSS File" />
         <option value="TypeScript JSX File" />
-        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -51,7 +66,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="js.last.introduce.type" value="LET" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/services/reducers" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -61,7 +76,12 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/services/reducers" />
+      <recent name="$PROJECT_DIR$/src/services/actions" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components/ingredient-in-constructor" />
       <recent name="$PROJECT_DIR$/src/components/app" />
     </key>
   </component>
@@ -76,7 +96,8 @@
       <workItem from="1618985887240" duration="18062000" />
       <workItem from="1619037788168" duration="8863000" />
       <workItem from="1620804476541" duration="9517000" />
-      <workItem from="1620895246598" duration="23243000" />
+      <workItem from="1620895246598" duration="23878000" />
+      <workItem from="1621253431049" duration="29978000" />
     </task>
     <servers />
   </component>

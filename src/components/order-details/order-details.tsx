@@ -1,43 +1,19 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styles from './order-details.module.css';
 import OrderPlacedImage from '../../images/order_placed.svg';
-import { ChosenIngredientsContext } from '../services/chosen-ingredients-context';
-import { orderApiUrl } from '../../utils/apiURLs';
-import { toast } from 'react-toastify';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../services/reducers';
+import { placeOrder } from '../../services/actions/order';
 
 const OrderDetails = () => {
-  const { chosenIngredients } = useContext(ChosenIngredientsContext);
-  const [orderNumber, setOrderNumber] = useState(undefined)
+  const dispatcher = useDispatch();
+  const chosenIngredients = useSelector( (state: RootState) => state.burgerConstructor.ingredients);
 
   useEffect( () => {
-    const postData = {
-      ingredients: chosenIngredients.map(ingredient => ingredient._id)
-    }
+    dispatcher(placeOrder(chosenIngredients))
+  }, [dispatcher, chosenIngredients]);
 
-    fetch(orderApiUrl, {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json' },
-        body: JSON.stringify(postData)
-      })
-      .then((resp) => {
-        if (!resp.ok) {
-          throw new Error('Произошла ошибка сети');
-        }
-        return resp.json()
-      })
-      .then((data) => {
-          if (!data.success) {
-            throw new Error('Ошибка получения данных');
-          }
-        setOrderNumber(data.order.number)
-        }
-      )
-      .catch((err) => {
-        toast.error(err.message)
-      });
-
-  }, [chosenIngredients]);
-
+  const orderNumber = useSelector( (state: RootState) => state.order.order.number)
 
   return (
     <div className={styles.Container}>

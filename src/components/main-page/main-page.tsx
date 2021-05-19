@@ -1,53 +1,28 @@
-import React, { useReducer } from 'react';
+import React from 'react';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
-import { IngredientModel, IngredientTypes } from '../../models/ingredient-model';
-import ingredientPropType from '../../models/ingredient-model-prop-type';
-import PropTypes from 'prop-types';
-import { IngredientsReducerAction, IngredientsReducerType } from '../../models/ingredients-reducer-type';
-import { ChosenIngredientsContext } from '../services/chosen-ingredients-context';
 import styles from './main-page.module.css';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../services/reducers';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 
-const MainPage = ({ ingredients }: { ingredients: IngredientModel[] }) => {
+const MainPage = () => {
 
-  const ingredientsReducer = (chosenIngredients: IngredientModel[], action: IngredientsReducerType) => {
-    switch (action.type) {
-      case IngredientsReducerAction.Add:
-        if (action.ingredient.type === IngredientTypes.Bun) {
-          chosenIngredients = chosenIngredients.filter((ing: IngredientModel) => ing.type !== IngredientTypes.Bun)
-          return [action.ingredient, ...chosenIngredients, action.ingredient];
-        }
-        const bun = chosenIngredients.find( ing => ing.type === IngredientTypes.Bun)
-        chosenIngredients = chosenIngredients.filter((ing: IngredientModel) => ing.type !== IngredientTypes.Bun)
-        if (bun) {
-          return [bun, ...chosenIngredients, action.ingredient, bun];
-        }
-        return [...chosenIngredients, action.ingredient];
-      case IngredientsReducerAction.Remove:
-        return chosenIngredients.filter((ing: IngredientModel) => ing !== action.ingredient);
-      default:
-        return chosenIngredients;
-    }
-  }
-
-  const [chosenIngredients, ingredientsDispatcher] = useReducer(ingredientsReducer, [], undefined);
+  const { ingredients } = useSelector((state: RootState) => state.burgerConstructor);
+  const draggingIngredient = useSelector((state: RootState) => state.draggingIngredient.ingredient);
 
   return (
     <main className={[styles.container, 'mt-4'].join(' ')}>
-      <ChosenIngredientsContext.Provider value={{ chosenIngredients, ingredientsDispatcher }}>
-        <BurgerIngredients ingredients={ingredients} />
-        { chosenIngredients.length > 0 &&
+      <DndProvider backend={HTML5Backend}>
+        <BurgerIngredients />
+        { (ingredients.length > 0 || draggingIngredient) &&
           <BurgerConstructor />
         }
-      </ChosenIngredientsContext.Provider>
-
+      </DndProvider>
     </main>
   );
-};
-
-MainPage.propTypes = {
-  ingredients: PropTypes.arrayOf(ingredientPropType).isRequired,
 };
 
 export default MainPage;

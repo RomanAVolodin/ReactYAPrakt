@@ -1,10 +1,12 @@
-import { IngredientModel } from '../../models/ingredient-model';
 import styles from './modal-detailed.module.css';
-import ingredientPropType from '../../models/ingredient-model-prop-type';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../services/reducers';
 
 
-const IngredientDetails = ({ingredient}: {ingredient: IngredientModel}) => {
-  return (
+const IngredientDetails = () => {
+  const ingredient = useSelector( (state: RootState) => state.detailedIngredient.ingredient)
+
+  return !ingredient ? (<h3>choose ingredient</h3>) : (
     <div className={styles.Container}>
       <img src={ingredient.image_large} alt={ingredient.name} />
       <div className="text text_type_main-default">
@@ -34,9 +36,5 @@ const IngredientDetails = ({ingredient}: {ingredient: IngredientModel}) => {
     </div>
   )
 }
-
-IngredientDetails.propTypes = {
-  ingredient: ingredientPropType.isRequired
-};
 
 export default IngredientDetails;
