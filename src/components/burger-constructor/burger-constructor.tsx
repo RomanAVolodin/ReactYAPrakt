@@ -111,6 +111,13 @@ const BurgerConstructor = () => {
         <OrderDetails />
       </Modal>
 
+      { ingredients.length === 0 && isDragging && (
+        <div className={`text text_type_digits-default ${styles.empty_dropzone}`}>
+          <p>
+            Сладывать тут:)
+          </p>
+        </div>
+      )}
     </section>
   );
 };
