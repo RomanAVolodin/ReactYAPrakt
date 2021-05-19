@@ -1,14 +1,54 @@
-import React from 'react';
-import { IngredientModel } from '../../models/ingredient-model';
+import React, { useContext, useEffect, useState } from 'react';
 import styles from './order-details.module.css';
 import OrderPlacedImage from '../../images/order_placed.svg';
-import PropTypes from 'prop-types';
-import ingredientPropType from '../../models/ingredient-model-prop-type';
+import { ChosenIngredientsContext } from '../services/chosen-ingredients-context';
+import { orderApiUrl } from '../../utils/apiURLs';
+import { toast } from 'react-toastify';
 
-const OrderDetails = ({ingredients}: {ingredients: IngredientModel[]}) => {
+const OrderDetails = () => {
+  const { chosenIngredients } = useContext(ChosenIngredientsContext);
+  const [orderNumber, setOrderNumber] = useState(undefined)
+
+  useEffect( () => {
+    const postData = {
+      ingredients: chosenIngredients.map(ingredient => ingredient._id)
+    }
+
+    fetch(orderApiUrl, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json' },
+        body: JSON.stringify(postData)
+      })
+      .then((resp) => {
+        if (!resp.ok) {
+          throw new Error('Произошла ошибка сети');
+        }
+        return resp.json()
+      })
+      .then((data) => {
+          if (!data.success) {
+            throw new Error('Ошибка получения данных');
+          }
+        setOrderNumber(data.order.number)
+        }
+      )
+      .catch((err) => {
+        toast.error(err.message)
+      });
+
+  }, [chosenIngredients]);
+
+
   return (
     <div className={styles.Container}>
-      <p className="text text_type_digits-large mt-2 glow_text">12345</p>
+      {orderNumber ?
+        <p className="text text_type_digits-large mt-2 glow_text">
+          {orderNumber}
+        </p> :
+        <p className="text text_type_digits-medium mt-2 glow_text">
+          Loading ...
+        </p>
+      }
       <p className="text text_type_main-medium mt-3 mb-5">
         идентификатор заказа
       </p>
@@ -25,8 +65,5 @@ const OrderDetails = ({ingredients}: {ingredients: IngredientModel[]}) => {
   )
 }
 
-OrderDetails.propTypes = {
-  ingredients: PropTypes.arrayOf(ingredientPropType).isRequired
-};
 
 export default OrderDetails;

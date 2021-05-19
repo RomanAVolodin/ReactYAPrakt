@@ -2,37 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="65a7763b-2a8a-420b-abfb-1eeb2dce4a52" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/aws.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/react-burger.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/app-header/AppHeader.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/app-header/AppHeader.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/burger-constructor/BurgerConstructor.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/burger-constructor/BurgerConstructor.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/burger-ingredients/BurgerIngredients.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/burger-ingredients/Ingredient.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/burger-ingredients/Ingredient.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/main-page/MainPage.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/main-page/MainPage.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/images/logo.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/images/mobile_menu_opener.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/IngredientModel.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/data.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.test.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/app/app.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/burger-constructor/burger-constructor.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/burger-constructor/burger-constructor.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/burger-ingredients/burger-ingredients.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/burger-ingredients/burger-ingredients.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ingredient/ingredient.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ingredient/ingredient.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ingredient/ingredient.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ingredient/ingredient.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/main-page/main-page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/main-page/main-page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/modal-overlay/modal-overlay.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/modal-overlay/modal-overlay.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/order-details/order-details.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/order-details/order-details.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logo.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reportWebVitals.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/reportWebVitals.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/setupTests.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/setupTests.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/ingredients-reducer-type.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/ingredients-reducer-type.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -43,14 +25,19 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="TypeScript File" />
-        <option value="TypeScript JSX File" />
         <option value="CSS File" />
+        <option value="TypeScript JSX File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="sprint-1/step-2" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1rT2hDW3F2fb0YmQ5asA8yqIbof" />
@@ -73,6 +60,11 @@
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components/app" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -82,7 +74,9 @@
       <option name="presentableId" value="Default" />
       <updated>1618985878216</updated>
       <workItem from="1618985887240" duration="18062000" />
-      <workItem from="1619037788168" duration="8511000" />
+      <workItem from="1619037788168" duration="8863000" />
+      <workItem from="1620804476541" duration="9517000" />
+      <workItem from="1620895246598" duration="23243000" />
     </task>
     <servers />
   </component>

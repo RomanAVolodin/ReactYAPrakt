@@ -5,7 +5,9 @@ import PropTypes from 'prop-types';
 
 const ModalOverlay = ({onCloseClick} : {onCloseClick: MouseEventHandler<HTMLDivElement>}) => {
   return (
-    <div className={styles.Backdrop} onClick={onCloseClick}>
+    <div
+      className={styles.Backdrop}
+      onClick={onCloseClick}>
     </div>
   )
 }

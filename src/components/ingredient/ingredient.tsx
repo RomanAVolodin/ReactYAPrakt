@@ -1,30 +1,34 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { IngredientModel } from '../../models/ingredient-model';
 import styles from './ingredient.module.css';
 import { CheckMarkIcon, Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import Modal from '../modal-window/modal';
 import IngredientDetails from '../ingredient-detailed/ingredient-details';
-import PropTypes from 'prop-types';
 import ingredientPropType from '../../models/ingredient-model-prop-type';
+import { ChosenIngredientsContext } from '../services/chosen-ingredients-context';
+import { IngredientsReducerAction } from '../../models/ingredients-reducer-type';
 
-const Ingredient = ({
-  ingredient,
-  onChoose,
-}: {
-  ingredient: IngredientModel;
-  onChoose: CallableFunction;
-}) => {
-  const [amount, setAmount] = useState<number>(0);
+const Ingredient = ({ ingredient }: { ingredient: IngredientModel }) => {
+
   const [modalShown, setModalShown] = useState<boolean>(false)
+  const { chosenIngredients, ingredientsDispatcher } = useContext(ChosenIngredientsContext);
 
   const increaseAmount = () => {
-    if (amount > 0 && ingredient.type === 'bun') return;
-    onChoose(ingredient);
-    setAmount(amount + 1);
+    ingredientsDispatcher({ type: IngredientsReducerAction.Add, ingredient: { ...ingredient } });
   };
 
+  const amount = () => {
+    return chosenIngredients.reduce( (accumulator: number, currentValue: IngredientModel) => {
+      return currentValue._id === ingredient._id ? accumulator + 1 : accumulator
+    }, 0);
+  }
+
   const showModal = () => {
-    setModalShown(!modalShown);
+    setModalShown(true);
+  }
+
+  const hideModal = () => {
+    setModalShown(false);
   }
 
   return (
@@ -37,9 +41,9 @@ const Ingredient = ({
         <CurrencyIcon type="primary" />
       </div>
       <p>{ingredient.name}</p>
-      {amount > 0 && <Counter count={amount} size="small" />}
+      {amount() > 0 && <Counter count={amount()} size="small" />}
 
-      <Modal title="Детали ингредиента" show={modalShown} onCloseClick={showModal}>
+      <Modal title="Детали ингредиента" show={modalShown} onCloseClick={hideModal}>
           <IngredientDetails ingredient={ingredient} />
       </Modal>
 
@@ -53,8 +57,7 @@ const Ingredient = ({
 };
 
 Ingredient.propTypes = {
-  ingredient: ingredientPropType.isRequired,
-  onChoose: PropTypes.func.isRequired,
+  ingredient: ingredientPropType.isRequired
 };
 
 export default Ingredient;
