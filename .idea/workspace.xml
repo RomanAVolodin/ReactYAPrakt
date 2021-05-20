@@ -2,9 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="65a7763b-2a8a-420b-abfb-1eeb2dce4a52" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/services/actions/hovered-in-constructor.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/reducers/hovered-in-constructor.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/burger-constructor/burger-constructor.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/burger-constructor/burger-constructor.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/burger-constructor/burger-constructor.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/burger-constructor/burger-constructor.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/burger-ingredients/burger-ingredients.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/burger-ingredients/burger-ingredients.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ingredient-in-constructor/ingredient-in-constructor.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ingredient-in-constructor/ingredient-in-constructor.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ingredient-in-constructor/ingredient-in-constructor.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ingredient-in-constructor/ingredient-in-constructor.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/actions/burger-constructor.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/actions/burger-constructor.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/reducers/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/reducers/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,7 +29,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="sprint-1/step-2" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -72,6 +77,7 @@
       <workItem from="1620804476541" duration="9517000" />
       <workItem from="1620895246598" duration="23878000" />
       <workItem from="1621253431049" duration="30720000" />
+      <workItem from="1621529632453" duration="10583000" />
     </task>
     <servers />
   </component>

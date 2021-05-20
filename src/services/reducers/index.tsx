@@ -5,6 +5,7 @@ import { constructorReducer } from './burger-constructor';
 import { orderReducer } from './order';
 import { ingredientsDetailedReducer } from './ingredient-detail';
 import { ingredientsDraggingReducer } from './ingredient-dragging';
+import { ingredientHoverInconstructorReducer } from './hovered-in-constructor';
 
 
 export const rootReducer = combineReducers({
@@ -12,7 +13,8 @@ export const rootReducer = combineReducers({
   burgerConstructor: constructorReducer,
   order: orderReducer,
   detailedIngredient: ingredientsDetailedReducer,
-  draggingIngredient: ingredientsDraggingReducer
+  draggingIngredient: ingredientsDraggingReducer,
+  hoveredInConstructorIngredient: ingredientHoverInconstructorReducer
 });
 
 export type RootState = ReturnType<typeof rootReducer>

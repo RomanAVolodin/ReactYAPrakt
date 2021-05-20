@@ -1,5 +1,4 @@
 import React, { useState, useRef, RefObject, useEffect } from 'react';
-import { debounce } from 'debounce';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { IngredientTypes } from '../../models/ingredient-model';
 import Ingredient from '../ingredient/ingredient';
@@ -55,15 +54,13 @@ const BurgerIngredients = () => {
       }
     }
 
-    const debounsecHandle = debounce(handleScroll, 500)
-
     const scrollableElement = ingredsContainer.current;
     if (scrollableElement) {
-      scrollableElement.addEventListener( 'scroll', debounsecHandle);
+      scrollableElement.addEventListener( 'scroll', handleScroll);
     }
     return () => {
       if (scrollableElement) {
-        scrollableElement.removeEventListener('scroll', debounsecHandle);
+        scrollableElement.removeEventListener('scroll', handleScroll);
       }
     }
   })
