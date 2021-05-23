@@ -1,48 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import AppHeader from '../app-header/app-header';
 import MainPage from '../main-page/main-page';
-import { IngredientModel } from '../../models/ingredient-model';
-import { ingredientsApiUrl } from '../../utils/apiURLs';
-import { toast, ToastContainer } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch } from 'react-redux';
+import { getIngredients } from '../../services/actions/ingredients';
 
 function App() {
-  const [state, setState] = useState<{
-    isLoading: boolean;
-    isErrorOccurred: boolean;
-    ingredients: IngredientModel[];
-  }>({ isLoading: false, isErrorOccurred: false, ingredients: [] });
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    fetch(ingredientsApiUrl)
-      .then((resp) => {
-        if (!resp.ok) {
-          throw new Error('Произошла ошибка сети');
-        }
-        return resp.json()
-      })
-      .then((data) => {
-          if (!data.success) {
-            throw new Error('Ошибка получения данных');
-          }
-          setState( prevState => (
-            { ...prevState, isLoading: false, ingredients: data.data }
-          ))
-      }
-      )
-      .catch((err) => {
-        toast.error(err.message)
-        setState(prevState => ({ ...prevState, isLoading: false, isErrorOccurred: true }));
-      });
-  }, []);
-
+    dispatch(getIngredients());
+  }, [dispatch]);
 
   return (
-    //TODO: popup window on error
-
     <div className="App">
       <AppHeader />
-      <MainPage ingredients={state.ingredients} />
+      <MainPage />
       <ToastContainer />
     </div>
   );

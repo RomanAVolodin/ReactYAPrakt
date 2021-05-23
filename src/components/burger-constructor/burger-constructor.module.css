@@ -1,10 +1,11 @@
 .container {
   width: 540px;
-  padding-top: 60px;
+  margin-top: 60px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  padding-left: 30px;
+  margin-left: 30px;
+  min-height: 300px;
 }
 
 .final_price {
@@ -14,18 +15,29 @@
   padding: 20px 0px;
 }
 
-.constructor_element_container {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-
 .ingredients_scrollable_container {
   overflow: auto;
   max-height: 500px;
 }
 
+.on_drag_ready {
+  border: 1px dotted rgba(0, 128, 0, 0.6);
+}
+
+.on_drag_hover {
+  border: 1px dotted rgba(128, 0, 107, 0.6);
+}
+
 .scrollbar_appeared {
   margin-right: -20px;
   padding-right: 12px;
+}
+
+.empty_dropzone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  width: 100%;
+  color: rgba(77, 77, 118, 0.42);
 }
