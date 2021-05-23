@@ -14,10 +14,11 @@ import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../services/reducers';
 import {
-  ADD_INGREDIENT_TO_CONSTRUCTOR
+  ADD_INGREDIENT_TO_CONSTRUCTOR, WRAP_INGREDIENTS_IN_CONSTRUCTOR,
 } from '../../services/actions/burger-constructor';
 import { useDrop } from 'react-dnd';
 import { IngredientInConstructor } from '../ingredient-in-constructor/ingredient-in-constructor';
+import { SortableContainer } from 'react-sortable-hoc';
 
 const BurgerConstructor = () => {
 
@@ -50,6 +51,20 @@ const BurgerConstructor = () => {
 
   const chosenBun = ingredients[0] && ingredients[0].type === IngredientTypes.Bun ? ingredients[0] : null
 
+  const SortableList = SortableContainer(({items} : {items: IngredientModel[]}) => {
+    return (
+      <div>
+        {items.map((ing, index) => (
+          <IngredientInConstructor key={`${index}-${ing._id}`} index={chosenBun ? index + 1 : index } ingredient={ing} />
+        ))}
+      </div>
+    );
+  });
+
+  const onSortEnd = ({oldIndex, newIndex}: {oldIndex: number, newIndex: number}) => {
+    dispatcher({type: WRAP_INGREDIENTS_IN_CONSTRUCTOR, indexesOfTransferedElement: {from: oldIndex, to: newIndex}})
+  };
+
   return (
     <section
       onDrop={ e => e.preventDefault() }
@@ -75,12 +90,8 @@ const BurgerConstructor = () => {
             : null,
         ].join(' ')}
       >
-
-        {ingredients
-          .filter((i: IngredientModel) => i.type !== IngredientTypes.Bun)
-          .map((ing: IngredientModel, index: number) => (
-            <IngredientInConstructor key={index} ingredient={ing} />
-          ))}
+        <SortableList items={ingredients
+          .filter((i: IngredientModel) => i.type !== IngredientTypes.Bun)} onSortEnd={ onSortEnd } distance={1} />
       </div>
 
       { chosenBun &&

@@ -2,15 +2,14 @@ import { IngredientModel, IngredientTypes } from '../../models/ingredient-model'
 import {
   ADD_INGREDIENT_TO_CONSTRUCTOR,
   REMOVE_INGREDIENT_FROM_CONSTRUCTOR,
-  PLACE_INGREDIENT_AFTER,
-  PLACE_INGREDIENT_BEFORE
+  WRAP_INGREDIENTS_IN_CONSTRUCTOR,
 } from '../actions/burger-constructor';
 
 
 export type IngredientsReducerActionType = {
   type: string
   ingredient: IngredientModel
-  ingredientReorderWith: IngredientModel
+  indexesOfTransferedElement: { from: number, to: number }
 }
 
 interface ConstructorStateType  {
@@ -48,17 +47,10 @@ export const constructorReducer = (state = initialState, action: IngredientsRedu
       return {...state, ingredients: newIngredients, finalPrice: calculateFinalPrice(newIngredients)}
     }
 
-    case PLACE_INGREDIENT_AFTER: {
-      const newIngredients = state.ingredients.filter((ing: IngredientModel) => ing !== action.ingredient);
-      const index = newIngredients.findIndex( ing => ing === action.ingredientReorderWith);
-      newIngredients.splice(index + 1, 0, action.ingredient);
-      return {...state, ingredients: newIngredients}
-    }
-
-    case PLACE_INGREDIENT_BEFORE: {
-      const newIngredients = state.ingredients.filter((ing: IngredientModel) => ing !== action.ingredient);
-      const index = newIngredients.findIndex( ing => ing === action.ingredientReorderWith);
-      newIngredients.splice(index, 0, action.ingredient);
+    case WRAP_INGREDIENTS_IN_CONSTRUCTOR: {
+      const newIngredients = [ ...state.ingredients ];
+      const cutOut = newIngredients.splice(action.indexesOfTransferedElement.from, 1);
+      newIngredients.splice(action.indexesOfTransferedElement.to, 0, cutOut[0]);
       return {...state, ingredients: newIngredients}
     }
 
