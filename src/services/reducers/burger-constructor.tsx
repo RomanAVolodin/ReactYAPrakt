@@ -5,22 +5,21 @@ import {
   WRAP_INGREDIENTS_IN_CONSTRUCTOR,
 } from '../actions/burger-constructor';
 
-
 export type IngredientsReducerActionType = {
-  type: string
-  ingredient: IngredientModel
-  indexesOfTransferedElement: { from: number, to: number }
+  type: string;
+  ingredient: IngredientModel;
+  indexesOfTransferedElement: { from: number; to: number };
+};
+
+interface ConstructorStateType {
+  ingredients: IngredientModel[];
+  finalPrice: number;
 }
 
-interface ConstructorStateType  {
-  ingredients: IngredientModel[],
-  finalPrice: number
-}
-
-const initialState: ConstructorStateType  = {
+const initialState: ConstructorStateType = {
   ingredients: [],
-  finalPrice: 0
-}
+  finalPrice: 0,
+};
 
 const calculateFinalPrice = (ingredients: IngredientModel[]) => {
   return ingredients.reduce((acc: number, ing: IngredientModel) => {
@@ -31,27 +30,43 @@ const calculateFinalPrice = (ingredients: IngredientModel[]) => {
 export const constructorReducer = (state = initialState, action: IngredientsReducerActionType) => {
   switch (action.type) {
     case ADD_INGREDIENT_TO_CONSTRUCTOR: {
-      let newIngredients = []
+      let newIngredients = [];
       if (action.ingredient.type === IngredientTypes.Bun) {
-        const chosenIngredients = state.ingredients.filter((ing: IngredientModel) => ing.type !== IngredientTypes.Bun)
-        newIngredients = [action.ingredient, ...chosenIngredients, action.ingredient]
+        const chosenIngredients = state.ingredients.filter(
+          (ing: IngredientModel) => ing.type !== IngredientTypes.Bun,
+        );
+        newIngredients = [action.ingredient, ...chosenIngredients, action.ingredient];
       } else {
-        const bun = state.ingredients.find( ing => ing.type === IngredientTypes.Bun)
-        const chosenIngredients  = state.ingredients.filter((ing: IngredientModel) => ing.type !== IngredientTypes.Bun)
-        newIngredients = bun ?  [bun, ...chosenIngredients, action.ingredient, bun] :  [...chosenIngredients, action.ingredient]
+        const bun = state.ingredients.find((ing) => ing.type === IngredientTypes.Bun);
+        const chosenIngredients = state.ingredients.filter(
+          (ing: IngredientModel) => ing.type !== IngredientTypes.Bun,
+        );
+        newIngredients = bun
+          ? [bun, ...chosenIngredients, action.ingredient, bun]
+          : [...chosenIngredients, action.ingredient];
       }
-      return { ...state, ingredients: newIngredients, finalPrice: calculateFinalPrice(newIngredients)}
+      return {
+        ...state,
+        ingredients: newIngredients,
+        finalPrice: calculateFinalPrice(newIngredients),
+      };
     }
     case REMOVE_INGREDIENT_FROM_CONSTRUCTOR: {
-      const newIngredients = state.ingredients.filter((ing: IngredientModel) => ing !== action.ingredient);
-      return {...state, ingredients: newIngredients, finalPrice: calculateFinalPrice(newIngredients)}
+      const newIngredients = state.ingredients.filter(
+        (ing: IngredientModel) => ing !== action.ingredient,
+      );
+      return {
+        ...state,
+        ingredients: newIngredients,
+        finalPrice: calculateFinalPrice(newIngredients),
+      };
     }
 
     case WRAP_INGREDIENTS_IN_CONSTRUCTOR: {
-      const newIngredients = [ ...state.ingredients ];
+      const newIngredients = [...state.ingredients];
       const cutOut = newIngredients.splice(action.indexesOfTransferedElement.from, 1);
       newIngredients.splice(action.indexesOfTransferedElement.to, 0, cutOut[0]);
-      return {...state, ingredients: newIngredients}
+      return { ...state, ingredients: newIngredients };
     }
 
     default: {

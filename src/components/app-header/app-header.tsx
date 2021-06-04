@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import {
   BurgerIcon,
   ListIcon,
@@ -9,7 +10,7 @@ import headerStyles from './app-header.module.css';
 import LogoSmall from '../../images/logo.svg';
 import MobileMenuOpener from '../../images/mobile_menu_opener.svg';
 
-const AppHeader = () => {
+const AppHeader: React.FC = () => {
   return (
     <header>
       <nav
@@ -21,12 +22,25 @@ const AppHeader = () => {
       >
         <ul className={headerStyles.menu_desktop}>
           <li className={headerStyles.menu_item}>
-            <BurgerIcon type="primary" />
-            <span className="ml-1">Конструктор</span>
+            <NavLink
+              exact
+              to="/"
+              className="link text text_type_main-default text_color_inactive"
+              activeClassName="text_color_active"
+            >
+              <BurgerIcon type="primary" />
+              <span className="ml-1">Конструктор</span>
+            </NavLink>
           </li>
           <li className={headerStyles.menu_item}>
-            <ListIcon type="primary" />
-            <span className="ml-1">Лента заказов</span>
+            <NavLink
+              to="/feed"
+              className="link text text_type_main-default text_color_inactive"
+              activeClassName="text_color_active"
+            >
+              <ListIcon type="primary" />
+              <span className="ml-1">Лента заказов</span>
+            </NavLink>
           </li>
         </ul>
 
@@ -34,8 +48,14 @@ const AppHeader = () => {
 
         <ul className={headerStyles.menu_desktop}>
           <li className={headerStyles.menu_item}>
-            <ProfileIcon type="primary" />
-            <span className="ml-1">Личный кабинет</span>
+            <NavLink
+              to="/profile"
+              className="link text text_type_main-default text_color_inactive"
+              activeClassName="text_color_active"
+            >
+              <ProfileIcon type="primary" />
+              <span className="ml-1">Личный кабинет</span>
+            </NavLink>
           </li>
         </ul>
       </nav>

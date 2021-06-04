@@ -1,10 +1,10 @@
 .Backdrop {
-    background: rgba(16, 20, 25, 0.7);
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    z-index: 998;
-    display: flex;
+  background: rgba(16, 20, 25, 0.7);
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 998;
+  display: flex;
 }

@@ -1,0 +1,16 @@
+.container {
+    margin-top: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    align-content: flex-start;
+}
+
+.links {
+    margin-right: 30px;
+    min-width: 300px;
+}
+
+.profile_inner_container {
+    width: 600px;
+}

@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100vw;
+  height: calc(100vh - 88px);
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+.container a {
+  text-decoration: none;
+  color: #4c4cff;
+}
