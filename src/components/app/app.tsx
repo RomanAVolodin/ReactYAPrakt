@@ -14,7 +14,7 @@ import {
   RegisterPage,
   ResetPasswordPage,
   OrderDetailedPage,
-  ProfileMainPage,
+  ProfileMainPage, ProfileUserData, ProfileOrdersHistory,
 } from '../../pages';
 
 
@@ -52,7 +52,19 @@ function App() {
             <OrderDetailedPage />
           </Route>
           <Route path="/profile" >
-            <ProfileMainPage />
+            <ProfileMainPage>
+              <Switch>
+                <Route path="/profile" exact={true}>
+                  <ProfileUserData />
+                </Route>
+                <Route path="/profile/orders" exact={true}>
+                  <ProfileOrdersHistory />
+                </Route>
+                <Route path="/profile/orders/:order_id" exact={true}>
+                  <OrderDetailedPage />
+                </Route>
+              </Switch>
+            </ProfileMainPage>
           </Route>
           <Route>
             <NotFound404 />

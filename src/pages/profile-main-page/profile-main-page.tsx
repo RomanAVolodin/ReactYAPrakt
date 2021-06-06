@@ -1,11 +1,9 @@
 import React from 'react';
-import { NavLink, Switch, Route } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import styles from './profile.module.css';
-import { ProfileUserData } from '../profile-user-data/profile-user-data';
-import { ProfileOrdersHistory, OrderDetailedPage } from '../index';
 
 
-export const ProfileMainPage: React.FC = () => {
+export const ProfileMainPage: React.FC = ({ children }) => {
   return (
     <div className={styles.container}>
       <div className={styles.links}>
@@ -37,17 +35,7 @@ export const ProfileMainPage: React.FC = () => {
         </p>
       </div>
       <div className={styles.profile_inner_container}>
-        <Switch>
-          <Route path="/profile" exact={true}>
-            <ProfileUserData />
-          </Route>
-          <Route path="/profile/orders" exact={true}>
-            <ProfileOrdersHistory />
-          </Route>
-          <Route path="/profile/orders/:order_id" exact={true}>
-            <OrderDetailedPage />
-          </Route>
-        </Switch>
+        { children }
       </div>
     </div>
   );
