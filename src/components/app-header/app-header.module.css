@@ -26,6 +26,10 @@
 }
 
 .menu_item {
+  list-style: none;
+}
+
+.menu_item a {
   display: flex;
   align-items: center;
 }
