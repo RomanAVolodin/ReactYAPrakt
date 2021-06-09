@@ -2,24 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="65a7763b-2a8a-420b-abfb-1eeb2dce4a52" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/OnlyUnauthRoute.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ProtectedRoute.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/location-state.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/user.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/slices/auth.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/api.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/utils.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/app/app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/app/app.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/order-in-list/order-in-list.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/order-in-list/order-in-list.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/login/login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/login/login.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/profile-main-page/profile-main-page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/profile-main-page/profile-main-page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/profile-user-data/profile-user-data.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/profile-user-data/profile-user-data.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/register/register.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/register/register.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/reducers/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/reducers/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/slices/login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/slices/login.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/apiURLs.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/apiURLs.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,7 +80,7 @@
       <workItem from="1621848943395" duration="10184000" />
       <workItem from="1622644308966" duration="37775000" />
       <workItem from="1622788688452" duration="27925000" />
-      <workItem from="1623086913061" duration="22262000" />
+      <workItem from="1623086913061" duration="22691000" />
     </task>
     <servers />
   </component>

@@ -24,8 +24,6 @@ import Modal from '../modal-window/modal';
 
 function App() {
   const dispatch = useDispatch();
-  const history = useHistory();
-  const location = useLocation();
   const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
 
   const closeModalRoute = () => {
