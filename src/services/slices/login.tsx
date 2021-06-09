@@ -7,12 +7,8 @@ import {
 } from '../../utils/initial-states';
 import { Dispatch } from 'redux';
 import { toast } from 'react-toastify';
-import {
-  createUserApiUrl,
-  passwordResetApiUrl,
-  passwordResetRequestApiUrl,
-} from '../../utils/apiURLs';
 import { RootState } from '../reducers';
+import { doPasswordResetRequest, passwordResetRequest } from '../../utils/api';
 
 const initialState = {
   email: EmailFieldInitialState,
@@ -22,65 +18,6 @@ const initialState = {
   isDataTransfering: false,
   isDataTransferingCompleted: false,
   isErrorWhileDataTransfer: false,
-};
-
-export const proceedLogin = () => (dispatch: Dispatch) => {
-  const {
-    dataTransferCompletedSuccessfully,
-    isDataTransfering,
-    errorWhileDataTransfer,
-  } = loginSlice.actions;
-
-  dispatch(isDataTransfering());
-  new Promise<string>((resolve, reject) => {
-    setTimeout(() => {
-      resolve('Data fetched');
-    }, 800);
-  })
-    .then((data) => {
-      dispatch(dataTransferCompletedSuccessfully(data));
-    })
-    .catch((err) => {
-      dispatch(errorWhileDataTransfer());
-      toast.error(err.message);
-    });
-};
-
-export const proceedRegister = () => (dispatch: Dispatch, getState: () => RootState) => {
-  const {
-    dataTransferCompletedSuccessfully,
-    isDataTransfering,
-    errorWhileDataTransfer,
-  } = loginSlice.actions;
-  const { email, password, name } = getState().login;
-
-  dispatch(isDataTransfering());
-  fetch(createUserApiUrl, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      email: email.value,
-      password: password.value,
-      name: name.value,
-    }),
-  })
-    .then((resp) => {
-      if (!resp.ok) {
-        throw new Error('Произошла ошибка сети');
-      }
-      return resp.json();
-    })
-    .then((data) => {
-      if (!data.success) {
-        throw new Error(data.error ? data.error : 'Ошибка получения данных');
-      }
-      dispatch(dataTransferCompletedSuccessfully(data.data));
-      toast.success('Регистрация прошла успешно, можете войти со своими данными');
-    })
-    .catch((err) => {
-      dispatch(errorWhileDataTransfer());
-      toast.error(err.message);
-    });
 };
 
 export const proceedPasswordResetRequest = () => (
@@ -95,13 +32,7 @@ export const proceedPasswordResetRequest = () => (
   const { email } = getState().login;
 
   dispatch(isDataTransfering());
-  fetch(passwordResetRequestApiUrl, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      email: email.value,
-    }),
-  })
+  passwordResetRequest(email.value)
     .then((resp) => {
       if (!resp.ok) {
         throw new Error('Произошла ошибка сети');
@@ -112,7 +43,7 @@ export const proceedPasswordResetRequest = () => (
       if (!data.success) {
         throw new Error(data.error ? data.error : 'Ошибка получения данных');
       }
-      dispatch(dataTransferCompletedSuccessfully(data.data));
+      dispatch(dataTransferCompletedSuccessfully());
       toast.success('На указанный Вами email отправлено письмо с инструкцией');
     })
     .catch((err) => {
@@ -130,14 +61,7 @@ export const proceedPasswordReset = () => (dispatch: Dispatch, getState: () => R
   const { password, verification_code } = getState().login;
 
   dispatch(isDataTransfering());
-  fetch(passwordResetApiUrl, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      password: password.value,
-      token: verification_code.value,
-    }),
-  })
+  doPasswordResetRequest(password.value, verification_code.value)
     .then((resp) => {
       return resp.json();
     })
@@ -145,7 +69,7 @@ export const proceedPasswordReset = () => (dispatch: Dispatch, getState: () => R
       if (!data.success) {
         throw new Error(data.message ? data.message : 'Ошибка получения данных');
       }
-      dispatch(dataTransferCompletedSuccessfully(data.data));
+      dispatch(dataTransferCompletedSuccessfully());
       toast.success('Пароль успешно изменен');
     })
     .catch((err) => {
@@ -199,7 +123,7 @@ export const loginSlice = createSlice({
         state.password.icon = 'ShowIcon';
       }
     },
-    dataTransferCompletedSuccessfully(state, { payload }) {
+    dataTransferCompletedSuccessfully(state) {
       state.isDataTransfering = false;
       state.isErrorWhileDataTransfer = false;
       state.isDataTransferingCompleted = true;

@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Switch, Route, useHistory, useLocation, useRouteMatch } from 'react-router-dom';
 import AppHeader from '../app-header/app-header';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -16,10 +16,21 @@ import {
   OrderDetailedPage,
   ProfileMainPage, ProfileUserData, ProfileOrdersHistory,
 } from '../../pages';
+import { ProtectedRoute } from '../ProtectedRoute';
+import { OnlyUnauthRoute } from '../OnlyUnauthRoute';
+import { LocationState } from '../../models/location-state';
+import Modal from '../modal-window/modal';
 
 
 function App() {
   const dispatch = useDispatch();
+  const history = useHistory();
+  const location = useLocation();
+  const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
+
+  const closeModalRoute = () => {
+    // history.push(location.state)
+  }
 
   useEffect(() => {
     dispatch(getIngredients());
@@ -33,25 +44,25 @@ function App() {
           <Route path="/" exact={true}>
             <MainPage />
           </Route>
-          <Route path="/login" exact={true}>
+          <OnlyUnauthRoute path="/login" exact={true}>
             <LoginPage />
-          </Route>
-          <Route path="/register" exact={true}>
+          </OnlyUnauthRoute>
+          <OnlyUnauthRoute path="/register" exact={true}>
             <RegisterPage />
-          </Route>
-          <Route path="/forgot-password" exact={true}>
+          </OnlyUnauthRoute>
+          <OnlyUnauthRoute path="/forgot-password" exact={true}>
             <ForgotPasswordPage />
-          </Route>
-          <Route path="/reset-password" exact={true}>
+          </OnlyUnauthRoute>
+          <OnlyUnauthRoute path="/reset-password" exact={true}>
             <ResetPasswordPage />
-          </Route>
+          </OnlyUnauthRoute>
           <Route path="/feed" exact={true}>
             <Feed />
           </Route>
           <Route path="/feed/:order_id" exact={true}>
             <OrderDetailedPage />
           </Route>
-          <Route path="/profile" >
+          <ProtectedRoute path="/profile" >
             <ProfileMainPage>
               <Switch>
                 <Route path="/profile" exact={true}>
@@ -60,12 +71,24 @@ function App() {
                 <Route path="/profile/orders" exact={true}>
                   <ProfileOrdersHistory />
                 </Route>
-                <Route path="/profile/orders/:order_id" exact={true}>
-                  <OrderDetailedPage />
+                <Route path="/profile/orders/:order_id" exact={true} render={ ({location, match}) => {
+                  if (location && location.state) {
+                    const { from } = location.state as LocationState;
+                    if (from.pathname === '/profile/orders') {
+                      return (
+                        <Modal title="Детали ингредиента" show={true} onCloseClick={closeModalRoute}>
+                          <OrderDetailedPage />
+                        </Modal>
+                      )
+                    }
+                  }
+
+                  return (<OrderDetailedPage />)
+                }}>
                 </Route>
               </Switch>
             </ProfileMainPage>
-          </Route>
+          </ProtectedRoute>
           <Route>
             <NotFound404 />
           </Route>

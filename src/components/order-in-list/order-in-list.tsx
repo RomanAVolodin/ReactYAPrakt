@@ -5,12 +5,13 @@ import { RootState } from '../../services/reducers';
 import styles from './order-in-list.module.css';
 import { IngredientModel } from '../../models/ingredient-model';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useHistory, useRouteMatch } from 'react-router-dom';
+import { useHistory, useLocation, useRouteMatch } from 'react-router-dom';
 import OrderStatusTitle from '../order-status-title/order-status-title';
 
 
 const OrderInList = ({ order }: { order: Order }) => {
-  let match = useRouteMatch();
+  const match = useRouteMatch();
+  const location = useLocation();
   const history = useHistory();
   const ingredientsAll = useSelector((state: RootState) => state.ingredients.ingredients);
 
@@ -26,7 +27,7 @@ const OrderInList = ({ order }: { order: Order }) => {
   const MAX_ELEMENTS_AMOUNT = 6;
 
   return (
-    <div className={styles.container} onClick={() => history.push(`${match.url}/${order.number}`)}>
+    <div className={styles.container} onClick={() => history.push({pathname: `${match.url}/${order.number}`, state: { from: location }})}>
       <div className={styles.order_number_date}>
         <p className="text text_type_digits-default">#{order.number}</p>
         <p className="text text_type_main-default text_color_inactive">Сегодня, 16:20 i-GMT+3</p>
