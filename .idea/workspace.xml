@@ -2,51 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d1578c80-08dc-4464-a437-025ad5075892" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/pages/profile-user-data/profile-user-data.module.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/OnlyUnauthRoute.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/OnlyUnauthRoute.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ProtectedRoute.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ProtectedRoute.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/app/app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/app/app.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/burger-constructor/burger-constructor.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/burger-constructor/burger-constructor.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/feed-list/feed-list.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/feed-list/feed-list.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/feed-summary/feed-summary.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/feed-summary/feed-summary.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/feed-summary/feed-summary.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/feed-summary/feed-summary.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ingredient-detailed/ingredient-details.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/ingredient-detailed/ingredient-details.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ingredient-detailed/modal-detailed.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/ingredient-detailed/modal-detailed.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ingredient-in-constructor/ingredient-in-constructor.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ingredient-in-constructor/ingredient-in-constructor.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ingredient-with-amount-for-feed/ingredient-with-amount-for-feed.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ingredient-with-amount-for-feed/ingredient-with-amount-for-feed.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ingredient-with-amount-for-feed/ingredient-with-amount-for-feed.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ingredient-with-amount-for-feed/ingredient-with-amount-for-feed.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ingredient/ingredient.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ingredient/ingredient.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/modal-window/modal.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/modal-window/modal.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/order-in-list/order-in-list.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/order-in-list/order-in-list.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/order-in-list/order-in-list.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/order-in-list/order-in-list.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/order-status-title/order-status-title.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/order-status-title/order-status-title.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/orders-list/orders-list.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/orders-list/orders-list.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/orders-list/orders-list.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/orders-list/orders-list.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/ingredient-model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/ingredient-model.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/location-state.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/location-state.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/order.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/order.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/user.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/user.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/forgot-password/forgot-password.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/forgot-password/forgot-password.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/login/login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/login/login.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/order-detailed-page/order-detailed-page.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/order-detailed-page/order-detailed-page.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/order-detailed-page/order-detailed-page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/order-detailed-page/order-detailed-page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/profile-main-page/profile-main-page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/profile-main-page/profile-main-page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/profile-main-page/profile.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/profile-main-page/profile.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/profile-orders-history/profile-orders-history.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/profile-orders-history/profile-orders-history.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/profile-user-data/profile-user-data.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/profile-user-data/profile-user-data.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/register/register.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/register/register.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/reset-password/reset-password.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/reset-password/reset-password.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/reducers/ingredient-detail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/reducers/ingredient-detail.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/slices/auth.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/slices/auth.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/slices/feed.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/slices/feed.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/slices/ingredients.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/slices/ingredients.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/api.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/api.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/feed-fake-data.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/feed-fake-data.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/utils.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
