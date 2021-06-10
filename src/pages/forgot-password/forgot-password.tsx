@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import styles from '../login/login.module.css';
-import { Button, Input, Logo } from '@ya.praktikum/react-developer-burger-ui-components';
+
 import validator from 'validator';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../services/reducers';
@@ -11,6 +11,7 @@ import {
   proceedPasswordResetRequest,
   switchOffDataTransferStatus,
 } from '../../services/slices/login';
+import { Button, Input, Logo } from '@ya.praktikum/react-developer-burger-ui-components';
 
 const ForgotPasswordPage: React.FC = () => {
   const {
@@ -21,6 +22,7 @@ const ForgotPasswordPage: React.FC = () => {
   } = useSelector((state: RootState) => state.login);
   const dispatcher = useDispatch();
   const history = useHistory();
+  const location = useLocation();
 
   const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
     dispatcher(changeEmailFieldValue(e.target.value));
@@ -44,9 +46,9 @@ const ForgotPasswordPage: React.FC = () => {
   useEffect(() => {
     if (isDataTransferingCompleted) {
       dispatcher(switchOffDataTransferStatus());
-      history.replace('/reset-password');
+      history.replace({pathname: '/reset-password', state: { from: location }});
     }
-  }, [isDataTransferingCompleted, history, dispatcher]);
+  }, [isDataTransferingCompleted, history, location, dispatcher]);
 
   return (
     <div className={styles.container}>

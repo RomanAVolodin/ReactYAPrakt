@@ -1,10 +1,13 @@
 import {
   createUserApiUrl,
   getUserApiUrl,
+  ingredientsApiUrl,
   loginUserApiUrl,
-  logoutUserApiUrl, passwordResetApiUrl,
+  logoutUserApiUrl,
+  passwordResetApiUrl,
   passwordResetRequestApiUrl,
-  refreshTokenApiUrl, updateUserApiUrl,
+  refreshTokenApiUrl,
+  updateUserApiUrl,
 } from './apiURLs';
 import { User } from '../models/user';
 import { getCookie, getFromLocalStorage } from './utils';
@@ -16,11 +19,11 @@ export const registerRequest = async (user: User) => {
     cache: 'no-cache',
     credentials: 'same-origin',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
     redirect: 'follow',
     referrerPolicy: 'no-referrer',
-    body: JSON.stringify(user)
+    body: JSON.stringify(user),
   });
 };
 
@@ -31,11 +34,11 @@ export const loginRequest = async (user: User) => {
     cache: 'no-cache',
     credentials: 'same-origin',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
     redirect: 'follow',
     referrerPolicy: 'no-referrer',
-    body: JSON.stringify(user)
+    body: JSON.stringify(user),
   });
 };
 
@@ -47,10 +50,10 @@ export const getUserRequest = async () =>
     credentials: 'same-origin',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + getCookie('accessToken')
+      Authorization: 'Bearer ' + getCookie('accessToken'),
     },
     redirect: 'follow',
-    referrerPolicy: 'no-referrer'
+    referrerPolicy: 'no-referrer',
   });
 
 export const logoutRequest = async () => {
@@ -60,11 +63,11 @@ export const logoutRequest = async () => {
     cache: 'no-cache',
     credentials: 'same-origin',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
     redirect: 'follow',
     referrerPolicy: 'no-referrer',
-    body: JSON.stringify({ token: getFromLocalStorage('refreshToken') })
+    body: JSON.stringify({ token: getFromLocalStorage('refreshToken') }),
   });
 };
 
@@ -75,11 +78,11 @@ export const refreshTokenRequest = async () => {
     cache: 'no-cache',
     credentials: 'same-origin',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
     redirect: 'follow',
     referrerPolicy: 'no-referrer',
-    body: JSON.stringify({ token: getFromLocalStorage('refreshToken') })
+    body: JSON.stringify({ token: getFromLocalStorage('refreshToken') }),
   });
 };
 
@@ -90,14 +93,14 @@ export const passwordResetRequest = async (email: string) => {
     cache: 'no-cache',
     credentials: 'same-origin',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
     redirect: 'follow',
     referrerPolicy: 'no-referrer',
     body: JSON.stringify({
       email: email,
     }),
-  })
+  });
 };
 
 export const doPasswordResetRequest = async (password: string, token: string) => {
@@ -107,15 +110,15 @@ export const doPasswordResetRequest = async (password: string, token: string) =>
     cache: 'no-cache',
     credentials: 'same-origin',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
     redirect: 'follow',
     referrerPolicy: 'no-referrer',
     body: JSON.stringify({
       password,
-      token
+      token,
     }),
-  })
+  });
 };
 
 export const updateUserRequest = async (user: User) => {
@@ -126,10 +129,23 @@ export const updateUserRequest = async (user: User) => {
     credentials: 'same-origin',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + getCookie('accessToken')
+      Authorization: 'Bearer ' + getCookie('accessToken'),
     },
     redirect: 'follow',
     referrerPolicy: 'no-referrer',
     body: JSON.stringify(user),
-  })
+  });
 };
+
+export const getIngredientsRequest = async () =>
+  await fetch(ingredientsApiUrl, {
+    method: 'GET',
+    mode: 'cors',
+    cache: 'no-cache',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    redirect: 'follow',
+    referrerPolicy: 'no-referrer',
+  });

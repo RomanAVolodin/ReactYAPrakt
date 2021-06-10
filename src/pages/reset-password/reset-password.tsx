@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import styles from '../login/login.module.css';
 import { Button, Input, Logo } from '@ya.praktikum/react-developer-burger-ui-components';
 import validator from 'validator';
@@ -13,9 +13,19 @@ import {
   changePaswordFieldValue,
   proceedPasswordReset,
 } from '../../services/slices/login';
+import { LocationState } from '../../models/location-state';
 
 const ResetPasswordPage: React.FC = () => {
   const history = useHistory();
+  const location = useLocation();
+
+  useEffect(() => {
+    const { from } = location.state ? (location.state as LocationState) : { from: null };
+    if (from?.pathname !== '/forgot-password') {
+      history.replace({pathname: '/forgot-password'});
+    }
+  }, [history, location.state]);
+
 
   const {
     password,

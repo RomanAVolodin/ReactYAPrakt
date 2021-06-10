@@ -18,11 +18,9 @@ const FeedList: React.FC = () => {
   return (
     <div>
       <p className="text text_type_main-large mb-10 mt-15">Лента заказов</p>
-      { isFetchingFeed ? (<div>Получение данных...</div>) : <OrdersList orders={orders} />}
+      {isFetchingFeed ? <div>Получение данных...</div> : <OrdersList orders={orders} />}
 
-      { isErrorWhileFetchingFeed && (
-          <div>Ошибка при загрузке заказов</div>
-      )}
+      {isErrorWhileFetchingFeed && <div>Ошибка при загрузке заказов</div>}
     </div>
   );
 };

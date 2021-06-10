@@ -34,7 +34,7 @@ export interface IngredientWithAmount {
 
 export const ingredientWithAmountPropType = PropTypes.shape({
   ingredient: ingredientPropType.isRequired,
-  amount: PropTypes.number.isRequired
+  amount: PropTypes.number.isRequired,
 });
 
 export default ingredientPropType;

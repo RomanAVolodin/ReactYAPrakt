@@ -4,9 +4,8 @@ import { RootState } from '../services/reducers';
 import { useEffect, useState } from 'react';
 import { getUser } from '../services/slices/auth';
 
-
 export function OnlyUnauthRoute({ children, ...rest }: any) {
-  const user = useSelector( (state: RootState) => state.auth.user);
+  const user = useSelector((state: RootState) => state.auth.user);
   const dispatch = useDispatch();
 
   const [isUserLoaded, setUserLoaded] = useState(false);
@@ -15,9 +14,7 @@ export function OnlyUnauthRoute({ children, ...rest }: any) {
     const init = async () => {
       await dispatch(getUser());
     };
-    init().then(
-      () => setUserLoaded(true)
-    );
+    init().then(() => setUserLoaded(true));
   }, [dispatch]);
 
   if (!isUserLoaded) {
@@ -31,7 +28,7 @@ export function OnlyUnauthRoute({ children, ...rest }: any) {
         user ? (
           <Redirect
             to={{
-              pathname: '/'
+              pathname: '/',
             }}
           />
         ) : (

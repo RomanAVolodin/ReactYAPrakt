@@ -25,11 +25,22 @@ const initialState: FeedStateType = {
 export const getFeed = () => (dispatch: Dispatch) => {
   const { feedFetched, feedFetchError, feedIsFetching } = feedSlice.actions;
 
+  // может еще понадобиться для формирования фейковых данных
+  // const feedData = feedFakeData.map( order => {
+  //     const amountOfIngreds = Math.floor(Math.random() * 9) + 3;
+  //     const result = [];
+  //     for (let i = 0; i < amountOfIngreds; i++) {
+  //       const index = Math.floor(Math.random() * ingredients.length);
+  //       result.push(ingredients[index]);
+  //     }
+  //     return {...order, ingredients: result}
+  //   })
+
   dispatch(feedIsFetching());
   new Promise<Order[]>((resolve, reject) => {
     setTimeout(() => {
       resolve(feedFakeData);
-    }, 800);
+    }, 400);
   })
     .then((data) => {
       dispatch(feedFetched(data));
@@ -42,17 +53,16 @@ export const getFeed = () => (dispatch: Dispatch) => {
 
 export const getOrderFromFeed = (id: string) => (dispatch: Dispatch) => {
   const { orderFetched, orderFetchError, orderIsFetching } = feedSlice.actions;
-
   dispatch(orderIsFetching());
   new Promise<Order>((resolve, reject) => {
     setTimeout(() => {
-      const order = feedFakeData.find(o => o.number === id)
+      const order = feedFakeData.find((o) => o.number === id);
       if (order) {
         resolve(order);
       } else {
-        reject('Заказ не найден');
+        reject('Заказ с таким номером не найден');
       }
-    }, 800);
+    }, 400);
   })
     .then((data) => {
       dispatch(orderFetched(data));

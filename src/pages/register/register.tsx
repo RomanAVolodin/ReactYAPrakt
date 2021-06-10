@@ -31,7 +31,6 @@ const RegisterPage: React.FC = () => {
   const dispatcher = useDispatch();
   const history = useHistory();
 
-
   const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
     dispatcher(changeEmailFieldValue(e.target.value));
   };
@@ -69,11 +68,11 @@ const RegisterPage: React.FC = () => {
     ) {
       return;
     }
-    const user:User = {
+    const user: User = {
       email: email.value,
       password: password.value,
       name: name.value,
-    }
+    };
     dispatcher(registerUser(user));
   };
 

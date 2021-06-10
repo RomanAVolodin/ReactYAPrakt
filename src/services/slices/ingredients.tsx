@@ -1,8 +1,8 @@
 import { IngredientModel } from '../../models/ingredient-model';
 import { createSlice } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
-import { ingredientsApiUrl } from '../../utils/apiURLs';
 import { Dispatch } from 'redux';
+import { getIngredientsRequest } from '../../utils/api';
 
 interface IngredientsStateType {
   ingredients: IngredientModel[];
@@ -24,13 +24,8 @@ export const getIngredients = () => (dispatch: Dispatch) => {
   } = ingredientsSlice.actions;
 
   dispatch(ingredientsAreFetching());
-  fetch(ingredientsApiUrl)
-    .then((resp) => {
-      if (!resp.ok) {
-        throw new Error('Произошла ошибка сети');
-      }
-      return resp.json();
-    })
+  getIngredientsRequest()
+    .then((resp) => resp.json())
     .then((data) => {
       if (!data.success) {
         throw new Error('Ошибка получения данных');

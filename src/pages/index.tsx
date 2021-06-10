@@ -21,5 +21,5 @@ export {
   OrderDetailedPage,
   ProfileMainPage,
   ProfileUserData,
-  ProfileOrdersHistory
+  ProfileOrdersHistory,
 };

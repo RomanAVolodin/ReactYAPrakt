@@ -20,12 +20,16 @@ import {
 import { useDrop } from 'react-dnd';
 import IngredientInConstructor from '../ingredient-in-constructor/ingredient-in-constructor';
 import { SortableContainer } from 'react-sortable-hoc';
+import { useHistory, useLocation } from 'react-router-dom';
 
 const BurgerConstructor: React.FC = () => {
   const [orderCompleted, setOrderCompleted] = useState<boolean>(false);
   const { ingredients, finalPrice } = useSelector((state: RootState) => state.burgerConstructor);
   const isDragging = useSelector((state: RootState) => state.draggingIngredient.ingredient);
   const dispatcher = useDispatch();
+  const user = useSelector( (state: RootState) => state.auth.user);
+  const history = useHistory();
+  const location = useLocation();
 
   const [{ isHover }, dropTarget] = useDrop({
     accept: 'ingredients',
@@ -42,7 +46,12 @@ const BurgerConstructor: React.FC = () => {
       toast.warn('Заказ не может быть сформирован, не выбрана булка :(');
       return;
     }
-    setOrderCompleted(true);
+    if (user) {
+      setOrderCompleted(true);
+    } else {
+      history.push({ pathname: '/login', state: { from: location } })
+    }
+
   };
 
   const hideOrder = () => {

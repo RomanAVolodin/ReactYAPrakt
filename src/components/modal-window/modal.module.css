@@ -1,5 +1,5 @@
 .ModalWindow {
-  width: 550px;
+  min-width: 550px;
   position: fixed;
   top: 50%;
   left: 50%;

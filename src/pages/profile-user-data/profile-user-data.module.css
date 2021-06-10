@@ -1,0 +1,9 @@
+.input_container_500 .input__container .input_size_default {
+  width: 500px;
+}
+
+.cancel_submit {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
