@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route, useHistory } from 'react-router-dom';
+import { Router, Switch, Route } from 'react-router-dom';
 import AppHeader from '../app-header/app-header';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -23,6 +23,10 @@ import { OnlyUnauthRoute } from '../OnlyUnauthRoute';
 import { LocationState } from '../../models/location-state';
 import Modal from '../modal-window/modal';
 import IngredientDetails from '../../pages/ingredient-detailed/ingredient-details';
+import ClearHistoryStateComponent from '../clear-history-state/clear-history-state';
+import { createBrowserHistory } from 'history';
+
+export const history = createBrowserHistory();
 
 function App() {
   const dispatch = useDispatch();
@@ -31,17 +35,9 @@ function App() {
     dispatch(getIngredients());
   }, [dispatch]);
 
-  const ClearHistoryStateComponent: React.FC = () => {
-    const history = useHistory();
-    if (history.location && history.location.state) {
-      history.replace({ ...history.location, state: {} });
-    }
-    return null;
-  };
-
   return (
     <div className="App">
-      <Router>
+      <Router history={history}>
         <ClearHistoryStateComponent />
         <AppHeader />
         <Switch>

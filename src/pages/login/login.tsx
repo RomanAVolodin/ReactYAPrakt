@@ -59,7 +59,7 @@ const LoginPage: React.FC = () => {
     const customLocation = location.state as LocationState;
     dispatcher(
       loginUser(user, () => {
-        history.replace(customLocation.from ? customLocation.from : { pathname: '/' });
+        history.replace(customLocation && customLocation.from ? customLocation.from : { pathname: '/' });
       }),
     );
   };

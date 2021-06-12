@@ -45,3 +45,7 @@ export function getFromLocalStorage(name) {
 export function removeFromLocalStorage(name) {
   localStorage.removeItem(name);
 }
+
+export const getTokenFromPayload = (payload) => {
+  return payload && payload.indexOf('Bearer') === 0 ? payload.split('Bearer ')[1] : payload;
+};

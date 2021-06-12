@@ -1,4 +1,4 @@
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Redirect, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../services/reducers';
 import { useEffect, useState } from 'react';
@@ -7,7 +7,7 @@ import { getUser } from '../services/slices/auth';
 export function OnlyUnauthRoute({ children, ...rest }: any) {
   const user = useSelector((state: RootState) => state.auth.user);
   const dispatch = useDispatch();
-
+  const history = useHistory();
   const [isUserLoaded, setUserLoaded] = useState(false);
 
   useEffect(() => {
@@ -15,7 +15,7 @@ export function OnlyUnauthRoute({ children, ...rest }: any) {
       await dispatch(getUser());
     };
     init().then(() => setUserLoaded(true));
-  }, [dispatch]);
+  }, [dispatch, history]);
 
   if (!isUserLoaded) {
     return null;

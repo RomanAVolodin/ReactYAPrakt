@@ -9,11 +9,11 @@ interface IngredientsDetailviewAction {
   ingredient: IngredientModel;
 }
 
-interface IngredientsDetailviewStateType {
+export interface IngredientsDetailviewStateType {
   ingredient: IngredientModel | null;
 }
 
-const initialState: IngredientsDetailviewStateType = {
+export const initialState: IngredientsDetailviewStateType = {
   ingredient: null,
 };
 
@@ -24,13 +24,13 @@ export const getIngredientById = (id: string) => (
   const ingredients = getState().ingredients.ingredients;
   dispatch({ type: CLEAR_INGREDIENT_PREVIEW });
   new Promise<IngredientModel>((resolve, reject) => {
-    const ingredient = ingredients.find((i) => i._id === id);
-    if (ingredient) {
-      resolve(ingredient);
-    } else {
-      reject('Ингредиент с таким ID не найден');
-    }
-  })
+      const ingredient = ingredients.find((i) => i._id === id);
+      if (ingredient) {
+        resolve(ingredient);
+      } else {
+        reject('Ингредиент с таким ID не найден');
+      }
+    })
     .then((data) => {
       dispatch({ type: SET_INGREDIENT_AS_PREVIEW, ingredient: data });
     })

@@ -10,7 +10,8 @@ import {
   updateUserApiUrl,
 } from './apiURLs';
 import { User } from '../models/user';
-import { getCookie, getFromLocalStorage } from './utils';
+import { getFromLocalStorage } from './utils';
+import http from './http';
 
 export const registerRequest = async (user: User) => {
   return await fetch(createUserApiUrl, {
@@ -42,19 +43,7 @@ export const loginRequest = async (user: User) => {
   });
 };
 
-export const getUserRequest = async () =>
-  await fetch(getUserApiUrl, {
-    method: 'GET',
-    mode: 'cors',
-    cache: 'no-cache',
-    credentials: 'same-origin',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + getCookie('accessToken'),
-    },
-    redirect: 'follow',
-    referrerPolicy: 'no-referrer',
-  });
+export const getUserRequest = async () => http.get(getUserApiUrl).then(res => res.data);
 
 export const logoutRequest = async () => {
   return await fetch(logoutUserApiUrl, {
@@ -121,21 +110,7 @@ export const doPasswordResetRequest = async (password: string, token: string) =>
   });
 };
 
-export const updateUserRequest = async (user: User) => {
-  return await fetch(updateUserApiUrl, {
-    method: 'PATCH',
-    mode: 'cors',
-    cache: 'no-cache',
-    credentials: 'same-origin',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + getCookie('accessToken'),
-    },
-    redirect: 'follow',
-    referrerPolicy: 'no-referrer',
-    body: JSON.stringify(user),
-  });
-};
+export const updateUserRequest = async (user: User) => http.patch(updateUserApiUrl, JSON.stringify(user)).then(res => res.data);
 
 export const getIngredientsRequest = async () =>
   await fetch(ingredientsApiUrl, {

@@ -7,14 +7,13 @@ import {
   getUserRequest,
   loginRequest,
   logoutRequest,
-  refreshTokenRequest,
   registerRequest,
   updateUserRequest,
 } from '../../utils/api';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
   deleteCookie,
-  getCookie,
+  getCookie, getTokenFromPayload,
   removeFromLocalStorage,
   saveToLocalStorage,
   setCookie,
@@ -95,7 +94,6 @@ export const updateUser = (user: User) => (dispatch: Dispatch) => {
 
   dispatch(isDataTransfering());
   updateUserRequest(user)
-    .then((resp) => resp.json())
     .then((data) => {
       if (!data.success) {
         throw new Error(data.message ? data.message : 'Ошибка получения данных');
@@ -135,43 +133,6 @@ export const logoutUser = () => (dispatch: Dispatch) => {
     });
 };
 
-export const refreshToken = () => async (dispatch: Dispatch) => {
-  const {
-    dataTransferCompletedSuccessfully,
-    isDataTransfering,
-    errorWhileDataTransfer,
-  } = loginSlice.actions;
-
-  const { tokenRefreshed, loggedOut } = authSlice.actions;
-  const { userFetched } = authSlice.actions;
-
-  dispatch(isDataTransfering());
-  refreshTokenRequest()
-    .then((resp) => resp.json())
-    .then((data) => {
-      if (!data.success) {
-        throw new Error(data.message ? data.message : 'Ошибка получения данных');
-      }
-      dispatch(dataTransferCompletedSuccessfully());
-      dispatch(tokenRefreshed(data));
-
-      getUserRequest()
-        .then((resp) => resp.json())
-        .then((data) => {
-          if (!data.success) {
-            throw new Error(data.message ? data.message : 'Ошибка получения данных');
-          }
-          dispatch(dataTransferCompletedSuccessfully());
-          dispatch(userFetched(data));
-        })
-    })
-    .catch((err) => {
-      dispatch(errorWhileDataTransfer());
-      toast.error(err.message);
-      dispatch(loggedOut());
-    });
-};
-
 export const getUser = () => async (dispatch: Dispatch, getState: () => RootState) => {
   const {
     dataTransferCompletedSuccessfully,
@@ -192,20 +153,12 @@ export const getUser = () => async (dispatch: Dispatch, getState: () => RootStat
   dispatch(userStartFetching());
   dispatch(isDataTransfering());
   return getUserRequest()
-    .then((resp) => resp.json())
     .then((data) => {
-      if (!data.success) {
-        throw new Error(data.message ? data.message : 'Ошибка получения данных');
-      }
       dispatch(dataTransferCompletedSuccessfully());
       dispatch(changeEmailFieldValue(data.user.email));
       dispatch(changeNameFieldValue(data.user.name));
       dispatch(userFetched(data));
     })
-};
-
-const getTokenFromPayload = (payload?: string) => {
-  return payload && payload.indexOf('Bearer') === 0 ? payload.split('Bearer ')[1] : payload;
 };
 
 export const authSlice = createSlice({
