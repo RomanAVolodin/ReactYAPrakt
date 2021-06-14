@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import styles from './login.module.css';
 import { Button, Input, Logo } from '@ya.praktikum/react-developer-burger-ui-components';
 import validator from 'validator';
@@ -11,14 +11,18 @@ import {
   changePaswordFieldError,
   changePaswordFieldIcon,
   changePaswordFieldValue,
-  proceedLogin,
 } from '../../services/slices/login';
+import { loginUser } from '../../services/slices/auth';
+import { User } from '../../models/user';
+import { LocationState } from '../../models/location-state';
 
 const LoginPage: React.FC = () => {
+  const history = useHistory();
+  const location = useLocation();
+  const dispatcher = useDispatch();
   const { email, password, isErrorWhileDataTransfer, isDataTransfering } = useSelector(
     (state: RootState) => state.login,
   );
-  const dispatcher = useDispatch();
 
   const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
     dispatcher(changeEmailFieldValue(e.target.value));
@@ -26,7 +30,6 @@ const LoginPage: React.FC = () => {
   const onChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
     dispatcher(changePaswordFieldValue(e.target.value));
   };
-
   const passwordIconClick = () => {
     dispatcher(changePaswordFieldIcon());
   };
@@ -49,35 +52,50 @@ const LoginPage: React.FC = () => {
     ) {
       return;
     }
-    dispatcher(proceedLogin());
+    const user: User = {
+      email: email.value,
+      password: password.value,
+    };
+    const customLocation = location.state as LocationState;
+    dispatcher(
+      loginUser(user, () => {
+        history.replace(
+          customLocation && customLocation.from ? customLocation.from : { pathname: '/' },
+        );
+      }),
+    );
   };
 
   return (
     <div className={styles.container}>
       <Logo />
       <p className="text text_type_main-medium mt-20">Вход</p>
-      <Input
-        type={email.type}
-        placeholder={email.placeholder}
-        onChange={onChangeEmail}
-        value={email.value}
-        name={email.name}
-        error={email.isError}
-        errorText={email.errorText}
-        size={'default'}
-      />
-      <Input
-        type={password.type}
-        placeholder={password.placeholder}
-        onChange={onChangePassword}
-        value={password.value}
-        name={password.name}
-        error={password.isError}
-        errorText={password.errorText}
-        size={'default'}
-        icon={password.icon}
-        onIconClick={passwordIconClick}
-      />
+      <div className="mb-3">
+        <Input
+          type={email.type}
+          placeholder={email.placeholder}
+          onChange={onChangeEmail}
+          value={email.value}
+          name={email.name}
+          error={email.isError}
+          errorText={email.errorText}
+          size={'default'}
+        />
+      </div>
+      <div className="mb-3">
+        <Input
+          type={password.type}
+          placeholder={password.placeholder}
+          onChange={onChangePassword}
+          value={password.value}
+          name={password.name}
+          error={password.isError}
+          errorText={password.errorText}
+          size={'default'}
+          icon={password.icon}
+          onIconClick={passwordIconClick}
+        />
+      </div>
       <Button type="primary" size="large" onClick={login}>
         {!isDataTransfering ? 'Войти' : 'Данные проверяются'}
       </Button>

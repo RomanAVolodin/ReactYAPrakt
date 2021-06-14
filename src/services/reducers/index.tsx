@@ -7,6 +7,7 @@ import { ingredientsDraggingReducer } from './ingredient-dragging';
 import { ingredientsSlice } from '../slices/ingredients';
 import { loginSlice } from '../slices/login';
 import { feedSlice } from '../slices/feed';
+import { authSlice } from '../slices/auth';
 
 export const rootReducer = combineReducers({
   ingredients: ingredientsSlice.reducer,
@@ -16,6 +17,7 @@ export const rootReducer = combineReducers({
   draggingIngredient: ingredientsDraggingReducer,
   login: loginSlice.reducer,
   feed: feedSlice.reducer,
+  auth: authSlice.reducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

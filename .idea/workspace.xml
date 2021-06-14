@@ -1,10 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="65a7763b-2a8a-420b-abfb-1eeb2dce4a52" name="Default Changelist" comment="">
+    <list default="true" id="d1578c80-08dc-4464-a437-025ad5075892" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/cypress/integration/home-page.spec.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/jest.config.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/reducers/burger-constructor.test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/reducers/index.test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/reducers/ingredient-dragging.test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/reducers/order.test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/slices/auth.test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/slices/feed.test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/slices/ingredients.test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/slices/login.test.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/app-header/app-header.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/app-header/app-header.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/app-header/app-header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/app-header/app-header.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/app/app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/app/app.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/profile-main-page/profile-main-page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/profile-main-page/profile-main-page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/burger-constructor/burger-constructor.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/burger-constructor/burger-constructor.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/clear-history-state/clear-history-state.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/clear-history-state/clear-history-state.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/forgot-password/forgot-password.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/forgot-password/forgot-password.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/login/login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/login/login.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/reset-password/reset-password.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/reset-password/reset-password.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/actions/order.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/actions/order.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/reducers/burger-constructor.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/reducers/burger-constructor.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/reducers/ingredient-detail.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/reducers/ingredient-detail.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/reducers/ingredient-detail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/reducers/ingredient-detail.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/reducers/ingredient-dragging.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/reducers/ingredient-dragging.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/reducers/order.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/reducers/order.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/slices/auth.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/slices/auth.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/slices/feed.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/slices/feed.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/slices/ingredients.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/slices/ingredients.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/slices/login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/slices/login.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/setupTests.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/setupTests.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/api.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/api.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/http.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/http.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/tests-utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/tests-utils.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/utils.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,22 +48,31 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="TypeScript File" />
         <option value="CSS File" />
         <option value="TypeScript JSX File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="feature/redux-toolkit" />
+        <entry key="$PROJECT_DIR$" value="feature/refresh-token" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
   <component name="ProjectId" id="1rT2hDW3F2fb0YmQ5asA8yqIbof" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -41,22 +84,23 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="js.last.introduce.type" value="LET" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/utils" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="nodejs.jest.jest_package" value="$PROJECT_DIR$/node_modules/react-scripts" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components" />
       <recent name="$PROJECT_DIR$/src/utils" />
       <recent name="$PROJECT_DIR$/src/services/slices" />
       <recent name="$PROJECT_DIR$/src/pages" />
       <recent name="$PROJECT_DIR$/src/services/reducers" />
-      <recent name="$PROJECT_DIR$/src/services/actions" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/pages" />
@@ -65,10 +109,91 @@
       <recent name="$PROJECT_DIR$/src/components/app" />
     </key>
   </component>
+  <component name="RunManager" selected="Jest.Auth slice.Регистрация завершена - стейт">
+    <configuration name="Auth slice.Регистрация завершена - стейт" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/src/services/slices/auth.test.js" />
+      <test-names>
+        <test-name value="Auth slice" />
+        <test-name value="Регистрация завершена - стейт" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="Auth slice.Обновление данных пользователя" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/src/services/slices/auth.test.js" />
+      <test-names>
+        <test-name value="Auth slice" />
+        <test-name value="Обновление данных пользователя" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="BurgerConstrucor reducer.При добавлении булки она добавляется два раза, в начало и в конец бургера" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/src/services/reducers/burger-constructor.test.js" />
+      <test-names>
+        <test-name value="BurgerConstrucor reducer" />
+        <test-name value="При добавлении булки она добавляется два раза, в начало и в конец бургера" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="Ingredients редюсер.Ошибка при загрузке ингредиентов" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/src/services/slices/ingredients.test.js" />
+      <test-names>
+        <test-name value="Ingredients редюсер" />
+        <test-name value="Ошибка при загрузке ингредиентов" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="Ingredients редюсер.State Ошибка при загрузке ингредиентов" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/src/services/slices/ingredients.test.js" />
+      <test-names>
+        <test-name value="Ingredients редюсер" />
+        <test-name value="State Ошибка при загрузке ингредиентов" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Jest.Auth slice.Регистрация завершена - стейт" />
+        <item itemvalue="Jest.Auth slice.Обновление данных пользователя" />
+        <item itemvalue="Jest.Ingredients редюсер.State Ошибка при загрузке ингредиентов" />
+        <item itemvalue="Jest.Ingredients редюсер.Ошибка при загрузке ингредиентов" />
+        <item itemvalue="Jest.BurgerConstrucor reducer.При добавлении булки она добавляется два раза, в начало и в конец бургера" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="65a7763b-2a8a-420b-abfb-1eeb2dce4a52" name="Default Changelist" comment="" />
+      <changelist id="d1578c80-08dc-4464-a437-025ad5075892" name="Default Changelist" comment="" />
       <created>1618985878216</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -81,7 +206,9 @@
       <workItem from="1621529632453" duration="18774000" />
       <workItem from="1621848943395" duration="10184000" />
       <workItem from="1622644308966" duration="37775000" />
-      <workItem from="1622788688452" duration="27262000" />
+      <workItem from="1622788688452" duration="27925000" />
+      <workItem from="1623086913061" duration="22691000" />
+      <workItem from="1623504366472" duration="27547000" />
     </task>
     <servers />
   </component>

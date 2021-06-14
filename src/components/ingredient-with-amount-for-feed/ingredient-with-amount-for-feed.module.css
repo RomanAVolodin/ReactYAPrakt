@@ -1,36 +1,36 @@
 .container {
-    display: flex;
-    margin-top: 15px;
-    justify-content: space-between;
+  display: flex;
+  margin-top: 15px;
+  justify-content: space-between;
 }
 
 .ingredient_image {
-    position: relative;
-    border: double 2px transparent;
-    border-radius: 80px;
-    background-image: linear-gradient(#131316, #131316),
+  position: relative;
+  border: double 2px transparent;
+  border-radius: 80px;
+  background-image: linear-gradient(#131316, #131316),
     radial-gradient(circle at top left, #f00, #3020ff);
-    background-origin: border-box;
-    background-clip: content-box, border-box;
-    width: 64px;
-    height: 64px;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-content: center;
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  width: 64px;
+  height: 64px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-content: center;
 }
 
 .image_name {
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
 }
 
 .amount_price {
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
-    margin-left: 20px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  margin-left: 20px;
 }

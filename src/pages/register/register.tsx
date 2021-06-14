@@ -13,9 +13,10 @@ import {
   changePaswordFieldError,
   changePaswordFieldIcon,
   changePaswordFieldValue,
-  proceedRegister,
   switchOffDataTransferStatus,
 } from '../../services/slices/login';
+import { User } from '../../models/user';
+import { registerUser } from '../../services/slices/auth';
 
 const RegisterPage: React.FC = () => {
   const {
@@ -26,6 +27,7 @@ const RegisterPage: React.FC = () => {
     isDataTransfering,
     isDataTransferingCompleted,
   } = useSelector((state: RootState) => state.login);
+
   const dispatcher = useDispatch();
   const history = useHistory();
 
@@ -66,8 +68,12 @@ const RegisterPage: React.FC = () => {
     ) {
       return;
     }
-
-    dispatcher(proceedRegister());
+    const user: User = {
+      email: email.value,
+      password: password.value,
+      name: name.value,
+    };
+    dispatcher(registerUser(user));
   };
 
   useEffect(() => {

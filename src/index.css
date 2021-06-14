@@ -42,11 +42,11 @@
 }
 
 .text_success_color {
-  color: #00CCCC;
+  color: #00cccc;
 }
 
 .text_danger_color {
-  color: #E52B1A;;
+  color: #e52b1a;
 }
 
 .text_color_active * {
@@ -61,4 +61,13 @@
 
 .opacity_04 {
   opacity: 0.4;
+}
+
+.cursor_pointer {
+  cursor: pointer;
+}
+
+.input_container_full_width .input__container,
+.input_container_full_width .input__container .input_size_default {
+  width: 100%;
 }
