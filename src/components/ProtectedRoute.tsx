@@ -1,24 +1,21 @@
 import { useEffect, useState } from 'react';
 import { getUser } from '../services/slices/auth';
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Redirect, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../services/reducers';
 
-
 export function ProtectedRoute({ children, ...rest }: any) {
-  const user = useSelector( (state: RootState) => state.auth.user);
+  const { user } = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch();
-
   const [isUserLoaded, setUserLoaded] = useState(false);
+  const history = useHistory();
 
   useEffect(() => {
     const init = async () => {
       await dispatch(getUser());
     };
-    init().then(
-      () => setUserLoaded(true)
-    );
-  }, [dispatch]);
+    init().then(() => setUserLoaded(true));
+  }, [dispatch, history]);
 
   if (!isUserLoaded) {
     return null;
@@ -26,7 +23,7 @@ export function ProtectedRoute({ children, ...rest }: any) {
 
   return (
     <Route
-      { ...rest }
+      {...rest}
       render={({ location }) =>
         user ? (
           children
@@ -34,7 +31,7 @@ export function ProtectedRoute({ children, ...rest }: any) {
           <Redirect
             to={{
               pathname: '/login',
-              state: { from: location }
+              state: { from: location },
             }}
           />
         )

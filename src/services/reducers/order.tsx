@@ -14,7 +14,7 @@ interface OrderStateType {
   isErrorWhileFetching: boolean;
 }
 
-const initialState: OrderStateType = {
+export const initialState: OrderStateType = {
   order: { name: '', number: '', status: 'pending', ingredients: [] },
   isFetching: false,
   isErrorWhileFetching: false,

@@ -11,18 +11,18 @@ const ProfileOrdersHistory: React.FC = () => {
     (state: RootState) => state.feed,
   );
 
+  const ingredients = useSelector((state: RootState) => state.ingredients.ingredients);
+
   useEffect(() => {
     dispatch(getFeed());
-  }, [dispatch]);
+  }, [dispatch, ingredients]);
 
   return (
     <>
-      {isFetchingFeed ? (<div>Получение данных...</div>) : <OrdersList orders={orders} />}
-      { isErrorWhileFetchingFeed && (
-        <div>Ошибка при загрузке заказов</div>
-      )}
+      {isFetchingFeed ? <div>Получение данных...</div> : <OrdersList orders={orders} />}
+      {isErrorWhileFetchingFeed && <div>Ошибка при загрузке заказов</div>}
     </>
   );
-}
+};
 
 export default ProfileOrdersHistory;

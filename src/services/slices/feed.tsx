@@ -13,7 +13,7 @@ interface FeedStateType {
   isErrorWhileFetchingOrder: boolean;
 }
 
-const initialState: FeedStateType = {
+export const initialState: FeedStateType = {
   orders: [],
   isFetchingFeed: false,
   isErrorWhileFetchingFeed: false,
@@ -23,36 +23,30 @@ const initialState: FeedStateType = {
 };
 
 export const getFeed = () => (dispatch: Dispatch) => {
-  const { feedFetched, feedFetchError, feedIsFetching } = feedSlice.actions;
-
+  const { feedFetched, feedIsFetching } = feedSlice.actions;
   dispatch(feedIsFetching());
-  new Promise<Order[]>((resolve, reject) => {
+  return new Promise<Order[]>((resolve, reject) => {
     setTimeout(() => {
       resolve(feedFakeData);
-    }, 800);
+    }, 400);
   })
     .then((data) => {
       dispatch(feedFetched(data));
     })
-    .catch((err) => {
-      dispatch(feedFetchError());
-      toast.error(err.message);
-    });
 };
 
 export const getOrderFromFeed = (id: string) => (dispatch: Dispatch) => {
   const { orderFetched, orderFetchError, orderIsFetching } = feedSlice.actions;
-
   dispatch(orderIsFetching());
-  new Promise<Order>((resolve, reject) => {
+  return new Promise<Order>((resolve, reject) => {
     setTimeout(() => {
-      const order = feedFakeData.find(o => o.number === id)
+      const order = feedFakeData.find((o) => o.number === id);
       if (order) {
         resolve(order);
       } else {
-        reject('Заказ не найден');
+        reject('Заказ с таким номером не найден');
       }
-    }, 800);
+    }, 400);
   })
     .then((data) => {
       dispatch(orderFetched(data));

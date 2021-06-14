@@ -7,25 +7,32 @@ import {
   getUserRequest,
   loginRequest,
   logoutRequest,
-  refreshTokenRequest,
   registerRequest,
   updateUserRequest,
 } from '../../utils/api';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { deleteCookie, getCookie, removeFromLocalStorage, saveToLocalStorage, setCookie } from '../../utils/utils';
+import {
+  deleteCookie,
+  getCookie,
+  getTokenFromPayload,
+  removeFromLocalStorage,
+  saveToLocalStorage,
+  setCookie,
+} from '../../utils/utils';
 
-
-interface AuthStateType  {
-  user: User | null
-  accessToken?: string
-  refreshToken?: string
+interface AuthStateType {
+  user: User | null;
+  isUserFetching: boolean;
+  accessToken?: string;
+  refreshToken?: string;
 }
 
-const initialState: AuthStateType = {
-  user: null
-}
+export const initialState: AuthStateType = {
+  user: null,
+  isUserFetching: false,
+};
 
-export const registerUser = (user: User) => (dispatch: Dispatch, getState: () => RootState) => {
+export const registerUser = (user: User) => (dispatch: Dispatch) => {
   const {
     dataTransferCompletedSuccessfully,
     isDataTransfering,
@@ -35,7 +42,7 @@ export const registerUser = (user: User) => (dispatch: Dispatch, getState: () =>
   const { registerCompleted } = authSlice.actions;
 
   dispatch(isDataTransfering());
-  registerRequest(user)
+  return registerRequest(user)
     .then((resp) => resp.json())
     .then((data) => {
       if (!data.success) {
@@ -61,7 +68,7 @@ export const loginUser = (user: User, cb: CallableFunction) => (dispatch: Dispat
   const { loginSuccessfullyCompleted } = authSlice.actions;
 
   dispatch(isDataTransfering());
-  loginRequest(user)
+  return loginRequest(user)
     .then((resp) => resp.json())
     .then((data) => {
       if (!data.success) {
@@ -87,8 +94,7 @@ export const updateUser = (user: User) => (dispatch: Dispatch) => {
   const { userUpdateSuccessfullyCompleted } = authSlice.actions;
 
   dispatch(isDataTransfering());
-  updateUserRequest(user)
-    .then((resp) => resp.json())
+  return updateUserRequest(user)
     .then((data) => {
       if (!data.success) {
         throw new Error(data.message ? data.message : 'Ошибка получения данных');
@@ -113,7 +119,7 @@ export const logoutUser = () => (dispatch: Dispatch) => {
   const { loggedOut } = authSlice.actions;
 
   dispatch(isDataTransfering());
-  logoutRequest()
+  return logoutRequest()
     .then((resp) => resp.json())
     .then((data) => {
       if (!data.success) {
@@ -128,66 +134,29 @@ export const logoutUser = () => (dispatch: Dispatch) => {
     });
 };
 
-export const refreshToken = () => (dispatch: Dispatch) => {
-  const {
-    dataTransferCompletedSuccessfully,
-    isDataTransfering,
-    errorWhileDataTransfer,
-  } = loginSlice.actions;
-
-  const { tokenRefreshed } = authSlice.actions;
-
-  dispatch(isDataTransfering());
-  refreshTokenRequest()
-    .then((resp) => resp.json())
-    .then((data) => {
-      if (!data.success) {
-        throw new Error(data.message ? data.message : 'Ошибка получения данных');
-      }
-      dispatch(dataTransferCompletedSuccessfully());
-      dispatch(tokenRefreshed(data));
-    })
-    .catch((err) => {
-      dispatch(errorWhileDataTransfer());
-      toast.error(err.message);
-    });
-};
-
 export const getUser = () => async (dispatch: Dispatch, getState: () => RootState) => {
-  const {
-    dataTransferCompletedSuccessfully,
-    isDataTransfering,
-    errorWhileDataTransfer,
-  } = loginSlice.actions;
+  const { dataTransferCompletedSuccessfully, isDataTransfering } = loginSlice.actions;
 
-  const { userFetched } = authSlice.actions;
-  const user = getState().auth.user;
+  const { userFetched, userStartFetching } = authSlice.actions;
+  const { user, isUserFetching } = getState().auth;
 
-  if (user || (!user && !getCookie('accessToken'))) return new Promise<void>((resolve, reject) => {
-    resolve();
-  });
-
-  dispatch(isDataTransfering());
-  return getUserRequest()
-    .then((resp) => resp.json())
-    .then((data) => {
-      if (!data.success) {
-        throw new Error(data.message ? data.message : 'Ошибка получения данных');
-      }
-      dispatch(dataTransferCompletedSuccessfully());
-      dispatch(changeEmailFieldValue(data.user.email));
-      dispatch(changeNameFieldValue(data.user.name));
-      dispatch(userFetched(data));
-    })
-    .catch((err) => {
-      dispatch(errorWhileDataTransfer());
-      toast.error(err.message);
+  if (user || (!user && !getCookie('accessToken')))
+    return new Promise<void>((resolve, reject) => {
+      resolve();
     });
-};
 
-const getTokenFromPayload = (payload?: string) => {
-  return payload &&  payload.indexOf('Bearer') === 0 ? payload.split('Bearer ')[1] : payload
-}
+  if (isUserFetching) {
+    return;
+  }
+  dispatch(userStartFetching());
+  dispatch(isDataTransfering());
+  return getUserRequest().then((data) => {
+    dispatch(dataTransferCompletedSuccessfully());
+    dispatch(changeEmailFieldValue(data.user.email));
+    dispatch(changeNameFieldValue(data.user.name));
+    dispatch(userFetched(data));
+  });
+};
 
 export const authSlice = createSlice({
   name: 'auth',
@@ -217,6 +186,13 @@ export const authSlice = createSlice({
     },
     userFetched(state, action: PayloadAction<AuthStateType>) {
       state.user = action.payload.user;
+      state.isUserFetching = false;
+    },
+    userStartFetching(state) {
+      state.isUserFetching = true;
+    },
+    userCompletedFetchingWithError(state) {
+      state.isUserFetching = false;
     },
   },
 });

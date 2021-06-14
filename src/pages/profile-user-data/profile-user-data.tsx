@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, useCallback, useEffect } from 'react';
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import {
   changeEmailFieldValue,
@@ -8,18 +8,15 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../services/reducers';
 import { updateUser } from '../../services/slices/auth';
+import styles from './profile-user-data.module.css';
 
 export const ProfileUserData: React.FC = () => {
-  const {
-    email,
-    password,
-    name,
-    isDataTransfering,
-    isErrorWhileDataTransfer
-  } = useSelector((state: RootState) => state.login);
+  const { email, password, name, isDataTransfering, isErrorWhileDataTransfer } = useSelector(
+    (state: RootState) => state.login,
+  );
 
+  const user = useSelector((state: RootState) => state.auth.user);
   const dispatcher = useDispatch();
-
 
   const onChangeName = (e: ChangeEvent<HTMLInputElement>) => {
     dispatcher(changeNameFieldValue(e.target.value));
@@ -31,18 +28,31 @@ export const ProfileUserData: React.FC = () => {
     dispatcher(changePaswordFieldValue(e.target.value));
   };
 
+  const cancelInput = useCallback(() => {
+    if (user) {
+      dispatcher(changeEmailFieldValue(user.email));
+      if (user.name) {
+        dispatcher(changeNameFieldValue(user.name));
+      }
+    }
+  }, [dispatcher, user]);
+
+  useEffect(() => {
+    cancelInput();
+  }, [cancelInput]);
+
   const proceedUpdateUser = () => {
     const user = {
       name: name.value,
       email: email.value,
       password: password.value,
-    }
+    };
     dispatcher(updateUser(user));
-  }
+  };
 
   return (
-    <div>
-      <div className="mb-3">
+    <>
+      <div className="input_container_full_width mb-3">
         <Input
           type={'text'}
           placeholder={'Имя'}
@@ -55,7 +65,7 @@ export const ProfileUserData: React.FC = () => {
           size={'default'}
         />
       </div>
-      <div className="mb-3">
+      <div className="input_container_full_width mb-3">
         <Input
           type={'text'}
           placeholder={'Логин'}
@@ -68,7 +78,7 @@ export const ProfileUserData: React.FC = () => {
           size={'default'}
         />
       </div>
-      <div className="mb-3">
+      <div className="input_container_full_width mb-3">
         <Input
           type={'password'}
           placeholder={'Пароль'}
@@ -81,12 +91,18 @@ export const ProfileUserData: React.FC = () => {
           size={'default'}
         />
       </div>
-      <Button type="primary" size="large" onClick={proceedUpdateUser}>
-        {!isDataTransfering ? 'Сохранить' : 'Данные отправляются'}
-      </Button>
+      <div className={styles.cancel_submit}>
+        <div className="mr-5 cursor_pointer text_success_color" onClick={cancelInput}>
+          Отмена
+        </div>
+        <Button type="primary" size="medium" onClick={proceedUpdateUser}>
+          {!isDataTransfering ? 'Сохранить' : 'Данные отправляются'}
+        </Button>
+      </div>
+
       {isErrorWhileDataTransfer && (
         <p className="text text_type_main-default">При получении данных произошла ошибка</p>
       )}
-    </div>
+    </>
   );
-}
+};

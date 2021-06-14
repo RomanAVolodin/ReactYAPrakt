@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Switch, Route, useHistory, useLocation, useRouteMatch } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Router, Switch, Route } from 'react-router-dom';
 import AppHeader from '../app-header/app-header';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -14,21 +14,22 @@ import {
   RegisterPage,
   ResetPasswordPage,
   OrderDetailedPage,
-  ProfileMainPage, ProfileUserData, ProfileOrdersHistory,
+  ProfileMainPage,
+  ProfileUserData,
+  ProfileOrdersHistory,
 } from '../../pages';
 import { ProtectedRoute } from '../ProtectedRoute';
 import { OnlyUnauthRoute } from '../OnlyUnauthRoute';
 import { LocationState } from '../../models/location-state';
 import Modal from '../modal-window/modal';
+import IngredientDetails from '../../pages/ingredient-detailed/ingredient-details';
+import ClearHistoryStateComponent from '../clear-history-state/clear-history-state';
+import { createBrowserHistory } from 'history';
 
+export const history = createBrowserHistory();
 
 function App() {
   const dispatch = useDispatch();
-  const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
-
-  const closeModalRoute = () => {
-    // history.push(location.state)
-  }
 
   useEffect(() => {
     dispatch(getIngredients());
@@ -36,12 +37,35 @@ function App() {
 
   return (
     <div className="App">
-      <Router>
+      <Router history={history}>
+        <ClearHistoryStateComponent />
         <AppHeader />
         <Switch>
           <Route path="/" exact={true}>
             <MainPage />
           </Route>
+          <Route
+            path="/ingredients/:id"
+            exact={true}
+            render={({ location, history, match }) => {
+              const { from } = location.state ? (location.state as LocationState) : { from: null };
+              if (from?.pathname === '/') {
+                return (
+                  <>
+                    <MainPage />
+                    <Modal
+                      title="Детали ингредиента"
+                      show={true}
+                      onCloseClick={() => history.goBack()}
+                    >
+                      <IngredientDetails />
+                    </Modal>
+                  </>
+                );
+              }
+              return <IngredientDetails />;
+            }}
+          />
           <OnlyUnauthRoute path="/login" exact={true}>
             <LoginPage />
           </OnlyUnauthRoute>
@@ -57,10 +81,29 @@ function App() {
           <Route path="/feed" exact={true}>
             <Feed />
           </Route>
-          <Route path="/feed/:order_id" exact={true}>
-            <OrderDetailedPage />
-          </Route>
-          <ProtectedRoute path="/profile" >
+          <Route
+            path="/feed/:order_id"
+            exact={true}
+            render={({ location, history, match }) => {
+              const { from } = location.state ? (location.state as LocationState) : { from: null };
+              if (from?.pathname === '/feed') {
+                return (
+                  <>
+                    <Feed />
+                    <Modal
+                      title={`#${match.params.order_id}`}
+                      show={true}
+                      onCloseClick={() => history.goBack()}
+                    >
+                      <OrderDetailedPage />
+                    </Modal>
+                  </>
+                );
+              }
+              return <OrderDetailedPage />;
+            }}
+          />
+          <ProtectedRoute path="/profile">
             <ProfileMainPage>
               <Switch>
                 <Route path="/profile" exact={true}>
@@ -69,21 +112,30 @@ function App() {
                 <Route path="/profile/orders" exact={true}>
                   <ProfileOrdersHistory />
                 </Route>
-                <Route path="/profile/orders/:order_id" exact={true} render={ ({location, match}) => {
-                  if (location && location.state) {
-                    const { from } = location.state as LocationState;
-                    if (from.pathname === '/profile/orders') {
+                <Route
+                  path="/profile/orders/:order_id"
+                  exact={true}
+                  render={({ location, history, match }) => {
+                    const { from } = location.state
+                      ? (location.state as LocationState)
+                      : { from: null };
+                    if (from?.pathname === '/profile/orders') {
                       return (
-                        <Modal title="Детали ингредиента" show={true} onCloseClick={closeModalRoute}>
-                          <OrderDetailedPage />
-                        </Modal>
-                      )
+                        <>
+                          <ProfileOrdersHistory />
+                          <Modal
+                            title={`#${match.params.order_id}`}
+                            show={true}
+                            onCloseClick={() => history.goBack()}
+                          >
+                            <OrderDetailedPage />
+                          </Modal>
+                        </>
+                      );
                     }
-                  }
-
-                  return (<OrderDetailedPage />)
-                }}>
-                </Route>
+                    return <OrderDetailedPage />;
+                  }}
+                />
               </Switch>
             </ProfileMainPage>
           </ProtectedRoute>

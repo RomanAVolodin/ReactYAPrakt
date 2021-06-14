@@ -10,7 +10,7 @@ import { toast } from 'react-toastify';
 import { RootState } from '../reducers';
 import { doPasswordResetRequest, passwordResetRequest } from '../../utils/api';
 
-const initialState = {
+export const initialState = {
   email: EmailFieldInitialState,
   password: PasswordFieldInitialState,
   name: NameFieldInitialState,
@@ -32,13 +32,8 @@ export const proceedPasswordResetRequest = () => (
   const { email } = getState().login;
 
   dispatch(isDataTransfering());
-  passwordResetRequest(email.value)
-    .then((resp) => {
-      if (!resp.ok) {
-        throw new Error('Произошла ошибка сети');
-      }
-      return resp.json();
-    })
+  return passwordResetRequest(email.value)
+    .then((resp) => resp.json())
     .then((data) => {
       if (!data.success) {
         throw new Error(data.error ? data.error : 'Ошибка получения данных');
@@ -61,7 +56,7 @@ export const proceedPasswordReset = () => (dispatch: Dispatch, getState: () => R
   const { password, verification_code } = getState().login;
 
   dispatch(isDataTransfering());
-  doPasswordResetRequest(password.value, verification_code.value)
+  return doPasswordResetRequest(password.value, verification_code.value)
     .then((resp) => {
       return resp.json();
     })
@@ -139,7 +134,7 @@ export const loginSlice = createSlice({
     errorWhileDataTransfer(state) {
       state.isDataTransfering = false;
       state.isErrorWhileDataTransfer = true;
-      state.isDataTransferingCompleted = false;
+      state.isDataTransferingCompleted = true;
     },
   },
 });

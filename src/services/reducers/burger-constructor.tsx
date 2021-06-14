@@ -16,7 +16,7 @@ interface ConstructorStateType {
   finalPrice: number;
 }
 
-const initialState: ConstructorStateType = {
+export const initialState: ConstructorStateType = {
   ingredients: [],
   finalPrice: 0,
 };

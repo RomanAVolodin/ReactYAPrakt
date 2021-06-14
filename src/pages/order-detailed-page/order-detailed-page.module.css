@@ -1,38 +1,38 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    align-content: flex-start;
-    margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: flex-start;
+  margin-top: 5px;
 }
 
 .inner {
-    width: 600px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    align-content: flex-start;
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  align-content: flex-start;
 }
 
 .ingredients_list {
-    display: flex;
-    flex-direction: column;
-    max-height: 400px;
-    overflow: auto;
-    padding-right: 10px;
+  display: flex;
+  flex-direction: column;
+  max-height: 400px;
+  overflow: auto;
+  padding-right: 10px;
 }
 
 .date_price {
-    margin-top: 40px;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-content: center;
-    align-items: center;
+  margin-top: 40px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
 }
 
 .price {
-    display: flex;
+  display: flex;
 }

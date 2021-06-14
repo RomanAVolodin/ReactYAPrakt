@@ -23,6 +23,7 @@ const AppHeader: React.FC = () => {
         <ul className={headerStyles.menu_desktop}>
           <li className={headerStyles.menu_item}>
             <NavLink
+              data-testid="constructor-link"
               exact
               to="/"
               className="link text text_type_main-default text_color_inactive"
@@ -34,6 +35,7 @@ const AppHeader: React.FC = () => {
           </li>
           <li className={headerStyles.menu_item}>
             <NavLink
+              data-testid="feed-link"
               to="/feed"
               className="link text text_type_main-default text_color_inactive"
               activeClassName="text_color_active"
@@ -49,6 +51,7 @@ const AppHeader: React.FC = () => {
         <ul className={headerStyles.menu_desktop}>
           <li className={headerStyles.menu_item}>
             <NavLink
+              data-testid="cabinet-link"
               to="/profile"
               className="link text text_type_main-default text_color_inactive"
               activeClassName="text_color_active"

@@ -1,7 +1,7 @@
 export function getCookie(name) {
   const matches = document.cookie.match(
     // eslint-disable-next-line
-    new RegExp('(?:^|; )' + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + '=([^;]*)')
+    new RegExp('(?:^|; )' + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + '=([^;]*)'),
   );
   return matches ? decodeURIComponent(matches[1]) : undefined;
 }
@@ -26,6 +26,7 @@ export function setCookie(name, value, props) {
       updatedCookie += '=' + propValue;
     }
   }
+  updatedCookie += '; path=/;';
   document.cookie = updatedCookie;
 }
 
@@ -44,3 +45,7 @@ export function getFromLocalStorage(name) {
 export function removeFromLocalStorage(name) {
   localStorage.removeItem(name);
 }
+
+export const getTokenFromPayload = (payload) => {
+  return payload && payload.indexOf('Bearer') === 0 ? payload.split('Bearer ')[1] : payload;
+};

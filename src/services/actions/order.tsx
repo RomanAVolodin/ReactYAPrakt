@@ -15,17 +15,12 @@ export const placeOrder = (chosenIngredients: IngredientModel[]) => (dispatch: D
     type: ORDER_IS_PROCESSING,
   });
 
-  fetch(orderApiUrl, {
+  return fetch(orderApiUrl, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(dataToPost),
   })
-    .then((resp) => {
-      if (!resp.ok) {
-        throw new Error('Произошла ошибка сети');
-      }
-      return resp.json();
-    })
+    .then((resp) => resp.json())
     .then((data) => {
       if (!data.success) {
         throw new Error('Ошибка получения данных');

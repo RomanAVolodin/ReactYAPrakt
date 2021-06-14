@@ -1,14 +1,14 @@
 .container {
-    width: 500px;
-    padding: 8rem 3rem;
+  width: 500px;
+  padding: 8rem 3rem;
 }
 
 .orders_numbers {
-    display: flex;
-    justify-content: space-between;
-    align-content: center;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
 }
 
-.orders_ready p:not(:first-child)  {
-    color: #00CCCC;
+.orders_ready p:not(:first-child) {
+  color: #00cccc;
 }
