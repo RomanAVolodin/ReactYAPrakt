@@ -1,6 +1,10 @@
-describe('Приложение запущено', function() {
+describe('Приложение запущено и работает навигация по страницам', function() {
   before(function() {
     cy.visit('http://localhost:3000');
+  });
+
+  beforeEach(function() {
+    cy.viewport('macbook-15');
   });
 
   it('Должны быть на главной странице', function() {
@@ -31,5 +35,4 @@ describe('Приложение запущено', function() {
     cy.get('a').contains('Восстановить пароль').click();
     cy.contains('Вспомнили пароль?');
   });
-
 });
