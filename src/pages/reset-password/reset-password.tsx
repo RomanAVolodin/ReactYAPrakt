@@ -22,10 +22,9 @@ const ResetPasswordPage: React.FC = () => {
   useEffect(() => {
     const { from } = location.state ? (location.state as LocationState) : { from: null };
     if (from?.pathname !== '/forgot-password') {
-      history.replace({pathname: '/forgot-password'});
+      history.replace({ pathname: '/forgot-password' });
     }
   }, [history, location.state]);
-
 
   const {
     password,

@@ -10,7 +10,7 @@ interface IngredientsDraggingStateType {
   ingredient: IngredientModel | null;
 }
 
-const initialState: IngredientsDraggingStateType = {
+export const initialState: IngredientsDraggingStateType = {
   ingredient: null,
 };
 

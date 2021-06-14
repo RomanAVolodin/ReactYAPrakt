@@ -43,7 +43,7 @@ export const loginRequest = async (user: User) => {
   });
 };
 
-export const getUserRequest = async () => http.get(getUserApiUrl).then(res => res.data);
+export const getUserRequest = async () => await http.get(getUserApiUrl).then((res) => res.data);
 
 export const logoutRequest = async () => {
   return await fetch(logoutUserApiUrl, {
@@ -110,7 +110,8 @@ export const doPasswordResetRequest = async (password: string, token: string) =>
   });
 };
 
-export const updateUserRequest = async (user: User) => http.patch(updateUserApiUrl, JSON.stringify(user)).then(res => res.data);
+export const updateUserRequest = async (user: User) =>
+  await http.patch(updateUserApiUrl, JSON.stringify(user)).then((res) => res.data);
 
 export const getIngredientsRequest = async () =>
   await fetch(ingredientsApiUrl, {

@@ -21,7 +21,7 @@ const AppHeader: React.FC = () => {
         ].join(' ')}
       >
         <ul className={headerStyles.menu_desktop}>
-          <li className={headerStyles.menu_item} >
+          <li className={headerStyles.menu_item}>
             <NavLink
               data-testid="constructor-link"
               exact

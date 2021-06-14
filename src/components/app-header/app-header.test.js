@@ -3,13 +3,16 @@ import { fireEvent, getByTestId, render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 
 describe('Заголовок приложения', () => {
-
   let component;
   let mockFunc;
   beforeEach(() => {
     mockFunc = jest.fn();
-    const { container } = render(<MemoryRouter><AppHeader /></MemoryRouter>);
-    component = container
+    const { container } = render(
+      <MemoryRouter>
+        <AppHeader />
+      </MemoryRouter>,
+    );
+    component = container;
   });
 
   it('Должен быть пункт меню Конструктор', () => {
@@ -53,5 +56,4 @@ describe('Заголовок приложения', () => {
     fireEvent.click(element);
     expect(element.classList.contains('text_color_active')).toBe(true);
   });
-
 });

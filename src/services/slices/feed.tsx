@@ -13,7 +13,7 @@ interface FeedStateType {
   isErrorWhileFetchingOrder: boolean;
 }
 
-const initialState: FeedStateType = {
+export const initialState: FeedStateType = {
   orders: [],
   isFetchingFeed: false,
   isErrorWhileFetchingFeed: false,
@@ -23,21 +23,9 @@ const initialState: FeedStateType = {
 };
 
 export const getFeed = () => (dispatch: Dispatch) => {
-  const { feedFetched, feedFetchError, feedIsFetching } = feedSlice.actions;
-
-  // может еще понадобиться для формирования фейковых данных
-  // const feedData = feedFakeData.map( order => {
-  //     const amountOfIngreds = Math.floor(Math.random() * 9) + 3;
-  //     const result = [];
-  //     for (let i = 0; i < amountOfIngreds; i++) {
-  //       const index = Math.floor(Math.random() * ingredients.length);
-  //       result.push(ingredients[index]);
-  //     }
-  //     return {...order, ingredients: result}
-  //   })
-
+  const { feedFetched, feedIsFetching } = feedSlice.actions;
   dispatch(feedIsFetching());
-  new Promise<Order[]>((resolve, reject) => {
+  return new Promise<Order[]>((resolve, reject) => {
     setTimeout(() => {
       resolve(feedFakeData);
     }, 400);
@@ -45,16 +33,12 @@ export const getFeed = () => (dispatch: Dispatch) => {
     .then((data) => {
       dispatch(feedFetched(data));
     })
-    .catch((err) => {
-      dispatch(feedFetchError());
-      toast.error(err.message);
-    });
 };
 
 export const getOrderFromFeed = (id: string) => (dispatch: Dispatch) => {
   const { orderFetched, orderFetchError, orderIsFetching } = feedSlice.actions;
   dispatch(orderIsFetching());
-  new Promise<Order>((resolve, reject) => {
+  return new Promise<Order>((resolve, reject) => {
     setTimeout(() => {
       const order = feedFakeData.find((o) => o.number === id);
       if (order) {

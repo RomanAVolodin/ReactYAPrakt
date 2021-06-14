@@ -10,7 +10,7 @@ interface IngredientsStateType {
   isErrorWhileFetching: boolean;
 }
 
-const initialState: IngredientsStateType = {
+export const initialState: IngredientsStateType = {
   ingredients: [],
   isFetching: false,
   isErrorWhileFetching: false,
@@ -24,7 +24,7 @@ export const getIngredients = () => (dispatch: Dispatch) => {
   } = ingredientsSlice.actions;
 
   dispatch(ingredientsAreFetching());
-  getIngredientsRequest()
+  return getIngredientsRequest()
     .then((resp) => resp.json())
     .then((data) => {
       if (!data.success) {

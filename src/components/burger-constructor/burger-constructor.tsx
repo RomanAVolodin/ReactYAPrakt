@@ -27,7 +27,7 @@ const BurgerConstructor: React.FC = () => {
   const { ingredients, finalPrice } = useSelector((state: RootState) => state.burgerConstructor);
   const isDragging = useSelector((state: RootState) => state.draggingIngredient.ingredient);
   const dispatcher = useDispatch();
-  const user = useSelector( (state: RootState) => state.auth.user);
+  const user = useSelector((state: RootState) => state.auth.user);
   const history = useHistory();
   const location = useLocation();
 
@@ -49,9 +49,8 @@ const BurgerConstructor: React.FC = () => {
     if (user) {
       setOrderCompleted(true);
     } else {
-      history.push({ pathname: '/login', state: { from: location } })
+      history.push({ pathname: '/login', state: { from: location } });
     }
-
   };
 
   const hideOrder = () => {

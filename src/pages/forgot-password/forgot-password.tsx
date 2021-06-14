@@ -46,7 +46,7 @@ const ForgotPasswordPage: React.FC = () => {
   useEffect(() => {
     if (isDataTransferingCompleted) {
       dispatcher(switchOffDataTransferStatus());
-      history.replace({pathname: '/reset-password', state: { from: location }});
+      history.replace({ pathname: '/reset-password', state: { from: location } });
     }
   }, [isDataTransferingCompleted, history, location, dispatcher]);
 
