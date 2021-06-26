@@ -67,7 +67,7 @@ const Ingredient = ({ ingredient }: { ingredient: IngredientModel }) => {
         <span className="mr-1">{ingredient.price}</span>
         <CurrencyIcon type="primary" />
       </div>
-      <p>{ingredient.name}</p>
+      <p className="title">{ingredient.name}</p>
       {amount() > 0 && <Counter count={amount()} size="small" />}
 
       <div className={styles.DetailPopup} onClick={increaseAmount}>
