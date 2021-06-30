@@ -4,7 +4,7 @@ import AppHeader from '../app-header/app-header';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch } from 'react-redux';
-import { getIngredients } from '../../services/slices/ingredients';
+import { getIngredients } from '../../services/slices/ingredients/ingredients';
 import {
   Feed,
   ForgotPasswordPage,

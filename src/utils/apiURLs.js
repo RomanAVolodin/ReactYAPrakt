@@ -8,3 +8,6 @@ export const getUserApiUrl = 'https://norma.nomoreparties.space/api/auth/user';
 export const updateUserApiUrl = 'https://norma.nomoreparties.space/api/auth/user';
 export const passwordResetRequestApiUrl = 'https://norma.nomoreparties.space/api/password-reset';
 export const passwordResetApiUrl = 'https://norma.nomoreparties.space/api/password-reset/reset';
+
+export const wssFeedUrl = 'wss://norma.nomoreparties.space/orders/all';
+export const wssMyFeedUrl = 'wss://norma.nomoreparties.space/orders';

@@ -4,11 +4,11 @@ import {
   EmailFieldInitialState,
   NameFieldInitialState,
   PasswordFieldInitialState,
-} from '../../utils/initial-states';
+} from '../../../utils/initial-states';
 import { Dispatch } from 'redux';
 import { toast } from 'react-toastify';
-import { RootState } from '../reducers';
-import { doPasswordResetRequest, passwordResetRequest } from '../../utils/api';
+import { RootState } from '../../reducers';
+import { doPasswordResetRequest, passwordResetRequest } from '../../../utils/api';
 
 export const initialState = {
   email: EmailFieldInitialState,

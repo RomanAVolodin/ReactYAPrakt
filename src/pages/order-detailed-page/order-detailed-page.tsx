@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getOrderFromFeed } from '../../services/slices/feed';
+import { feedSocketInit, getOrderFromFeed } from '../../services/slices/feed/feed';
 import { RootState } from '../../services/reducers';
 import styles from './order-detailed-page.module.css';
 import { IngredientModel, IngredientWithAmount } from '../../models/ingredient-model';
@@ -12,7 +12,7 @@ import { LocationState } from '../../models/location-state';
 
 const OrderDetailedPage: React.FC = () => {
   const { order_id } = useParams<{ order_id: string }>();
-  const { order, isErrorWhileFetchingOrder, isFetchingOrder } = useSelector(
+  const { order, isErrorWhileFetchingOrder } = useSelector(
     (state: RootState) => state.feed,
   );
   const dispatch = useDispatch();
@@ -37,9 +37,23 @@ const OrderDetailedPage: React.FC = () => {
     return result;
   }, [order]);
 
+  const { orders } = useSelector(
+    (state: RootState) => state.feed,
+  );
+
+  const allIngredients = useSelector( (state: RootState) => state.ingredients.ingredients);
+
   useEffect(() => {
-    dispatch(getOrderFromFeed(order_id));
-  }, [dispatch, order_id]);
+    if (allIngredients.length && !orders.length) {
+      dispatch(feedSocketInit());
+    }
+  }, [dispatch, allIngredients, orders]);
+
+  useEffect(() => {
+    if (orders.length) {
+      dispatch(getOrderFromFeed(order_id));
+    }
+  }, [dispatch, order_id, orders]);
 
   const totalPrice = useMemo(() => {
     return ingredients
@@ -63,10 +77,8 @@ const OrderDetailedPage: React.FC = () => {
       [],
     );
 
-  return isFetchingOrder ? (
+  return !order  ? (
     <LoaderOrError />
-  ) : !order ? (
-    <div className={styles.container}>Заказ не найден</div>
   ) : (
     <div className={styles.container}>
       {from?.pathname !== '/profile/orders' && from?.pathname !== '/feed' && (
@@ -86,7 +98,7 @@ const OrderDetailedPage: React.FC = () => {
         </div>
 
         <div className={styles.date_price}>
-          <p className="text text_type_main-default text_color_inactive">Вчера, 13:50 i-GMT+3</p>
+          <p className="text text_type_main-default text_color_inactive">{order.createdAt} i-GMT+3</p>
           <div className={styles.price}>
             <p className="text text_type_digits-default mr-3">{totalPrice}</p>
             <CurrencyIcon type="primary" />

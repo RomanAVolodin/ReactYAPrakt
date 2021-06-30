@@ -1,14 +1,13 @@
-import { CLEAR_INGREDIENT_PREVIEW, SET_INGREDIENT_AS_PREVIEW } from '../actions/ingredient-detail';
-import { fakeIngredient } from '../../utils/tests-utils';
+import { fakeIngredient } from '../../../utils/tests-utils';
 import {
   getIngredientById,
   ingredientsDetailedReducer as reducer,
   initialState,
 } from './ingredient-detail';
-import feedFakeData from '../../utils/feed-fake-data';
-import { getIngredients } from '../slices/ingredients';
+import feedFakeData from '../../../utils/feed-fake-data';
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
+import { CLEAR_INGREDIENT_PREVIEW, SET_INGREDIENT_AS_PREVIEW } from '../../actions/ingredient-detail';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);

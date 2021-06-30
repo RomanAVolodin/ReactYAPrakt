@@ -1,8 +1,8 @@
-import { IngredientModel } from '../../models/ingredient-model';
-import { SET_INGREDIENT_AS_PREVIEW, CLEAR_INGREDIENT_PREVIEW } from '../actions/ingredient-detail';
+import { IngredientModel } from '../../../models/ingredient-model';
+import { SET_INGREDIENT_AS_PREVIEW, CLEAR_INGREDIENT_PREVIEW } from '../../actions/ingredient-detail';
 import { Dispatch } from 'redux';
 import { toast } from 'react-toastify';
-import { RootState } from './index';
+import { RootState } from '../index';
 
 interface IngredientsDetailviewAction {
   type: string;

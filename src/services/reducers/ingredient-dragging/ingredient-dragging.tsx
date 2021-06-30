@@ -1,5 +1,5 @@
-import { IngredientModel } from '../../models/ingredient-model';
-import { SET_INGREDIENT_DRAGGING, CLEAR_INGREDIENT_DRAGGING } from '../actions/ingredient-dragging';
+import { IngredientModel } from '../../../models/ingredient-model';
+import { SET_INGREDIENT_DRAGGING, CLEAR_INGREDIENT_DRAGGING } from '../../actions/ingredient-dragging';
 
 interface IngredientsDraggingAction {
   type: string;

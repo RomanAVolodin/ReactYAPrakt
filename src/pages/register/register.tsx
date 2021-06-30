@@ -14,9 +14,9 @@ import {
   changePaswordFieldIcon,
   changePaswordFieldValue,
   switchOffDataTransferStatus,
-} from '../../services/slices/login';
+} from '../../services/slices/login/login';
 import { User } from '../../models/user';
-import { registerUser } from '../../services/slices/auth';
+import { registerUser } from '../../services/slices/auth/auth';
 
 const RegisterPage: React.FC = () => {
   const {

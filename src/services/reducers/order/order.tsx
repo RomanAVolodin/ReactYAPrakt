@@ -1,6 +1,6 @@
-import { ORDER_COMPLETED, ORDER_IS_PROCESSING, ORDER_PROCESS_FAILED } from '../actions/order';
+import { ORDER_COMPLETED, ORDER_IS_PROCESSING, ORDER_PROCESS_FAILED } from '../../actions/order';
 import { toast } from 'react-toastify';
-import { Order } from '../../models/order';
+import { Order } from '../../../models/order';
 
 interface OrderFetchingAction {
   type: string;
@@ -15,7 +15,7 @@ interface OrderStateType {
 }
 
 export const initialState: OrderStateType = {
-  order: { name: '', number: '', status: 'pending', ingredients: [] },
+  order: { name: '', number: '', status: 'pending', ingredients: [], createdAt: '', updatedAt: '' },
   isFetching: false,
   isErrorWhileFetching: false,
 };

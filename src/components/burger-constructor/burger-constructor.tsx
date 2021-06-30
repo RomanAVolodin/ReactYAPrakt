@@ -64,11 +64,11 @@ const BurgerConstructor: React.FC = () => {
     return (
       <div>
         {items.map((ing, index) => (
-          <IngredientInConstructor
-            key={`${index}-${ing._id}`}
-            index={chosenBun ? index + 1 : index}
-            ingredient={ing}
-          />
+            <IngredientInConstructor
+              key={`${index}-${ing._id}`}
+              index={chosenBun ? index + 1 : index}
+              ingredient={ing}
+            />
         ))}
       </div>
     );
@@ -109,11 +109,11 @@ const BurgerConstructor: React.FC = () => {
             : null,
         ].join(' ')}
       >
-        <SortableList
-          items={ingredients.filter((i: IngredientModel) => i.type !== IngredientTypes.Bun)}
-          onSortEnd={onSortEnd}
-          distance={1}
-        />
+          <SortableList
+            items={ingredients.filter((i: IngredientModel) => i.type !== IngredientTypes.Bun)}
+            onSortEnd={onSortEnd}
+            distance={1}
+          />
       </div>
 
       {chosenBun && (

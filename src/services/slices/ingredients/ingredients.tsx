@@ -1,8 +1,8 @@
-import { IngredientModel } from '../../models/ingredient-model';
+import { IngredientModel } from '../../../models/ingredient-model';
 import { createSlice } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import { Dispatch } from 'redux';
-import { getIngredientsRequest } from '../../utils/api';
+import { getIngredientsRequest } from '../../../utils/api';
 
 interface IngredientsStateType {
   ingredients: IngredientModel[];
