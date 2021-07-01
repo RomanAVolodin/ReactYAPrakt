@@ -12,7 +12,7 @@ import {
   changePaswordFieldIcon,
   changePaswordFieldValue,
   proceedPasswordReset,
-} from '../../services/slices/login';
+} from '../../services/slices/login/login';
 import { LocationState } from '../../models/location-state';
 
 const ResetPasswordPage: React.FC = () => {

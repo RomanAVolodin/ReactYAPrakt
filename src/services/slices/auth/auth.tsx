@@ -1,15 +1,15 @@
-import { User } from '../../models/user';
+import { User } from '../../../models/user';
 import { Dispatch } from 'redux';
-import { RootState } from '../reducers';
+import { RootState } from '../../reducers';
 import { toast } from 'react-toastify';
-import { changeEmailFieldValue, changeNameFieldValue, loginSlice } from './login';
+import { changeEmailFieldValue, changeNameFieldValue, loginSlice } from '../login/login';
 import {
   getUserRequest,
   loginRequest,
   logoutRequest,
   registerRequest,
   updateUserRequest,
-} from '../../utils/api';
+} from '../../../utils/api';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
   deleteCookie,
@@ -18,7 +18,7 @@ import {
   removeFromLocalStorage,
   saveToLocalStorage,
   setCookie,
-} from '../../utils/utils';
+} from '../../../utils/utils';
 
 interface AuthStateType {
   user: User | null;

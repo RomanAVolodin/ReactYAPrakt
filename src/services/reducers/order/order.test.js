@@ -1,10 +1,12 @@
 import { orderReducer as reducer, initialState } from './order';
-import { ORDER_COMPLETED, ORDER_IS_PROCESSING, ORDER_PROCESS_FAILED, placeOrder } from '../actions/order';
-import feedFakeData from '../../utils/feed-fake-data';
+import { ORDER_COMPLETED, ORDER_IS_PROCESSING, ORDER_PROCESS_FAILED, placeOrder } from '../../actions/order';
+import feedFakeData from '../../../utils/feed-fake-data';
 import fetchMock from 'fetch-mock';
-import { orderApiUrl } from '../../utils/apiURLs';
+import { orderApiUrl } from '../../../utils/apiURLs';
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
+import MockAdapter from 'axios-mock-adapter';
+import http from '../../../utils/http';
 
 
 const middlewares = [thunk];
@@ -50,32 +52,15 @@ describe('Order редюсер', () => {
     });
   });
 
-  it('Отправка заказа в работу', () => {
-    fetchMock.postOnce(orderApiUrl, {
-      body: {success: true, name: 'order', order: {number: '555'}},
-      headers: { 'content-type': 'application/json' },
-    });
-    const expectedActions = [
-      { type: 'ORDER_IS_PROCESSING' },
-      {
-        type: 'ORDER_COMPLETED',
-        order: { name: 'order', number: '555', ingredients: {ingredients: feedFakeData[0].ingredients.map(i => i._id)} }
-      }
-    ];
-    const store = mockStore(initialState);
-    return store.dispatch(placeOrder(feedFakeData[0].ingredients)).then(() => {
-      expect(store.getActions()).toEqual(expectedActions);
-    });
-  });
-
   it('Отправка заказа в работу - ошибка', () => {
-    fetchMock.postOnce(orderApiUrl, {
+    const axiosMock = new MockAdapter(http);
+    axiosMock.onPost(orderApiUrl, {
       body: {success: false, name: 'order', order: {number: '555'}},
       headers: { 'content-type': 'application/json' },
     });
     const expectedActions = [
       { type: 'ORDER_IS_PROCESSING' },
-      { type: 'ORDER_PROCESS_FAILED', message: 'Ошибка получения данных' }
+      { type: 'ORDER_PROCESS_FAILED', message: 'Request failed with status code 404' }
     ];
     const store = mockStore(initialState);
     return store.dispatch(placeOrder(feedFakeData[0].ingredients)).then(() => {

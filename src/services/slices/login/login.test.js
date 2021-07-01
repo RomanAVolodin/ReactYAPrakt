@@ -2,8 +2,7 @@ import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
 import { loginSlice as slice, initialState, proceedPasswordResetRequest, proceedPasswordReset } from './login';
 import fetchMock from 'fetch-mock';
-import { loginUserApiUrl, passwordResetApiUrl, passwordResetRequestApiUrl } from '../../utils/apiURLs';
-import { loginUser } from './auth';
+import { passwordResetApiUrl, passwordResetRequestApiUrl } from '../../../utils/apiURLs';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);

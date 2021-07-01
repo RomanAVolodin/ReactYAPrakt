@@ -1,7 +1,7 @@
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
 import { feedSlice as slice, getFeed, getOrderFromFeed, initialState } from './feed';
-import feedFakeData from '../../utils/feed-fake-data';
+import feedFakeData from '../../../utils/feed-fake-data';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -13,56 +13,18 @@ describe('Feed slice', () => {
     expect(reducer(undefined, {})).toEqual(initialState);
   });
 
-  it('Получение списка заказов', () => {
-    const expectedActions = [
-      { type: 'feed/feedIsFetching', payload: undefined },
-      {
-        type: 'feed/feedFetched',
-        payload: feedFakeData
-      }
-    ];
-    const store = mockStore(initialState);
-    return store.dispatch(getFeed()).then(() => {
-      expect(store.getActions()).toEqual(expectedActions);
-    });
-  });
-
-  it('Получение заказа из списка заказов', () => {
-    const expectedActions = [
-      { type: 'feed/orderIsFetching', payload: undefined },
-      {
-        type: 'feed/orderFetched',
-        payload: feedFakeData[0]
-      }
-    ];
-    const store = mockStore(initialState);
-    return store.dispatch(getOrderFromFeed(feedFakeData[0].number)).then(() => {
-      expect(store.getActions()).toEqual(expectedActions);
-    });
-  });
-
-  it('Получение заказа с неправильным номером из списка заказов', () => {
-    const expectedActions = [
-      { type: 'feed/orderIsFetching', payload: undefined },
-      { type: 'feed/orderFetchError', payload: undefined }
-    ];
-    const store = mockStore(initialState);
-    return store.dispatch(getOrderFromFeed('wrong_num')).then(() => {
-      expect(store.getActions()).toEqual(expectedActions);
-    });
-  });
-
   it('Список получен - стейт', () => {
-    expect(reducer(initialState, { type: 'feed/feedFetched', payload: feedFakeData})).toEqual({
+    expect(reducer(initialState, {
+      type: 'feed/feedFetched',
+      payload: {orders: [], total: 0, totalToday: 0}})).toEqual({
       ...initialState,
       isFetchingFeed: false,
-      isErrorWhileFetchingFeed: false,
-      orders: feedFakeData
+      isErrorWhileFetchingFeed: false
     });
   });
 
   it('Список в процессе получения - стейт', () => {
-    expect(reducer(initialState, { type: 'feed/feedIsFetching'})).toEqual({
+    expect(reducer(initialState, { type: 'feed/feedSocketInit'})).toEqual({
       ...initialState,
       isFetchingFeed: true,
       isErrorWhileFetchingFeed: false

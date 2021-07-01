@@ -3,13 +3,13 @@ import {
   ADD_INGREDIENT_TO_CONSTRUCTOR,
   REMOVE_INGREDIENT_FROM_CONSTRUCTOR,
   WRAP_INGREDIENTS_IN_CONSTRUCTOR,
-} from '../actions/burger-constructor';
+} from '../../actions/burger-constructor';
 import {
   fakeIngredient,
   fakeIngredientBun,
   fakeIngredientBun2,
   fakeIngredientMain,
-} from '../../utils/tests-utils';
+} from '../../../utils/tests-utils';
 
 describe('BurgerConstrucor reducer', () => {
   it('Должен вернуть state по умолчанию', () => {

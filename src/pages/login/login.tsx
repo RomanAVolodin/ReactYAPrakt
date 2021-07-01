@@ -11,8 +11,8 @@ import {
   changePaswordFieldError,
   changePaswordFieldIcon,
   changePaswordFieldValue,
-} from '../../services/slices/login';
-import { loginUser } from '../../services/slices/auth';
+} from '../../services/slices/login/login';
+import { loginUser } from '../../services/slices/auth/auth';
 import { User } from '../../models/user';
 import { LocationState } from '../../models/location-state';
 

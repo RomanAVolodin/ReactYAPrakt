@@ -3,7 +3,7 @@ import {
   getUserApiUrl,
   ingredientsApiUrl,
   loginUserApiUrl,
-  logoutUserApiUrl,
+  logoutUserApiUrl, orderApiUrl,
   passwordResetApiUrl,
   passwordResetRequestApiUrl,
   refreshTokenApiUrl,
@@ -44,6 +44,7 @@ export const loginRequest = async (user: User) => {
 };
 
 export const getUserRequest = async () => await http.get(getUserApiUrl).then((res) => res.data);
+export const placeOrderRequest = async (dataToPost: Object) => await http.post(orderApiUrl, dataToPost).then((res) => res.data);
 
 export const logoutRequest = async () => {
   return await fetch(logoutUserApiUrl, {

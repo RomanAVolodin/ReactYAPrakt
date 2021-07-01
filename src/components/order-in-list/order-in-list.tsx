@@ -27,7 +27,7 @@ const OrderInList = ({ order }: { order: Order }) => {
     >
       <div className={styles.order_number_date}>
         <p className="text text_type_digits-default">#{order.number}</p>
-        <p className="text text_type_main-default text_color_inactive">Сегодня, 16:20 i-GMT+3</p>
+        <p className="text text_type_main-default text_color_inactive">{order.createdAt} i-GMT+3</p>
       </div>
       <p className="text text_type_main-medium">{order.name}</p>
 

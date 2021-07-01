@@ -1,9 +1,9 @@
-import { IngredientModel, IngredientTypes } from '../../models/ingredient-model';
+import { IngredientModel, IngredientTypes } from '../../../models/ingredient-model';
 import {
   ADD_INGREDIENT_TO_CONSTRUCTOR,
   REMOVE_INGREDIENT_FROM_CONSTRUCTOR,
   WRAP_INGREDIENTS_IN_CONSTRUCTOR,
-} from '../actions/burger-constructor';
+} from '../../actions/burger-constructor';
 
 export type IngredientsReducerActionType = {
   type: string;

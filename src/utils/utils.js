@@ -1,3 +1,6 @@
+import moment from 'moment';
+import 'moment/locale/ru';
+
 export function getCookie(name) {
   const matches = document.cookie.match(
     // eslint-disable-next-line
@@ -49,3 +52,20 @@ export function removeFromLocalStorage(name) {
 export const getTokenFromPayload = (payload) => {
   return payload && payload.indexOf('Bearer') === 0 ? payload.split('Bearer ')[1] : payload;
 };
+
+
+export const dateToFromNowDaily = ( myDate ) => {
+  let fromNow = moment( myDate ).fromNow();
+  const mom = moment( myDate );
+  return mom.locale('ru')
+    .calendar( null, {
+      lastWeek: '[Прошлый] dddd, H:mm',
+      lastDay:  '[Вчера], H:mm',
+      sameDay:  '[Сегодня], H:mm',
+      nextDay:  '[Завтра], H:mm',
+      nextWeek: 'dddd, H:mm',
+      sameElse: function () {
+        return "[" + fromNow + "]";
+      }
+    });
+}

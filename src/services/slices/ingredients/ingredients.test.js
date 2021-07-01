@@ -2,8 +2,8 @@ import { initialState, ingredientsSlice as slice, getIngredients } from './ingre
 import fetchMock from 'fetch-mock';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import feedFakeData from '../../utils/feed-fake-data';
-import { ingredientsApiUrl } from '../../utils/apiURLs';
+import feedFakeData from '../../../utils/feed-fake-data';
+import { ingredientsApiUrl } from '../../../utils/apiURLs';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);

@@ -10,7 +10,7 @@ import {
   changeEmailFieldValue,
   proceedPasswordResetRequest,
   switchOffDataTransferStatus,
-} from '../../services/slices/login';
+} from '../../services/slices/login/login';
 import { Button, Input, Logo } from '@ya.praktikum/react-developer-burger-ui-components';
 
 const ForgotPasswordPage: React.FC = () => {

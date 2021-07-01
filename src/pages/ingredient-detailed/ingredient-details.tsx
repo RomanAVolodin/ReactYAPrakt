@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../services/reducers';
-import { getIngredientById } from '../../services/reducers/ingredient-detail';
+import { getIngredientById } from '../../services/reducers/ingredient-detail/ingredient-detail';
 import { LocationState } from '../../models/location-state';
 
 const IngredientDetails: React.FC = () => {

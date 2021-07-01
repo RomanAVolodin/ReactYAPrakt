@@ -1,6 +1,6 @@
 import { ingredientsDraggingReducer as reducer, initialState } from './ingredient-dragging';
-import { CLEAR_INGREDIENT_DRAGGING, SET_INGREDIENT_DRAGGING } from '../actions/ingredient-dragging';
-import { fakeIngredient } from '../../utils/tests-utils';
+import { CLEAR_INGREDIENT_DRAGGING, SET_INGREDIENT_DRAGGING } from '../../actions/ingredient-dragging';
+import { fakeIngredient } from '../../../utils/tests-utils';
 
 describe('IngredientsDraggingReducer', () => {
   it('Должен вернуть state по умолчанию', () => {

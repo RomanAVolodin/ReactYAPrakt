@@ -1,6 +1,6 @@
-import { orderApiUrl } from '../../utils/apiURLs';
 import { Dispatch } from 'redux';
 import { IngredientModel } from '../../models/ingredient-model';
+import { placeOrderRequest } from '../../utils/api';
 
 export const ORDER_IS_PROCESSING = 'ORDER_IS_PROCESSING';
 export const ORDER_COMPLETED = 'ORDER_COMPLETED';
@@ -15,12 +15,7 @@ export const placeOrder = (chosenIngredients: IngredientModel[]) => (dispatch: D
     type: ORDER_IS_PROCESSING,
   });
 
-  return fetch(orderApiUrl, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(dataToPost),
-  })
-    .then((resp) => resp.json())
+  return placeOrderRequest(dataToPost)
     .then((data) => {
       if (!data.success) {
         throw new Error('Ошибка получения данных');
