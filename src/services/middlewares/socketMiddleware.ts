@@ -10,6 +10,7 @@ import { wssFeedUrl, wssMyFeedUrl } from '../../utils/apiURLs';
 export const socketMiddleware = (): Middleware => {
   return (store: MiddlewareAPI) => {
     let feedSocket: WebSocket | null = null;
+    let pingInterval: ReturnType<typeof setInterval>;
 
     return (next: Dispatch) => (action: PayloadAction) => {
       const { dispatch, getState } = store;
@@ -39,6 +40,16 @@ export const socketMiddleware = (): Middleware => {
           })
           dispatch(feedFetched({ ...restParsedData, orders: serializedOrders }));
         };
+
+        feedSocket.onopen = () => {
+          pingInterval = setInterval(() => {
+            feedSocket?.send('ping');
+          }, 1000);
+        };
+
+        feedSocket.onclose = () => {
+          clearInterval(pingInterval);
+        }
 
         if (type === feedSocketClose.type && feedSocket) {
           feedSocket.close();
