@@ -1,10 +1,10 @@
-import { Route, Redirect, useHistory } from 'react-router-dom';
+import { Route, Redirect, useHistory, RouteProps } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../services/reducers';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getUser } from '../services/slices/auth/auth';
 
-export function OnlyUnauthRoute({ children, ...rest }: any) {
+export const OnlyUnauthRoute: React.FC<RouteProps> = ({ children, ...rest }) => {
   const { user, isUserFetching } = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch();
   const history = useHistory();

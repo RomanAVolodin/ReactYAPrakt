@@ -43,7 +43,9 @@ export const socketMiddleware = (): Middleware => {
 
         feedSocket.onopen = () => {
           pingInterval = setInterval(() => {
-            feedSocket?.send('ping');
+            if (feedSocket?.readyState === 1) {
+              feedSocket?.send('ping');
+            }
           }, 1000);
         };
 
