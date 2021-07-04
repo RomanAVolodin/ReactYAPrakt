@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect } from 'react';
+import React, { ChangeEvent, FormEvent, useEffect } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import styles from '../login/login.module.css';
 import { Button, Input, Logo } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -47,7 +47,9 @@ const ResetPasswordPage: React.FC = () => {
     dispatcher(changeCodeFieldValue(e.target.value));
   };
 
-  const resetPassword = () => {
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+
     if (validator.isEmpty(password.value)) {
       dispatcher(changePaswordFieldError('Поле обязательно к заполнению'));
     }
@@ -72,31 +74,34 @@ const ResetPasswordPage: React.FC = () => {
     <div className={styles.container}>
       <Logo />
       <p className="text text_type_main-medium mt-20">Восстановление пароля</p>
-      <Input
-        type={password.type}
-        placeholder={password.placeholder}
-        onChange={onChangePassword}
-        value={password.value}
-        name={password.name}
-        error={password.isError}
-        errorText={password.errorText}
-        size={'default'}
-        icon={password.icon}
-        onIconClick={passwordIconClick}
-      />
-      <Input
-        type={verification_code.type}
-        placeholder={verification_code.placeholder}
-        onChange={onChangeCode}
-        value={verification_code.value}
-        name={verification_code.name}
-        error={verification_code.isError}
-        errorText={verification_code.errorText}
-        size={'default'}
-      />
-      <Button type="primary" size="large" onClick={resetPassword}>
-        {!isDataTransfering ? 'Сохранить' : 'Данные отправляются'}
-      </Button>
+      <form onSubmit={handleSubmit}>
+        <Input
+          type={password.type}
+          placeholder={password.placeholder}
+          onChange={onChangePassword}
+          value={password.value}
+          name={password.name}
+          error={password.isError}
+          errorText={password.errorText}
+          size={'default'}
+          icon={password.icon}
+          onIconClick={passwordIconClick}
+        />
+        <Input
+          type={verification_code.type}
+          placeholder={verification_code.placeholder}
+          onChange={onChangeCode}
+          value={verification_code.value}
+          name={verification_code.name}
+          error={verification_code.isError}
+          errorText={verification_code.errorText}
+          size={'default'}
+        />
+        <Button type="primary" size="large">
+          {!isDataTransfering ? 'Сохранить' : 'Данные отправляются'}
+        </Button>
+      </form>
+
       {isErrorWhileDataTransfer && (
         <p className="text text_type_main-default">При отправке данных произошла ошибка</p>
       )}

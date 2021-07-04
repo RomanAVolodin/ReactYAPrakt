@@ -3,11 +3,9 @@ import {
   ConstructorElement,
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useMemo, useState } from 'react';
 import { IngredientModel, IngredientTypes } from '../../models/ingredient-model';
 import styles from './burger-constructor.module.css';
-import ingredientPropType from '../../models/ingredient-model-prop-type';
 import Modal from '../modal-window/modal';
 import OrderDetails from '../order-details/order-details';
 import { toast } from 'react-toastify';
@@ -25,7 +23,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 const BurgerConstructor: React.FC = () => {
   const [orderCompleted, setOrderCompleted] = useState<boolean>(false);
   const { ingredients, finalPrice } = useSelector((state: RootState) => state.burgerConstructor);
-  const isDragging = useSelector((state: RootState) => state.draggingIngredient.ingredient);
+  const draggingIngredient = useSelector((state: RootState) => state.draggingIngredient.ingredient);
   const dispatcher = useDispatch();
   const user = useSelector((state: RootState) => state.auth.user);
   const history = useHistory();
@@ -41,7 +39,7 @@ const BurgerConstructor: React.FC = () => {
     }),
   });
 
-  const placeOrder = () => {
+  const placeOrder = (): void => {
     if (!ingredients.find((ing) => ing.type === IngredientTypes.Bun)) {
       toast.warn('Заказ не может быть сформирован, не выбрана булка :(');
       return;
@@ -53,7 +51,7 @@ const BurgerConstructor: React.FC = () => {
     }
   };
 
-  const hideOrder = () => {
+  const hideOrder = (): void => {
     setOrderCompleted(false);
   };
 
@@ -81,14 +79,27 @@ const BurgerConstructor: React.FC = () => {
     });
   };
 
+  const chosenInnerIngredients = useMemo(() => {
+    return ingredients.filter(i => i.type !== IngredientTypes.Bun)
+  }, [ingredients]);
+
   return (
     <section
       onDrop={(e) => e.preventDefault()}
-      className={`${styles.container} ${isDragging && styles.on_drag_ready} ${
-        isHover && styles.on_drag_hover
-      } `}
+      className={styles.container}
       ref={dropTarget}
     >
+      { !chosenBun &&
+        <div className={`constructor-element 
+        constructor-element_pos_top 
+        ${styles.fake_ingredient} 
+        ${draggingIngredient && draggingIngredient.type === IngredientTypes.Bun && styles.on_drag_ready}`}>
+          <span className="constructor-element__row">
+            Выберите булку для Вашего бургера
+          </span>
+        </div>
+      }
+
       {chosenBun && (
         <div className="mt-1">
           <ConstructorElement
@@ -104,17 +115,37 @@ const BurgerConstructor: React.FC = () => {
       <div
         className={[
           styles.ingredients_scrollable_container,
-          ingredients.filter((i: IngredientModel) => i.type !== IngredientTypes.Bun).length > 5
+          chosenInnerIngredients.length > 5
             ? styles.scrollbar_appeared
             : null,
         ].join(' ')}
       >
+        {! chosenInnerIngredients.length &&
+          <div className={`constructor-element 
+          ${styles.fake_ingredient} 
+          ${draggingIngredient && draggingIngredient.type !== IngredientTypes.Bun && styles.on_drag_ready}`}>
+            <span className="constructor-element__row">
+              Добавьте ингредиенты
+            </span>
+          </div>
+        }
           <SortableList
-            items={ingredients.filter((i: IngredientModel) => i.type !== IngredientTypes.Bun)}
+            items={chosenInnerIngredients}
             onSortEnd={onSortEnd}
             distance={1}
           />
       </div>
+
+      { !chosenBun &&
+      <div className={`constructor-element 
+        constructor-element_pos_bottom
+        ${styles.fake_ingredient} 
+        ${draggingIngredient && draggingIngredient.type === IngredientTypes.Bun && styles.on_drag_ready}`}>
+          <span className="constructor-element__row">
+            Выберите булку для Вашего бургера
+          </span>
+      </div>
+      }
 
       {chosenBun && (
         <div className="mt-1">
@@ -129,7 +160,7 @@ const BurgerConstructor: React.FC = () => {
       )}
 
       {finalPrice > 0 && (
-        <div className={[styles.final_price, 'mt-3 mb-3'].join(' ')}>
+        <div className={[styles.final_price, 'mt-3 mb-1'].join(' ')}>
           <span className="text text_type_digits-default mr-1">{finalPrice}</span>
           <CurrencyIcon type="primary" />
 
@@ -145,17 +176,13 @@ const BurgerConstructor: React.FC = () => {
         <OrderDetails />
       </Modal>
 
-      {ingredients.length === 0 && isDragging && (
-        <div className={`text text_type_digits-default ${styles.empty_dropzone}`}>
-          <p>Сладывать тут:)</p>
+      {draggingIngredient && (
+        <div className={`text text_type_digits-default ${styles.empty_dropzone} ${styles.drop_sign}`}>
+          { !isHover ? <p>Перетаскивай дальше...</p> : <p>Бросай</p> }
         </div>
       )}
     </section>
   );
-};
-
-BurgerConstructor.propTypes = {
-  chosen_ingredients: PropTypes.arrayOf(ingredientPropType.isRequired),
 };
 
 export default BurgerConstructor;

@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Order, orderPropType } from '../../models/order';
+import { Order } from '../../models/order';
 import styles from './order-in-list.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useHistory, useLocation, useRouteMatch } from 'react-router-dom';
@@ -13,7 +13,7 @@ const OrderInList = ({ order }: { order: Order }) => {
   const totalPrice = useMemo(() => {
     return order.ingredients
       .map((ing) => (ing ? ing.price : 0))
-      .reduce((a: number, b: number) => a + b, 0);
+      .reduce((a, b) => a + b, 0);
   }, [order.ingredients]);
 
   const MAX_ELEMENTS_AMOUNT = 6;
@@ -58,10 +58,6 @@ const OrderInList = ({ order }: { order: Order }) => {
       </div>
     </div>
   );
-};
-
-OrderInList.propTypes = {
-  order: orderPropType.isRequired,
 };
 
 export default OrderInList;

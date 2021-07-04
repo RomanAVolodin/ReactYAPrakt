@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect } from 'react';
+import React, { ChangeEvent, FormEvent, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import styles from '../login/login.module.css';
 import { Button, Input, Logo } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -46,7 +46,9 @@ const RegisterPage: React.FC = () => {
     dispatcher(changeNameFieldValue(e.target.value));
   };
 
-  const register = () => {
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+
     if (!validator.isEmail(email.value)) {
       dispatcher(changeEmailFieldError('Ошибка в адресе почты'));
     }
@@ -90,41 +92,44 @@ const RegisterPage: React.FC = () => {
     <div className={styles.container}>
       <Logo />
       <p className="text text_type_main-medium mt-20">Регистрация</p>
-      <Input
-        type={name.type}
-        placeholder={name.placeholder}
-        onChange={onChangeName}
-        value={name.value}
-        name={name.name}
-        error={name.isError}
-        errorText={name.errorText}
-        size={'default'}
-      />
-      <Input
-        type={email.type}
-        placeholder={email.placeholder}
-        onChange={onChangeEmail}
-        value={email.value}
-        name={email.name}
-        error={email.isError}
-        errorText={email.errorText}
-        size={'default'}
-      />
-      <Input
-        type={password.type}
-        placeholder={password.placeholder}
-        onChange={onChangePassword}
-        value={password.value}
-        name={password.name}
-        error={password.isError}
-        errorText={password.errorText}
-        size={'default'}
-        icon={password.icon}
-        onIconClick={passwordIconClick}
-      />
-      <Button type="primary" size="large" onClick={register}>
-        {!isDataTransfering ? 'Зарегистрироваться' : 'Данные отправляются'}
-      </Button>
+      <form onSubmit={handleSubmit}>
+        <Input
+          type={name.type}
+          placeholder={name.placeholder}
+          onChange={onChangeName}
+          value={name.value}
+          name={name.name}
+          error={name.isError}
+          errorText={name.errorText}
+          size={'default'}
+        />
+        <Input
+          type={email.type}
+          placeholder={email.placeholder}
+          onChange={onChangeEmail}
+          value={email.value}
+          name={email.name}
+          error={email.isError}
+          errorText={email.errorText}
+          size={'default'}
+        />
+        <Input
+          type={password.type}
+          placeholder={password.placeholder}
+          onChange={onChangePassword}
+          value={password.value}
+          name={password.name}
+          error={password.isError}
+          errorText={password.errorText}
+          size={'default'}
+          icon={password.icon}
+          onIconClick={passwordIconClick}
+        />
+        <Button type="primary" size="large">
+          {!isDataTransfering ? 'Зарегистрироваться' : 'Данные отправляются'}
+        </Button>
+      </form>
+
       {isErrorWhileDataTransfer && (
         <p className="text text_type_main-default">При отправке данных произошла ошибка</p>
       )}

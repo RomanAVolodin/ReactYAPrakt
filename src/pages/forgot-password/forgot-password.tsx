@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect } from 'react';
+import React, { ChangeEvent, FormEvent, useEffect } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import styles from '../login/login.module.css';
 
@@ -28,7 +28,9 @@ const ForgotPasswordPage: React.FC = () => {
     dispatcher(changeEmailFieldValue(e.target.value));
   };
 
-  const passwordRequest = () => {
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+
     if (!validator.isEmail(email.value)) {
       dispatcher(changeEmailFieldError('Ошибка в адресе почты'));
     }
@@ -54,19 +56,21 @@ const ForgotPasswordPage: React.FC = () => {
     <div className={styles.container}>
       <Logo />
       <p className="text text_type_main-medium mt-20">Восстановление пароля</p>
-      <Input
-        type={email.type}
-        placeholder={email.placeholder}
-        onChange={onChangeEmail}
-        value={email.value}
-        name={email.name}
-        error={email.isError}
-        errorText={email.errorText}
-        size={'default'}
-      />
-      <Button type="primary" size="large" onClick={passwordRequest}>
-        {!isDataTransfering ? 'Восстановить' : 'Данные отправляются'}
-      </Button>
+      <form onSubmit={handleSubmit}>
+        <Input
+          type={email.type}
+          placeholder={email.placeholder}
+          onChange={onChangeEmail}
+          value={email.value}
+          name={email.name}
+          error={email.isError}
+          errorText={email.errorText}
+          size={'default'}
+        />
+        <Button type="primary" size="large">
+          {!isDataTransfering ? 'Восстановить' : 'Данные отправляются'}
+        </Button>
+      </form>
       {isErrorWhileDataTransfer && (
         <p className="text text_type_main-default">При отправке данных произошла ошибка</p>
       )}

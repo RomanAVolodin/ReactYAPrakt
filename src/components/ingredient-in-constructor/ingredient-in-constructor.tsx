@@ -1,4 +1,4 @@
-import ingredientPropType, { IngredientModel } from '../../models/ingredient-model';
+import { IngredientModel } from '../../models/ingredient-model';
 import styles from './ingredient-in-constructor.module.css';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { REMOVE_INGREDIENT_FROM_CONSTRUCTOR } from '../../services/actions/burger-constructor';
@@ -23,9 +23,5 @@ const IngredientInConstructor = SortableElement(
     );
   },
 );
-
-IngredientInConstructor.propTypes = {
-  ingredient: ingredientPropType.isRequired,
-};
 
 export default IngredientInConstructor;

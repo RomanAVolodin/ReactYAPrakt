@@ -1,5 +1,5 @@
 import React from 'react';
-import { IngredientWithAmount, ingredientWithAmountPropType } from '../../models/ingredient-model';
+import { IngredientWithAmount } from '../../models/ingredient-model';
 import styles from './ingredient-with-amount-for-feed.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
@@ -29,10 +29,6 @@ const IngredientWithAmountForFeed = ({
       </div>
     </div>
   );
-};
-
-IngredientWithAmountForFeed.propTypes = {
-  ingredientWithAmount: ingredientWithAmountPropType.isRequired,
 };
 
 export default IngredientWithAmountForFeed;
