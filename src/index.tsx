@@ -3,16 +3,9 @@ import ReactDOM from 'react-dom';
 import App from './components/app/app';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import { Provider } from 'react-redux';
-import { rootReducer } from './services/reducers';
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-import { socketMiddleware } from './services/middlewares/socketMiddleware';
-
-const store = configureStore({
-  reducer: rootReducer,
-  middleware: [socketMiddleware(), ...getDefaultMiddleware()],
-  devTools: process.env.NODE_ENV !== 'production',
-});
+import { store } from './services/store';
 
 ReactDOM.render(
   <Provider store={store}>

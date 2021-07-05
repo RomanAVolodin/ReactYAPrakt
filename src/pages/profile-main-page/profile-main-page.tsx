@@ -7,7 +7,7 @@ import { logoutUser } from '../../services/slices/auth/auth';
 export const ProfileMainPage: React.FC = ({ children }) => {
   const dispatch = useDispatch();
 
-  const logOut = () => {
+  const logOut = (): void => {
     dispatch(logoutUser());
   };
 

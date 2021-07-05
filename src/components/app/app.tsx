@@ -25,6 +25,7 @@ import Modal from '../modal-window/modal';
 import IngredientDetails from '../../pages/ingredient-detailed/ingredient-details';
 import ClearHistoryStateComponent from '../clear-history-state/clear-history-state';
 import { createBrowserHistory } from 'history';
+import { getUser } from '../../services/slices/auth/auth';
 
 export const history = createBrowserHistory();
 
@@ -33,6 +34,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getIngredients());
+    dispatch(getUser());
   }, [dispatch]);
 
   return (

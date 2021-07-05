@@ -1,5 +1,5 @@
 import React from 'react';
-import { Order, orderPropType } from '../../models/order';
+import { Order } from '../../models/order';
 
 export const OrderStatusTitle = ({ order }: { order: Order }) => {
   return order.status === 'done' ? (
@@ -15,10 +15,6 @@ export const OrderStatusTitle = ({ order }: { order: Order }) => {
       Готовится
     </p>
   );
-};
-
-OrderStatusTitle.propTypes = {
-  order: orderPropType.isRequired,
 };
 
 export default OrderStatusTitle;

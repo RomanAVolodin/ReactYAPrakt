@@ -58,7 +58,7 @@ const OrderDetailedPage: React.FC = () => {
   const totalPrice = useMemo(() => {
     return ingredients
       .map((ing) => ing.ingredient.price * ing.amount)
-      .reduce((a: number, b: number) => a + b, 0);
+      .reduce((a, b) => a + b, 0);
   }, [ingredients]);
 
   const LoaderOrError: React.FC = () =>
@@ -90,7 +90,7 @@ const OrderDetailedPage: React.FC = () => {
         <p className="text text_type_main-medium mt-10">Состав:</p>
 
         <div className={styles.ingredients_list}>
-          {ingredients.map((ingredient: IngredientWithAmount, index: number) =>
+          {ingredients.map((ingredient, index) =>
             ingredient ? (
               <IngredientWithAmountForFeed key={index} ingredientWithAmount={ingredient} />
             ) : null,

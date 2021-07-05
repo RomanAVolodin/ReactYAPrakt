@@ -3,6 +3,7 @@ import {
   ADD_INGREDIENT_TO_CONSTRUCTOR,
   REMOVE_INGREDIENT_FROM_CONSTRUCTOR,
   WRAP_INGREDIENTS_IN_CONSTRUCTOR,
+  CLEAR_CONSTRUCTOR
 } from '../../actions/burger-constructor';
 
 export type IngredientsReducerActionType = {
@@ -22,7 +23,7 @@ export const initialState: ConstructorStateType = {
 };
 
 const calculateFinalPrice = (ingredients: IngredientModel[]) => {
-  return ingredients.reduce((acc: number, ing: IngredientModel) => {
+  return ingredients.reduce((acc, ing) => {
     return acc + ing.price;
   }, 0);
 };
@@ -33,13 +34,13 @@ export const constructorReducer = (state = initialState, action: IngredientsRedu
       let newIngredients = [];
       if (action.ingredient.type === IngredientTypes.Bun) {
         const chosenIngredients = state.ingredients.filter(
-          (ing: IngredientModel) => ing.type !== IngredientTypes.Bun,
+          ing => ing.type !== IngredientTypes.Bun,
         );
         newIngredients = [action.ingredient, ...chosenIngredients, action.ingredient];
       } else {
         const bun = state.ingredients.find((ing) => ing.type === IngredientTypes.Bun);
         const chosenIngredients = state.ingredients.filter(
-          (ing: IngredientModel) => ing.type !== IngredientTypes.Bun,
+          ing => ing.type !== IngredientTypes.Bun,
         );
         newIngredients = bun
           ? [bun, ...chosenIngredients, action.ingredient, bun]
@@ -53,12 +54,20 @@ export const constructorReducer = (state = initialState, action: IngredientsRedu
     }
     case REMOVE_INGREDIENT_FROM_CONSTRUCTOR: {
       const newIngredients = state.ingredients.filter(
-        (ing: IngredientModel) => ing !== action.ingredient,
+        ing => ing !== action.ingredient,
       );
       return {
         ...state,
         ingredients: newIngredients,
         finalPrice: calculateFinalPrice(newIngredients),
+      };
+    }
+
+    case CLEAR_CONSTRUCTOR: {
+      return {
+        ...state,
+        ingredients: [],
+        finalPrice: calculateFinalPrice([]),
       };
     }
 

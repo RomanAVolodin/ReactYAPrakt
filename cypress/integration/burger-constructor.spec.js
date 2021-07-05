@@ -77,8 +77,7 @@ describe('Конструктор бургеров', function() {
   it('На странице конструктора - бургер еще ждет нас, оформляем заказ', function() {
     cy.contains('Соберите бургер');
     cy.get('button').contains('Оформить заказ').click();
-    cy.get('[class^=modal_ModalWindow__]').contains('идентификатор заказа');
-    cy.get('[class^=modal_ModalWindow__]').contains('Ваш заказ начали готовить');
+    cy.get('[class^=modal_ModalWindow__]').contains('Обработка заказа');
   });
 
 });

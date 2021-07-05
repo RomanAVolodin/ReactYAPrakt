@@ -6,7 +6,6 @@ import {
   Counter,
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import ingredientPropType from '../../models/ingredient-model-prop-type';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDrag } from 'react-dnd';
 import { RootState } from '../../services/reducers';
@@ -37,12 +36,12 @@ const Ingredient = ({ ingredient }: { ingredient: IngredientModel }) => {
     });
   }, [isDragging, ingredient, dispatcher]);
 
-  const increaseAmount = () => {
+  const increaseAmount = (): void => {
     dispatcher({ type: ADD_INGREDIENT_TO_CONSTRUCTOR, ingredient: { ...ingredient } });
   };
 
-  const amount = () => {
-    return ingredients.reduce((accumulator: number, currentValue: IngredientModel) => {
+  const amount = (): number => {
+    return ingredients.reduce((accumulator, currentValue) => {
       return currentValue._id === ingredient._id ? accumulator + 1 : accumulator;
     }, 0);
   };
@@ -75,10 +74,6 @@ const Ingredient = ({ ingredient }: { ingredient: IngredientModel }) => {
       </div>
     </div>
   );
-};
-
-Ingredient.propTypes = {
-  ingredient: ingredientPropType.isRequired,
 };
 
 export default Ingredient;

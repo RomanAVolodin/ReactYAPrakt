@@ -1,6 +1,7 @@
 import { Dispatch } from 'redux';
 import { IngredientModel } from '../../models/ingredient-model';
 import { placeOrderRequest } from '../../utils/api';
+import { CLEAR_CONSTRUCTOR } from './burger-constructor';
 
 export const ORDER_IS_PROCESSING = 'ORDER_IS_PROCESSING';
 export const ORDER_COMPLETED = 'ORDER_COMPLETED';
@@ -28,6 +29,9 @@ export const placeOrder = (chosenIngredients: IngredientModel[]) => (dispatch: D
           ingredients: dataToPost,
         },
       });
+
+      dispatch({ type: CLEAR_CONSTRUCTOR });
+
     })
     .catch((err) => {
       dispatch({

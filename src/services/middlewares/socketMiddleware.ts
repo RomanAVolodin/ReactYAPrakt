@@ -41,13 +41,15 @@ export const socketMiddleware = (): Middleware => {
           dispatch(feedFetched({ ...restParsedData, orders: serializedOrders }));
         };
 
-        feedSocket.onopen = () => {
+        feedSocket.onopen = (): void => {
           pingInterval = setInterval(() => {
-            feedSocket?.send('ping');
+            if (feedSocket?.readyState === 1) {
+              feedSocket?.send('ping');
+            }
           }, 1000);
         };
 
-        feedSocket.onclose = () => {
+        feedSocket.onclose = (): void => {
           clearInterval(pingInterval);
         }
 

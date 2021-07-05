@@ -21,7 +21,8 @@
 }
 
 .on_drag_ready {
-  border: 1px dotted rgba(0, 128, 0, 0.6);
+  border: 3px dotted rgba(0, 128, 0, 0.8);
+  opacity: 1 !important;
 }
 
 .on_drag_hover {
@@ -37,7 +38,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 300px;
+  height: 100px;
   width: 100%;
   color: rgba(77, 77, 118, 0.42);
+}
+
+.fake_ingredient {
+  width: 500px;
+  opacity: 0.3;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  margin-bottom: 5px;
+  margin-top: 7px;
+}
+
+.drop_sign {
+  opacity: 0.1;
 }

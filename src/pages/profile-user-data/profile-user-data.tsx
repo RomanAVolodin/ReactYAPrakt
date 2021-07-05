@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useCallback, useEffect } from 'react';
+import React, { ChangeEvent, FormEvent, useCallback, useEffect } from 'react';
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import {
   changeEmailFieldValue,
@@ -41,7 +41,9 @@ export const ProfileUserData: React.FC = () => {
     cancelInput();
   }, [cancelInput]);
 
-  const proceedUpdateUser = () => {
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+
     const user = {
       name: name.value,
       email: email.value,
@@ -51,7 +53,7 @@ export const ProfileUserData: React.FC = () => {
   };
 
   return (
-    <>
+    <form onSubmit={handleSubmit}>
       <div className="input_container_full_width mb-3">
         <Input
           type={'text'}
@@ -95,7 +97,7 @@ export const ProfileUserData: React.FC = () => {
         <div className="mr-5 cursor_pointer text_success_color" onClick={cancelInput}>
           Отмена
         </div>
-        <Button type="primary" size="medium" onClick={proceedUpdateUser}>
+        <Button type="primary" size="medium">
           {!isDataTransfering ? 'Сохранить' : 'Данные отправляются'}
         </Button>
       </div>
@@ -103,6 +105,6 @@ export const ProfileUserData: React.FC = () => {
       {isErrorWhileDataTransfer && (
         <p className="text text_type_main-default">При получении данных произошла ошибка</p>
       )}
-    </>
+    </form>
   );
 };

@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getUser } from '../services/slices/auth/auth';
-import { Route, Redirect, useHistory } from 'react-router-dom';
+import { Route, Redirect, useHistory, RouteProps } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../services/reducers';
 
-export function ProtectedRoute({ children, ...rest }: any) {
+export const ProtectedRoute: React.FC<RouteProps> = ({ children, ...rest }) => {
   const { user, isUserFetching } = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch();
   const [isUserLoaded, setUserLoaded] = useState(false);
