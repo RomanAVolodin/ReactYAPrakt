@@ -37,4 +37,4 @@ export const OnlyUnauthRoute: React.FC<RouteProps> = ({ children, ...rest }) => 
       }
     />
   );
-}
+};

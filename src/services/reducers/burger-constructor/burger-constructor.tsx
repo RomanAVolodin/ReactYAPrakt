@@ -3,14 +3,33 @@ import {
   ADD_INGREDIENT_TO_CONSTRUCTOR,
   REMOVE_INGREDIENT_FROM_CONSTRUCTOR,
   WRAP_INGREDIENTS_IN_CONSTRUCTOR,
-  CLEAR_CONSTRUCTOR
+  CLEAR_CONSTRUCTOR,
 } from '../../actions/burger-constructor';
 
-export type IngredientsReducerActionType = {
-  type: string;
-  ingredient: IngredientModel;
-  indexesOfTransferedElement: { from: number; to: number };
-};
+export interface IAddIngredientToConstructor {
+  readonly type: typeof ADD_INGREDIENT_TO_CONSTRUCTOR;
+  readonly ingredient: IngredientModel;
+}
+
+export interface IRemoveIngredientFromConstructor {
+  readonly type: typeof REMOVE_INGREDIENT_FROM_CONSTRUCTOR;
+  readonly ingredient: IngredientModel;
+}
+
+export interface IWrapIngredientsInConstructor {
+  readonly type: typeof WRAP_INGREDIENTS_IN_CONSTRUCTOR;
+  readonly indexesOfTransferedElement: { from: number; to: number };
+}
+
+export interface IClearConstructor {
+  readonly type: typeof CLEAR_CONSTRUCTOR;
+}
+
+export type IngredientsReducerActionsType =
+  | IAddIngredientToConstructor
+  | IRemoveIngredientFromConstructor
+  | IWrapIngredientsInConstructor
+  | IClearConstructor;
 
 interface ConstructorStateType {
   ingredients: IngredientModel[];
@@ -28,19 +47,22 @@ const calculateFinalPrice = (ingredients: IngredientModel[]) => {
   }, 0);
 };
 
-export const constructorReducer = (state = initialState, action: IngredientsReducerActionType) => {
+export const constructorReducer = (
+  state = initialState,
+  action: IngredientsReducerActionsType,
+): ConstructorStateType => {
   switch (action.type) {
     case ADD_INGREDIENT_TO_CONSTRUCTOR: {
       let newIngredients = [];
       if (action.ingredient.type === IngredientTypes.Bun) {
         const chosenIngredients = state.ingredients.filter(
-          ing => ing.type !== IngredientTypes.Bun,
+          (ing) => ing.type !== IngredientTypes.Bun,
         );
         newIngredients = [action.ingredient, ...chosenIngredients, action.ingredient];
       } else {
         const bun = state.ingredients.find((ing) => ing.type === IngredientTypes.Bun);
         const chosenIngredients = state.ingredients.filter(
-          ing => ing.type !== IngredientTypes.Bun,
+          (ing) => ing.type !== IngredientTypes.Bun,
         );
         newIngredients = bun
           ? [bun, ...chosenIngredients, action.ingredient, bun]
@@ -53,9 +75,7 @@ export const constructorReducer = (state = initialState, action: IngredientsRedu
       };
     }
     case REMOVE_INGREDIENT_FROM_CONSTRUCTOR: {
-      const newIngredients = state.ingredients.filter(
-        ing => ing !== action.ingredient,
-      );
+      const newIngredients = state.ingredients.filter((ing) => ing !== action.ingredient);
       return {
         ...state,
         ingredients: newIngredients,

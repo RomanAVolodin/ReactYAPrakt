@@ -5,14 +5,15 @@
 
 ```
 const http = axios.create();
-http.defaults.headers.common = { Authorization: 'Bearer token' };   
+http.defaults.headers.common = { Authorization: 'Bearer token' };
 ```
+
 При полученном коде ответа `401` или `403` - пробует обновить accessToken через refreshToken.
 
 > [http.js](src/utils/http.js) - экспортируемый модуль.
 
-
 ### Написаны unit тесты для основной логики приложения
+
 ```
  PASS  src/services/slices/login.test.js
  PASS  src/services/slices/auth.test.js
@@ -32,7 +33,7 @@ Time:        7.655 s, estimated 8 s
 ```
 
 > npm run test - запуск тестов
-> 
+>
 > npm run test-coverage - запуск тестов с покрытием (100% покрыты redux экшены и редюсеры)
 
 ### Написаны e2e тесты для постраничной навигации и конструктора бургеров

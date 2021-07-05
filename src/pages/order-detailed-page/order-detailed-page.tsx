@@ -12,9 +12,7 @@ import { LocationState } from '../../models/location-state';
 
 const OrderDetailedPage: React.FC = () => {
   const { order_id } = useParams<{ order_id: string }>();
-  const { order, isErrorWhileFetchingOrder } = useSelector(
-    (state: RootState) => state.feed,
-  );
+  const { order, isErrorWhileFetchingOrder } = useSelector((state: RootState) => state.feed);
   const dispatch = useDispatch();
   const location = useLocation();
 
@@ -37,11 +35,9 @@ const OrderDetailedPage: React.FC = () => {
     return result;
   }, [order]);
 
-  const { orders } = useSelector(
-    (state: RootState) => state.feed,
-  );
+  const { orders } = useSelector((state: RootState) => state.feed);
 
-  const allIngredients = useSelector( (state: RootState) => state.ingredients.ingredients);
+  const allIngredients = useSelector((state: RootState) => state.ingredients.ingredients);
 
   useEffect(() => {
     if (allIngredients.length && !orders.length) {
@@ -56,9 +52,7 @@ const OrderDetailedPage: React.FC = () => {
   }, [dispatch, order_id, orders]);
 
   const totalPrice = useMemo(() => {
-    return ingredients
-      .map((ing) => ing.ingredient.price * ing.amount)
-      .reduce((a, b) => a + b, 0);
+    return ingredients.map((ing) => ing.ingredient.price * ing.amount).reduce((a, b) => a + b, 0);
   }, [ingredients]);
 
   const LoaderOrError: React.FC = () =>
@@ -77,7 +71,7 @@ const OrderDetailedPage: React.FC = () => {
       [],
     );
 
-  return !order  ? (
+  return !order ? (
     <LoaderOrError />
   ) : (
     <div className={styles.container}>
@@ -98,7 +92,9 @@ const OrderDetailedPage: React.FC = () => {
         </div>
 
         <div className={styles.date_price}>
-          <p className="text text_type_main-default text_color_inactive">{order.createdAt} i-GMT+3</p>
+          <p className="text text_type_main-default text_color_inactive">
+            {order.createdAt} i-GMT+3
+          </p>
           <div className={styles.price}>
             <p className="text text_type_digits-default mr-3">{totalPrice}</p>
             <CurrencyIcon type="primary" />

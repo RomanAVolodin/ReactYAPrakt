@@ -38,4 +38,4 @@ export const ProtectedRoute: React.FC<RouteProps> = ({ children, ...rest }) => {
       }
     />
   );
-}
+};

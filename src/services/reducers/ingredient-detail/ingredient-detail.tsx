@@ -1,19 +1,29 @@
 import { IngredientModel } from '../../../models/ingredient-model';
-import { SET_INGREDIENT_AS_PREVIEW, CLEAR_INGREDIENT_PREVIEW } from '../../actions/ingredient-detail';
+import {
+  SET_INGREDIENT_AS_PREVIEW,
+  CLEAR_INGREDIENT_PREVIEW,
+} from '../../actions/ingredient-detail';
 import { Dispatch } from 'redux';
 import { toast } from 'react-toastify';
 import { RootState } from '../index';
 
-interface IngredientsDetailviewAction {
-  type: string;
-  ingredient: IngredientModel;
+export interface ISetIngredientAsPreview {
+  readonly type: typeof SET_INGREDIENT_AS_PREVIEW;
+  readonly ingredient: IngredientModel;
 }
 
-export interface IngredientsDetailviewStateType {
+export interface IClearIngredientAsPreview {
+  readonly type: typeof CLEAR_INGREDIENT_PREVIEW;
+  readonly ingredient?: IngredientModel;
+}
+
+export type IngredientsDetailViewActions = ISetIngredientAsPreview | IClearIngredientAsPreview;
+
+export interface IngredientsDetailViewStateType {
   ingredient: IngredientModel | null;
 }
 
-export const initialState: IngredientsDetailviewStateType = {
+export const initialState: IngredientsDetailViewStateType = {
   ingredient: null,
 };
 
@@ -41,8 +51,8 @@ export const getIngredientById = (id: string) => (
 
 export const ingredientsDetailedReducer = (
   state = initialState,
-  action: IngredientsDetailviewAction,
-) => {
+  action: IngredientsDetailViewActions,
+): IngredientsDetailViewStateType => {
   switch (action.type) {
     case SET_INGREDIENT_AS_PREVIEW: {
       return { ...state, ingredient: action.ingredient };

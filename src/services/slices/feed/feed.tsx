@@ -11,8 +11,8 @@ interface FeedStateType {
   order?: Order;
   isFetchingOrder: boolean;
   isErrorWhileFetchingOrder: boolean;
-  total: number,
-  totalToday: number
+  total: number;
+  totalToday: number;
 }
 
 export const initialState: FeedStateType = {
@@ -23,7 +23,7 @@ export const initialState: FeedStateType = {
   isFetchingOrder: false,
   isErrorWhileFetchingOrder: false,
   total: 0,
-  totalToday: 0
+  totalToday: 0,
 };
 
 export const getFeed = () => (dispatch: Dispatch) => {
@@ -35,10 +35,10 @@ export const getOrderFromFeed = (id: string) => (dispatch: Dispatch, getState: (
   const { orderFetched, orderFetchError, orderIsFetching } = feedSlice.actions;
   const feedOrders = getState().feed.orders as Order[];
   if (!feedOrders.length) {
-    return
+    return;
   }
   dispatch(orderIsFetching());
-  const order = feedOrders.find( fo => fo.number === id);
+  const order = feedOrders.find((fo) => fo.number === id);
   if (!order) {
     dispatch(orderFetchError());
     toast.error('Заказ не найден среди всех заказов');
@@ -97,10 +97,4 @@ export const feedSlice = createSlice({
   },
 });
 
-
-export const {
-  feedSocketInit,
-  myFeedSocketInit,
-  feedFetched,
-  feedSocketClose
-} = feedSlice.actions;
+export const { feedSocketInit, myFeedSocketInit, feedFetched, feedSocketClose } = feedSlice.actions;

@@ -49,7 +49,7 @@ const AppHeader: React.FC = () => {
         <NavLink to="/">
           <Logo />
         </NavLink>
-        
+
         <ul className={headerStyles.menu_desktop}>
           <li className={headerStyles.menu_item}>
             <NavLink

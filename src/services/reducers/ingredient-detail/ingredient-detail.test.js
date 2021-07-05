@@ -7,7 +7,10 @@ import {
 import feedFakeData from '../../../utils/feed-fake-data';
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
-import { CLEAR_INGREDIENT_PREVIEW, SET_INGREDIENT_AS_PREVIEW } from '../../actions/ingredient-detail';
+import {
+  CLEAR_INGREDIENT_PREVIEW,
+  SET_INGREDIENT_AS_PREVIEW,
+} from '../../actions/ingredient-detail';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);

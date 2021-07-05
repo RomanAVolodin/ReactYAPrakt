@@ -8,7 +8,7 @@ import { RootState } from '../../services/reducers';
 
 export const Feed: React.FC = () => {
   const dispatch = useDispatch();
-  const { ingredients } = useSelector( (state: RootState) => state.ingredients);
+  const { ingredients } = useSelector((state: RootState) => state.ingredients);
 
   useEffect(() => {
     if (ingredients.length) {
@@ -16,7 +16,7 @@ export const Feed: React.FC = () => {
     }
     return () => {
       dispatch(feedSocketClose());
-    }
+    };
   }, [dispatch, ingredients]);
 
   return (

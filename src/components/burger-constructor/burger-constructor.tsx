@@ -62,11 +62,11 @@ const BurgerConstructor: React.FC = () => {
     return (
       <div>
         {items.map((ing, index) => (
-            <IngredientInConstructor
-              key={`${index}-${ing._id}`}
-              index={chosenBun ? index + 1 : index}
-              ingredient={ing}
-            />
+          <IngredientInConstructor
+            key={`${index}-${ing._id}`}
+            index={chosenBun ? index + 1 : index}
+            ingredient={ing}
+          />
         ))}
       </div>
     );
@@ -80,25 +80,25 @@ const BurgerConstructor: React.FC = () => {
   };
 
   const chosenInnerIngredients = useMemo(() => {
-    return ingredients.filter(i => i.type !== IngredientTypes.Bun)
+    return ingredients.filter((i) => i.type !== IngredientTypes.Bun);
   }, [ingredients]);
 
   return (
-    <section
-      onDrop={(e) => e.preventDefault()}
-      className={styles.container}
-      ref={dropTarget}
-    >
-      { !chosenBun &&
-        <div className={`constructor-element 
+    <section onDrop={(e) => e.preventDefault()} className={styles.container} ref={dropTarget}>
+      {!chosenBun && (
+        <div
+          className={`constructor-element 
         constructor-element_pos_top 
         ${styles.fake_ingredient} 
-        ${draggingIngredient && draggingIngredient.type === IngredientTypes.Bun && styles.on_drag_ready}`}>
-          <span className="constructor-element__row">
-            Выберите булку для Вашего бургера
-          </span>
+        ${
+          draggingIngredient &&
+          draggingIngredient.type === IngredientTypes.Bun &&
+          styles.on_drag_ready
+        }`}
+        >
+          <span className="constructor-element__row">Выберите булку для Вашего бургера</span>
         </div>
-      }
+      )}
 
       {chosenBun && (
         <div className="mt-1">
@@ -115,37 +115,39 @@ const BurgerConstructor: React.FC = () => {
       <div
         className={[
           styles.ingredients_scrollable_container,
-          chosenInnerIngredients.length > 5
-            ? styles.scrollbar_appeared
-            : null,
+          chosenInnerIngredients.length > 5 ? styles.scrollbar_appeared : null,
         ].join(' ')}
       >
-        {! chosenInnerIngredients.length &&
-          <div className={`constructor-element 
+        {!chosenInnerIngredients.length && (
+          <div
+            className={`constructor-element 
           ${styles.fake_ingredient} 
-          ${draggingIngredient && draggingIngredient.type !== IngredientTypes.Bun && styles.on_drag_ready}`}>
-            <span className="constructor-element__row">
-              Добавьте ингредиенты
-            </span>
+          ${
+            draggingIngredient &&
+            draggingIngredient.type !== IngredientTypes.Bun &&
+            styles.on_drag_ready
+          }`}
+          >
+            <span className="constructor-element__row">Добавьте ингредиенты</span>
           </div>
-        }
-          <SortableList
-            items={chosenInnerIngredients}
-            onSortEnd={onSortEnd}
-            distance={1}
-          />
+        )}
+        <SortableList items={chosenInnerIngredients} onSortEnd={onSortEnd} distance={1} />
       </div>
 
-      { !chosenBun &&
-      <div className={`constructor-element 
+      {!chosenBun && (
+        <div
+          className={`constructor-element 
         constructor-element_pos_bottom
         ${styles.fake_ingredient} 
-        ${draggingIngredient && draggingIngredient.type === IngredientTypes.Bun && styles.on_drag_ready}`}>
-          <span className="constructor-element__row">
-            Выберите булку для Вашего бургера
-          </span>
-      </div>
-      }
+        ${
+          draggingIngredient &&
+          draggingIngredient.type === IngredientTypes.Bun &&
+          styles.on_drag_ready
+        }`}
+        >
+          <span className="constructor-element__row">Выберите булку для Вашего бургера</span>
+        </div>
+      )}
 
       {chosenBun && (
         <div className="mt-1">
@@ -177,8 +179,10 @@ const BurgerConstructor: React.FC = () => {
       </Modal>
 
       {draggingIngredient && (
-        <div className={`text text_type_digits-default ${styles.empty_dropzone} ${styles.drop_sign}`}>
-          { !isHover ? <p>Перетаскивай дальше...</p> : <p>Бросай</p> }
+        <div
+          className={`text text_type_digits-default ${styles.empty_dropzone} ${styles.drop_sign}`}
+        >
+          {!isHover ? <p>Перетаскивай дальше...</p> : <p>Бросай</p>}
         </div>
       )}
     </section>

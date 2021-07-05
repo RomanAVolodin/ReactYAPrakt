@@ -4,8 +4,7 @@ import OrderPlacedImage from '../../images/order_placed.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../services/reducers';
 import { placeOrder } from '../../services/actions/order';
-import Loader from "react-loader-spinner";
-
+import Loader from 'react-loader-spinner';
 
 const OrderDetails: React.FC = () => {
   const dispatcher = useDispatch();
@@ -17,7 +16,7 @@ const OrderDetails: React.FC = () => {
     }
   }, [dispatcher, chosenIngredients]);
 
-  const {  order, isFetching } = useSelector((state: RootState) => state.order);
+  const { order, isFetching } = useSelector((state: RootState) => state.order);
 
   return (
     <div className={styles.Container}>
@@ -38,12 +37,7 @@ const OrderDetails: React.FC = () => {
       ) : (
         <>
           <p className="text text_type_digits-medium mt-2 mb-15 glow_text">Обработка заказа...</p>
-          <Loader
-            type="BallTriangle"
-            color="#00BFFF"
-            height={100}
-            width={100}
-          />
+          <Loader type="BallTriangle" color="#00BFFF" height={100} width={100} />
         </>
       )}
     </div>

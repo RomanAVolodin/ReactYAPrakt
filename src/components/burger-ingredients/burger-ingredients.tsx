@@ -122,7 +122,7 @@ const BurgerIngredients: React.FC = () => {
               {ingredientsType.name}
             </div>
             {ingredients
-              .filter(ing => ing.type === ingredientsType.type)
+              .filter((ing) => ing.type === ingredientsType.type)
               .map((ing) => (
                 <Ingredient key={ing._id} ingredient={ing} />
               ))}

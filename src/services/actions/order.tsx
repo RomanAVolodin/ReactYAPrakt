@@ -3,9 +3,9 @@ import { IngredientModel } from '../../models/ingredient-model';
 import { placeOrderRequest } from '../../utils/api';
 import { CLEAR_CONSTRUCTOR } from './burger-constructor';
 
-export const ORDER_IS_PROCESSING = 'ORDER_IS_PROCESSING';
-export const ORDER_COMPLETED = 'ORDER_COMPLETED';
-export const ORDER_PROCESS_FAILED = 'ORDER_PROCESS_FAILED';
+export const ORDER_IS_PROCESSING: 'ORDER_IS_PROCESSING' = 'ORDER_IS_PROCESSING';
+export const ORDER_COMPLETED: 'ORDER_COMPLETED' = 'ORDER_COMPLETED';
+export const ORDER_PROCESS_FAILED: 'ORDER_PROCESS_FAILED' = 'ORDER_PROCESS_FAILED';
 
 export const placeOrder = (chosenIngredients: IngredientModel[]) => (dispatch: Dispatch) => {
   const dataToPost = {
@@ -31,7 +31,6 @@ export const placeOrder = (chosenIngredients: IngredientModel[]) => (dispatch: D
       });
 
       dispatch({ type: CLEAR_CONSTRUCTOR });
-
     })
     .catch((err) => {
       dispatch({

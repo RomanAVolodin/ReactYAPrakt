@@ -11,9 +11,7 @@ const OrderInList = ({ order }: { order: Order }) => {
   const history = useHistory();
 
   const totalPrice = useMemo(() => {
-    return order.ingredients
-      .map((ing) => (ing ? ing.price : 0))
-      .reduce((a, b) => a + b, 0);
+    return order.ingredients.map((ing) => (ing ? ing.price : 0)).reduce((a, b) => a + b, 0);
   }, [order.ingredients]);
 
   const MAX_ELEMENTS_AMOUNT = 6;

@@ -5,7 +5,6 @@ import OrdersList from '../orders-list/orders-list';
 import styles from './feed-list.module.css';
 
 const FeedList: React.FC = () => {
-
   const { orders, isFetchingFeed, isErrorWhileFetchingFeed } = useSelector(
     (state: RootState) => state.feed,
   );

@@ -23,17 +23,16 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-Cypress.Commands.add(
-  'selectNth',
-  { prevSubject: 'element' },
-  (subject, pos) => {
-    cy.wrap(subject)
-      .children('option')
-      .eq(pos)
-      .then(e => {
-        cy.wrap(subject).select(e.val())
-      })
-  }
-);
+Cypress.Commands.add('selectNth', { prevSubject: 'element' }, (subject, pos) => {
+  cy.wrap(subject)
+    .children('option')
+    .eq(pos)
+    .then((e) => {
+      cy.wrap(subject).select(e.val());
+    });
+});
 
-Cypress.Commands.add("dragTo", { prevSubject: "element" }, (subject, targetEl) => { cy.wrap(subject).trigger("dragstart"); cy.get(targetEl).trigger("drop"); } );
+Cypress.Commands.add('dragTo', { prevSubject: 'element' }, (subject, targetEl) => {
+  cy.wrap(subject).trigger('dragstart');
+  cy.get(targetEl).trigger('drop');
+});

@@ -10,8 +10,8 @@ const ProfileOrdersHistory: React.FC = () => {
   const { orders, isFetchingFeed, isErrorWhileFetchingFeed } = useSelector(
     (state: RootState) => state.feed,
   );
-  const { ingredients } = useSelector( (state: RootState) => state.ingredients);
-  const { user } = useSelector( (state: RootState) => state.auth);
+  const { ingredients } = useSelector((state: RootState) => state.ingredients);
+  const { user } = useSelector((state: RootState) => state.auth);
 
   useEffect(() => {
     if (ingredients.length && user) {
@@ -19,9 +19,8 @@ const ProfileOrdersHistory: React.FC = () => {
     }
     return () => {
       dispatch(feedSocketClose());
-    }
+    };
   }, [dispatch, ingredients, user]);
-
 
   return (
     <>
