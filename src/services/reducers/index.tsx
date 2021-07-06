@@ -4,20 +4,20 @@ import { constructorReducer } from './burger-constructor/burger-constructor';
 import { orderReducer } from './order/order';
 import { ingredientsDetailedReducer } from './ingredient-detail/ingredient-detail';
 import { ingredientsDraggingReducer } from './ingredient-dragging/ingredient-dragging';
-import { ingredientsSlice } from '../slices/ingredients/ingredients';
-import { loginSlice } from '../slices/login/login';
-import { feedSlice } from '../slices/feed/feed';
-import { authSlice } from '../slices/auth/auth';
+import { ingredientsSliceReducer } from '../slices/ingredients/ingredients';
+import { loginSliceReducer } from '../slices/login/login';
+import { feedSliceReducer } from '../slices/feed/feed';
+import { authSliceReducer } from '../slices/auth/auth';
 
 export const rootReducer = combineReducers({
-  ingredients: ingredientsSlice.reducer,
+  ingredients: ingredientsSliceReducer,
   burgerConstructor: constructorReducer,
   order: orderReducer,
   detailedIngredient: ingredientsDetailedReducer,
   draggingIngredient: ingredientsDraggingReducer,
-  login: loginSlice.reducer,
-  feed: feedSlice.reducer,
-  auth: authSlice.reducer,
+  login: loginSliceReducer,
+  feed: feedSliceReducer,
+  auth: authSliceReducer,
 });
 
-export type RootState = ReturnType<typeof rootReducer>;
+export type TRootState = ReturnType<typeof rootReducer>;

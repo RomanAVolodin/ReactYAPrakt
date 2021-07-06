@@ -2,18 +2,18 @@ import styles from './modal-detailed.module.css';
 import React, { useEffect } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../services/reducers';
+import { TRootState } from '../../services/reducers';
 import { getIngredientById } from '../../services/reducers/ingredient-detail/ingredient-detail';
-import { LocationState } from '../../models/location-state';
+import { TLocationState } from '../../models/location-state';
 
 const IngredientDetails: React.FC = () => {
   const location = useLocation();
-  const { from } = location.state ? (location.state as LocationState) : { from: null };
+  const { from } = location.state ? (location.state as TLocationState) : { from: null };
 
   const dispatch = useDispatch();
   const { id } = useParams<{ id: string }>();
-  const ingredient = useSelector((state: RootState) => state.detailedIngredient.ingredient);
-  const ingredientsAll = useSelector((state: RootState) => state.ingredients.ingredients);
+  const ingredient = useSelector((state: TRootState) => state.detailedIngredient.ingredient);
+  const ingredientsAll = useSelector((state: TRootState) => state.ingredients.ingredients);
 
   useEffect(() => {
     dispatch(getIngredientById(id));

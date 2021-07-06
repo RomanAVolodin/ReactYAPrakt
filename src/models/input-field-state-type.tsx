@@ -1,6 +1,6 @@
 import { TICons } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons';
 
-export interface InputFieldStateType {
+export interface IInputFieldStateType {
   type: 'text' | 'email' | 'password';
   value: string;
   name: string;

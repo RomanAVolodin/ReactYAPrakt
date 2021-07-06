@@ -1,28 +1,8 @@
 import { ORDER_COMPLETED, ORDER_IS_PROCESSING, ORDER_PROCESS_FAILED } from '../../actions/order';
 import { toast } from 'react-toastify';
-import { Order } from '../../../models/order';
+import { TOrderActions, TOrderStateType } from './types';
 
-export interface IOrderCompleted {
-  readonly type: typeof ORDER_COMPLETED;
-  readonly order: Order;
-}
 
-export interface IOrderProcessing {
-  readonly type: typeof ORDER_IS_PROCESSING;
-}
-
-export interface IOrderProcessFailed {
-  readonly type: typeof ORDER_PROCESS_FAILED;
-  readonly message?: string;
-}
-
-export type TOrderActions = IOrderCompleted | IOrderProcessing | IOrderProcessFailed;
-
-export type TOrderStateType = {
-  order: Order;
-  isFetching: boolean;
-  isErrorWhileFetching: boolean;
-};
 export const initialState: TOrderStateType = {
   order: { name: '', number: '', status: 'pending', ingredients: [], createdAt: '', updatedAt: '' },
   isFetching: false,

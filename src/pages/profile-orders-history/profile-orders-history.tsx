@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../services/reducers';
+import { TRootState } from '../../services/reducers';
 import OrdersList from '../../components/orders-list/orders-list';
 import { feedSocketClose, myFeedSocketInit } from '../../services/slices/feed/feed';
 
@@ -8,10 +8,10 @@ const ProfileOrdersHistory: React.FC = () => {
   const dispatch = useDispatch();
 
   const { orders, isFetchingFeed, isErrorWhileFetchingFeed } = useSelector(
-    (state: RootState) => state.feed,
+    (state: TRootState) => state.feed,
   );
-  const { ingredients } = useSelector((state: RootState) => state.ingredients);
-  const { user } = useSelector((state: RootState) => state.auth);
+  const { ingredients } = useSelector((state: TRootState) => state.ingredients);
+  const { user } = useSelector((state: TRootState) => state.auth);
 
   useEffect(() => {
     if (ingredients.length && user) {

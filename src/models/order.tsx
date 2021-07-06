@@ -1,15 +1,21 @@
-import { IngredientModel } from './ingredient-model';
+import { IIngredientModel } from './ingredient-model';
 
-export interface Order {
+export interface IOrder {
   name: string;
   number: string;
   status: 'done' | 'pending' | 'created' | string;
-  ingredients: IngredientModel[];
+  ingredients: IIngredientModel[];
   createdAt: string;
   updatedAt: string;
 }
 
-export interface OrderInSocket {
+export interface IOrderToProceed {
+  name: string,
+  number: string,
+  ingredients: {ingredients: string[]},
+}
+
+export interface IOrderInSocket {
   name: string;
   number: string;
   status: 'done' | 'pending' | 'created' | string;

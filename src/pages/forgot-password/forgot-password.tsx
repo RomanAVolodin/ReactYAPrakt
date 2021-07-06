@@ -4,7 +4,7 @@ import styles from '../login/login.module.css';
 
 import validator from 'validator';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../services/reducers';
+import { TRootState } from '../../services/reducers';
 import {
   changeEmailFieldError,
   changeEmailFieldValue,
@@ -19,7 +19,7 @@ const ForgotPasswordPage: React.FC = () => {
     isErrorWhileDataTransfer,
     isDataTransfering,
     isDataTransferingCompleted,
-  } = useSelector((state: RootState) => state.login);
+  } = useSelector((state: TRootState) => state.login);
   const dispatcher = useDispatch();
   const history = useHistory();
   const location = useLocation();

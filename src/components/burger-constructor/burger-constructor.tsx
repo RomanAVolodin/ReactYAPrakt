@@ -4,13 +4,13 @@ import {
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import React, { useMemo, useState } from 'react';
-import { IngredientModel, IngredientTypes } from '../../models/ingredient-model';
+import { IIngredientModel, EIngredientTypes } from '../../models/ingredient-model';
 import styles from './burger-constructor.module.css';
 import Modal from '../modal-window/modal';
 import OrderDetails from '../order-details/order-details';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../services/reducers';
+import { TRootState } from '../../services/reducers';
 import {
   ADD_INGREDIENT_TO_CONSTRUCTOR,
   WRAP_INGREDIENTS_IN_CONSTRUCTOR,
@@ -22,16 +22,18 @@ import { useHistory, useLocation } from 'react-router-dom';
 
 const BurgerConstructor: React.FC = () => {
   const [orderCompleted, setOrderCompleted] = useState<boolean>(false);
-  const { ingredients, finalPrice } = useSelector((state: RootState) => state.burgerConstructor);
-  const draggingIngredient = useSelector((state: RootState) => state.draggingIngredient.ingredient);
+  const { ingredients, finalPrice } = useSelector((state: TRootState) => state.burgerConstructor);
+  const draggingIngredient = useSelector(
+    (state: TRootState) => state.draggingIngredient.ingredient,
+  );
   const dispatcher = useDispatch();
-  const user = useSelector((state: RootState) => state.auth.user);
+  const user = useSelector((state: TRootState) => state.auth.user);
   const history = useHistory();
   const location = useLocation();
 
   const [{ isHover }, dropTarget] = useDrop({
     accept: 'ingredients',
-    drop(ingredient: IngredientModel) {
+    drop(ingredient: IIngredientModel) {
       dispatcher({ type: ADD_INGREDIENT_TO_CONSTRUCTOR, ingredient: { ...ingredient } });
     },
     collect: (monitor) => ({
@@ -40,7 +42,7 @@ const BurgerConstructor: React.FC = () => {
   });
 
   const placeOrder = (): void => {
-    if (!ingredients.find((ing) => ing.type === IngredientTypes.Bun)) {
+    if (!ingredients.find((ing) => ing.type === EIngredientTypes.Bun)) {
       toast.warn('Заказ не может быть сформирован, не выбрана булка :(');
       return;
     }
@@ -56,9 +58,9 @@ const BurgerConstructor: React.FC = () => {
   };
 
   const chosenBun =
-    ingredients[0] && ingredients[0].type === IngredientTypes.Bun ? ingredients[0] : null;
+    ingredients[0] && ingredients[0].type === EIngredientTypes.Bun ? ingredients[0] : null;
 
-  const SortableList = SortableContainer(({ items }: { items: IngredientModel[] }) => {
+  const SortableList = SortableContainer(({ items }: { items: IIngredientModel[] }) => {
     return (
       <div>
         {items.map((ing, index) => (
@@ -80,7 +82,7 @@ const BurgerConstructor: React.FC = () => {
   };
 
   const chosenInnerIngredients = useMemo(() => {
-    return ingredients.filter((i) => i.type !== IngredientTypes.Bun);
+    return ingredients.filter((i) => i.type !== EIngredientTypes.Bun);
   }, [ingredients]);
 
   return (
@@ -92,7 +94,7 @@ const BurgerConstructor: React.FC = () => {
         ${styles.fake_ingredient} 
         ${
           draggingIngredient &&
-          draggingIngredient.type === IngredientTypes.Bun &&
+          draggingIngredient.type === EIngredientTypes.Bun &&
           styles.on_drag_ready
         }`}
         >
@@ -124,7 +126,7 @@ const BurgerConstructor: React.FC = () => {
           ${styles.fake_ingredient} 
           ${
             draggingIngredient &&
-            draggingIngredient.type !== IngredientTypes.Bun &&
+            draggingIngredient.type !== EIngredientTypes.Bun &&
             styles.on_drag_ready
           }`}
           >
@@ -141,7 +143,7 @@ const BurgerConstructor: React.FC = () => {
         ${styles.fake_ingredient} 
         ${
           draggingIngredient &&
-          draggingIngredient.type === IngredientTypes.Bun &&
+          draggingIngredient.type === EIngredientTypes.Bun &&
           styles.on_drag_ready
         }`}
         >

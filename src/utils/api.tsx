@@ -10,11 +10,11 @@ import {
   refreshTokenApiUrl,
   updateUserApiUrl,
 } from './apiURLs';
-import { User } from '../models/user';
+import { IUser } from '../models/user';
 import { getFromLocalStorage } from './utils';
 import http from './http';
 
-export const registerRequest = async (user: User) => {
+export const registerRequest = async (user: IUser) => {
   return await fetch(createUserApiUrl, {
     method: 'POST',
     mode: 'cors',
@@ -29,7 +29,7 @@ export const registerRequest = async (user: User) => {
   });
 };
 
-export const loginRequest = async (user: User) => {
+export const loginRequest = async (user: IUser) => {
   return await fetch(loginUserApiUrl, {
     method: 'POST',
     mode: 'cors',
@@ -113,7 +113,7 @@ export const doPasswordResetRequest = async (password: string, token: string) =>
   });
 };
 
-export const updateUserRequest = async (user: User) =>
+export const updateUserRequest = async (user: IUser) =>
   await http.patch(updateUserApiUrl, JSON.stringify(user)).then((res) => res.data);
 
 export const getIngredientsRequest = async () =>

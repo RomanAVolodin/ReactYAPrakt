@@ -1,47 +1,18 @@
-import { IngredientModel, IngredientTypes } from '../../../models/ingredient-model';
+import { IIngredientModel, EIngredientTypes } from '../../../models/ingredient-model';
 import {
   ADD_INGREDIENT_TO_CONSTRUCTOR,
   REMOVE_INGREDIENT_FROM_CONSTRUCTOR,
   WRAP_INGREDIENTS_IN_CONSTRUCTOR,
   CLEAR_CONSTRUCTOR,
 } from '../../actions/burger-constructor';
+import { TConstructorStateType, TIngredientsReducerActionsType } from './types';
 
-export interface IAddIngredientToConstructor {
-  readonly type: typeof ADD_INGREDIENT_TO_CONSTRUCTOR;
-  readonly ingredient: IngredientModel;
-}
-
-export interface IRemoveIngredientFromConstructor {
-  readonly type: typeof REMOVE_INGREDIENT_FROM_CONSTRUCTOR;
-  readonly ingredient: IngredientModel;
-}
-
-export interface IWrapIngredientsInConstructor {
-  readonly type: typeof WRAP_INGREDIENTS_IN_CONSTRUCTOR;
-  readonly indexesOfTransferedElement: { from: number; to: number };
-}
-
-export interface IClearConstructor {
-  readonly type: typeof CLEAR_CONSTRUCTOR;
-}
-
-export type IngredientsReducerActionsType =
-  | IAddIngredientToConstructor
-  | IRemoveIngredientFromConstructor
-  | IWrapIngredientsInConstructor
-  | IClearConstructor;
-
-interface ConstructorStateType {
-  ingredients: IngredientModel[];
-  finalPrice: number;
-}
-
-export const initialState: ConstructorStateType = {
+export const initialState: TConstructorStateType = {
   ingredients: [],
   finalPrice: 0,
 };
 
-const calculateFinalPrice = (ingredients: IngredientModel[]) => {
+const calculateFinalPrice = (ingredients: IIngredientModel[]) => {
   return ingredients.reduce((acc, ing) => {
     return acc + ing.price;
   }, 0);
@@ -49,20 +20,20 @@ const calculateFinalPrice = (ingredients: IngredientModel[]) => {
 
 export const constructorReducer = (
   state = initialState,
-  action: IngredientsReducerActionsType,
-): ConstructorStateType => {
+  action: TIngredientsReducerActionsType,
+): TConstructorStateType => {
   switch (action.type) {
     case ADD_INGREDIENT_TO_CONSTRUCTOR: {
       let newIngredients = [];
-      if (action.ingredient.type === IngredientTypes.Bun) {
+      if (action.ingredient.type === EIngredientTypes.Bun) {
         const chosenIngredients = state.ingredients.filter(
-          (ing) => ing.type !== IngredientTypes.Bun,
+          (ing) => ing.type !== EIngredientTypes.Bun,
         );
         newIngredients = [action.ingredient, ...chosenIngredients, action.ingredient];
       } else {
-        const bun = state.ingredients.find((ing) => ing.type === IngredientTypes.Bun);
+        const bun = state.ingredients.find((ing) => ing.type === EIngredientTypes.Bun);
         const chosenIngredients = state.ingredients.filter(
-          (ing) => ing.type !== IngredientTypes.Bun,
+          (ing) => ing.type !== EIngredientTypes.Bun,
         );
         newIngredients = bun
           ? [bun, ...chosenIngredients, action.ingredient, bun]

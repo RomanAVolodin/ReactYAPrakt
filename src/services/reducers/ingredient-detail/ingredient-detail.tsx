@@ -1,39 +1,25 @@
-import { IngredientModel } from '../../../models/ingredient-model';
+import { IIngredientModel } from '../../../models/ingredient-model';
 import {
   SET_INGREDIENT_AS_PREVIEW,
   CLEAR_INGREDIENT_PREVIEW,
 } from '../../actions/ingredient-detail';
-import { Dispatch } from 'redux';
 import { toast } from 'react-toastify';
-import { RootState } from '../index';
+import { TRootState } from '../index';
+import { TAppDispatch } from '../../types/app-dispatch';
+import { TIngredientsDetailViewActions, TIngredientsDetailViewStateType } from './types';
 
-export interface ISetIngredientAsPreview {
-  readonly type: typeof SET_INGREDIENT_AS_PREVIEW;
-  readonly ingredient: IngredientModel;
-}
 
-export interface IClearIngredientAsPreview {
-  readonly type: typeof CLEAR_INGREDIENT_PREVIEW;
-  readonly ingredient?: IngredientModel;
-}
-
-export type IngredientsDetailViewActions = ISetIngredientAsPreview | IClearIngredientAsPreview;
-
-export interface IngredientsDetailViewStateType {
-  ingredient: IngredientModel | null;
-}
-
-export const initialState: IngredientsDetailViewStateType = {
+export const initialState: TIngredientsDetailViewStateType = {
   ingredient: null,
 };
 
 export const getIngredientById = (id: string) => (
-  dispatch: Dispatch,
-  getState: () => RootState,
+  dispatch: TAppDispatch,
+  getState: () => TRootState,
 ) => {
   const ingredients = getState().ingredients.ingredients;
   dispatch({ type: CLEAR_INGREDIENT_PREVIEW });
-  return new Promise<IngredientModel>((resolve, reject) => {
+  return new Promise<IIngredientModel>((resolve, reject) => {
     const ingredient = ingredients.find((i) => i._id === id);
     if (ingredient) {
       resolve(ingredient);
@@ -51,8 +37,8 @@ export const getIngredientById = (id: string) => (
 
 export const ingredientsDetailedReducer = (
   state = initialState,
-  action: IngredientsDetailViewActions,
-): IngredientsDetailViewStateType => {
+  action: TIngredientsDetailViewActions,
+): TIngredientsDetailViewStateType => {
   switch (action.type) {
     case SET_INGREDIENT_AS_PREVIEW: {
       return { ...state, ingredient: action.ingredient };

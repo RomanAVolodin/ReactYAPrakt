@@ -1,22 +1,19 @@
-import { IngredientModel } from '../../../models/ingredient-model';
-import { createSlice } from '@reduxjs/toolkit';
+import { IIngredientModel } from '../../../models/ingredient-model';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
-import { Dispatch } from 'redux';
+import { Reducer } from 'redux';
 import { getIngredientsRequest } from '../../../utils/api';
+import { TAppDispatch } from '../../types/app-dispatch';
+import { TIngredientsSliceActionsType, TIngredientsStateType } from './types';
 
-interface IngredientsStateType {
-  ingredients: IngredientModel[];
-  isFetching: boolean;
-  isErrorWhileFetching: boolean;
-}
 
-export const initialState: IngredientsStateType = {
+export const initialState: TIngredientsStateType = {
   ingredients: [],
   isFetching: false,
   isErrorWhileFetching: false,
 };
 
-export const getIngredients = () => (dispatch: Dispatch) => {
+export const getIngredients = () => (dispatch: TAppDispatch) => {
   const {
     ingredientsFetched,
     ingredientsFetchError,
@@ -42,19 +39,27 @@ export const ingredientsSlice = createSlice({
   name: 'ingredients',
   initialState,
   reducers: {
-    ingredientsFetched(state, { payload }) {
+    ingredientsFetched(
+      state: TIngredientsStateType,
+      action: PayloadAction<IIngredientModel[]>,
+    ): void {
       state.isFetching = false;
       state.isErrorWhileFetching = false;
-      state.ingredients = payload;
+      state.ingredients = action.payload;
     },
-    ingredientsAreFetching(state) {
+    ingredientsAreFetching(state: TIngredientsStateType): void {
       state.isFetching = true;
       state.isErrorWhileFetching = false;
     },
-    ingredientsFetchError(state) {
+    ingredientsFetchError(state: TIngredientsStateType): void {
       state.isFetching = false;
       state.isErrorWhileFetching = true;
       state.ingredients = [];
     },
   },
 });
+
+export const ingredientsSliceReducer = ingredientsSlice.reducer as Reducer<
+  TIngredientsStateType,
+  TIngredientsSliceActionsType
+>;

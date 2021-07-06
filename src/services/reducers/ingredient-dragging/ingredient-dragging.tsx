@@ -1,33 +1,18 @@
-import { IngredientModel } from '../../../models/ingredient-model';
 import {
   SET_INGREDIENT_DRAGGING,
   CLEAR_INGREDIENT_DRAGGING,
 } from '../../actions/ingredient-dragging';
+import { TIngredientDraggingActions, TIngredientsDraggingStateType } from './types';
 
-export interface ISetIngredientDragging {
-  readonly type: typeof SET_INGREDIENT_DRAGGING;
-  readonly ingredient: IngredientModel;
-}
 
-export interface IClearIngredientDragging {
-  readonly type: typeof CLEAR_INGREDIENT_DRAGGING;
-  readonly ingredient: IngredientModel;
-}
-
-export type IIngredientDraggingActions = ISetIngredientDragging | IClearIngredientDragging;
-
-interface IngredientsDraggingStateType {
-  ingredient: IngredientModel | null;
-}
-
-export const initialState: IngredientsDraggingStateType = {
+export const initialState: TIngredientsDraggingStateType = {
   ingredient: null,
 };
 
 export const ingredientsDraggingReducer = (
   state = initialState,
-  action: IIngredientDraggingActions,
-): IngredientsDraggingStateType => {
+  action: TIngredientDraggingActions,
+): TIngredientsDraggingStateType => {
   switch (action.type) {
     case SET_INGREDIENT_DRAGGING: {
       return { ...state, ingredient: action.ingredient };

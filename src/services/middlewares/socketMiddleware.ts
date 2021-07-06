@@ -6,8 +6,8 @@ import {
   feedSocketInit,
   myFeedSocketInit,
 } from '../slices/feed/feed';
-import { Order, OrderInSocket } from '../../models/order';
-import { IngredientModel } from '../../models/ingredient-model';
+import { IOrder, IOrderInSocket } from '../../models/order';
+import { IIngredientModel } from '../../models/ingredient-model';
 import { dateToFromNowDaily, getCookie } from '../../utils/utils';
 import { wssFeedUrl, wssMyFeedUrl } from '../../utils/apiURLs';
 
@@ -20,7 +20,7 @@ export const socketMiddleware = (): Middleware => {
       const { dispatch, getState } = store;
       const { type } = action;
 
-      const allIngredients = getState().ingredients.ingredients as IngredientModel[];
+      const allIngredients = getState().ingredients.ingredients as IIngredientModel[];
 
       if (type === feedSocketInit.type && allIngredients.length) {
         feedSocket = new WebSocket(wssFeedUrl);
@@ -36,20 +36,20 @@ export const socketMiddleware = (): Middleware => {
           const { data } = event;
           const parsedData = JSON.parse(data);
           const { success, ...restParsedData } = parsedData;
-          const orders: OrderInSocket[] = restParsedData.orders as OrderInSocket[];
-          const serializedOrders: Order[] = orders
+          const orders: IOrderInSocket[] = restParsedData.orders as IOrderInSocket[];
+          const serializedOrders: IOrder[] = orders.length ? orders
             .sort((a, b) => Date.parse(b.updatedAt) - Date.parse(a.updatedAt))
             .map((ord) => {
-              const ingredients: IngredientModel[] = ord.ingredients
+              const ingredients: IIngredientModel[] = ord.ingredients
                 .map((ing) => allIngredients.find((ai) => ai._id === ing))
-                .filter((ing) => ing !== undefined) as IngredientModel[];
+                .filter((ing) => ing !== undefined) as IIngredientModel[];
               return {
                 ...ord,
                 number: ord.number.toString(),
                 ingredients,
                 createdAt: dateToFromNowDaily(ord.createdAt),
               };
-            });
+            }) : [];
           dispatch(feedFetched({ ...restParsedData, orders: serializedOrders }));
         };
 

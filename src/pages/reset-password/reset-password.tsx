@@ -4,7 +4,7 @@ import styles from '../login/login.module.css';
 import { Button, Input, Logo } from '@ya.praktikum/react-developer-burger-ui-components';
 import validator from 'validator';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../services/reducers';
+import { TRootState } from '../../services/reducers';
 import {
   changeCodeFieldError,
   changeCodeFieldValue,
@@ -13,14 +13,14 @@ import {
   changePaswordFieldValue,
   proceedPasswordReset,
 } from '../../services/slices/login/login';
-import { LocationState } from '../../models/location-state';
+import { TLocationState } from '../../models/location-state';
 
 const ResetPasswordPage: React.FC = () => {
   const history = useHistory();
   const location = useLocation();
 
   useEffect(() => {
-    const { from } = location.state ? (location.state as LocationState) : { from: null };
+    const { from } = location.state ? (location.state as TLocationState) : { from: null };
     if (from?.pathname !== '/forgot-password') {
       history.replace({ pathname: '/forgot-password' });
     }
@@ -32,7 +32,7 @@ const ResetPasswordPage: React.FC = () => {
     isErrorWhileDataTransfer,
     isDataTransfering,
     isDataTransferingCompleted,
-  } = useSelector((state: RootState) => state.login);
+  } = useSelector((state: TRootState) => state.login);
   const dispatcher = useDispatch();
 
   const onChangePassword = (e: ChangeEvent<HTMLInputElement>) => {

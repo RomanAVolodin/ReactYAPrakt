@@ -1,10 +1,10 @@
 import React, { useMemo } from 'react';
 import styles from './feed-summary.module.css';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../services/reducers';
+import { TRootState } from '../../services/reducers';
 
 export const FeedSummary: React.FC = () => {
-  const { total, totalToday, orders } = useSelector((state: RootState) => state.feed);
+  const { total, totalToday, orders } = useSelector((state: TRootState) => state.feed);
 
   const ordersReady = useMemo(() => {
     return orders.filter((order) => order.status === 'done');

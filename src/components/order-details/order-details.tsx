@@ -2,13 +2,13 @@ import React, { useEffect } from 'react';
 import styles from './order-details.module.css';
 import OrderPlacedImage from '../../images/order_placed.svg';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../services/reducers';
+import { TRootState } from '../../services/reducers';
 import { placeOrder } from '../../services/actions/order';
 import Loader from 'react-loader-spinner';
 
 const OrderDetails: React.FC = () => {
   const dispatcher = useDispatch();
-  const chosenIngredients = useSelector((state: RootState) => state.burgerConstructor.ingredients);
+  const chosenIngredients = useSelector((state: TRootState) => state.burgerConstructor.ingredients);
 
   useEffect(() => {
     if (chosenIngredients.length) {
@@ -16,7 +16,7 @@ const OrderDetails: React.FC = () => {
     }
   }, [dispatcher, chosenIngredients]);
 
-  const { order, isFetching } = useSelector((state: RootState) => state.order);
+  const { order, isFetching } = useSelector((state: TRootState) => state.order);
 
   return (
     <div className={styles.Container}>

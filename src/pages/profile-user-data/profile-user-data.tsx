@@ -6,16 +6,16 @@ import {
   changePaswordFieldValue,
 } from '../../services/slices/login/login';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../services/reducers';
+import { TRootState } from '../../services/reducers';
 import { updateUser } from '../../services/slices/auth/auth';
 import styles from './profile-user-data.module.css';
 
 export const ProfileUserData: React.FC = () => {
   const { email, password, name, isDataTransfering, isErrorWhileDataTransfer } = useSelector(
-    (state: RootState) => state.login,
+    (state: TRootState) => state.login,
   );
 
-  const user = useSelector((state: RootState) => state.auth.user);
+  const user = useSelector((state: TRootState) => state.auth.user);
   const dispatcher = useDispatch();
 
   const onChangeName = (e: ChangeEvent<HTMLInputElement>) => {

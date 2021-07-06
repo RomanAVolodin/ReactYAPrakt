@@ -1,4 +1,4 @@
-import { IngredientModel } from '../../models/ingredient-model';
+import { IIngredientModel } from '../../models/ingredient-model';
 import styles from './ingredient-in-constructor.module.css';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { REMOVE_INGREDIENT_FROM_CONSTRUCTOR } from '../../services/actions/burger-constructor';
@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { SortableElement } from 'react-sortable-hoc';
 
 const IngredientInConstructor = SortableElement(
-  ({ ingredient }: { ingredient: IngredientModel }) => {
+  ({ ingredient }: { ingredient: IIngredientModel }) => {
     const dispatcher = useDispatch();
 
     return (
