@@ -5,10 +5,10 @@ import {
   changeNameFieldValue,
   changePaswordFieldValue,
 } from '../../services/slices/login/login';
-import { useDispatch, useSelector } from 'react-redux';
 import { TRootState } from '../../services/reducers';
 import { updateUser } from '../../services/slices/auth/auth';
 import styles from './profile-user-data.module.css';
+import { useDispatch, useSelector } from '../../utils/hooks';
 
 export const ProfileUserData: React.FC = () => {
   const { email, password, name, isDataTransfering, isErrorWhileDataTransfer } = useSelector(

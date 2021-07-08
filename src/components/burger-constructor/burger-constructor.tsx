@@ -9,7 +9,6 @@ import styles from './burger-constructor.module.css';
 import Modal from '../modal-window/modal';
 import OrderDetails from '../order-details/order-details';
 import { toast } from 'react-toastify';
-import { useDispatch, useSelector } from 'react-redux';
 import { TRootState } from '../../services/reducers';
 import {
   ADD_INGREDIENT_TO_CONSTRUCTOR,
@@ -19,6 +18,7 @@ import { useDrop } from 'react-dnd';
 import IngredientInConstructor from '../ingredient-in-constructor/ingredient-in-constructor';
 import { SortableContainer } from 'react-sortable-hoc';
 import { useHistory, useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from '../../utils/hooks';
 
 const BurgerConstructor: React.FC = () => {
   const [orderCompleted, setOrderCompleted] = useState<boolean>(false);

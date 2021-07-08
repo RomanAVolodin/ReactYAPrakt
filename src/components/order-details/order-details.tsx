@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import styles from './order-details.module.css';
 import OrderPlacedImage from '../../images/order_placed.svg';
-import { useDispatch, useSelector } from 'react-redux';
 import { TRootState } from '../../services/reducers';
 import { placeOrder } from '../../services/actions/order';
 import Loader from 'react-loader-spinner';
+import { useDispatch, useSelector } from '../../utils/hooks';
 
 const OrderDetails: React.FC = () => {
   const dispatcher = useDispatch();

@@ -3,7 +3,6 @@ import { Link, useHistory } from 'react-router-dom';
 import styles from '../login/login.module.css';
 import { Button, Input, Logo } from '@ya.praktikum/react-developer-burger-ui-components';
 import validator from 'validator';
-import { useDispatch, useSelector } from 'react-redux';
 import { TRootState } from '../../services/reducers';
 import {
   changeEmailFieldError,
@@ -17,6 +16,7 @@ import {
 } from '../../services/slices/login/login';
 import { IUser } from '../../models/user';
 import { registerUser } from '../../services/slices/auth/auth';
+import { useDispatch, useSelector } from '../../utils/hooks';
 
 const RegisterPage: React.FC = () => {
   const {

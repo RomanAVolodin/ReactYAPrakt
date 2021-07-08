@@ -3,7 +3,6 @@ import { Router, Switch, Route } from 'react-router-dom';
 import AppHeader from '../app-header/app-header';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useDispatch } from 'react-redux';
 import { getIngredients } from '../../services/slices/ingredients/ingredients';
 import {
   Feed,
@@ -26,6 +25,7 @@ import IngredientDetails from '../../pages/ingredient-detailed/ingredient-detail
 import ClearHistoryStateComponent from '../clear-history-state/clear-history-state';
 import { createBrowserHistory } from 'history';
 import { getUser } from '../../services/slices/auth/auth';
+import { useDispatch } from '../../utils/hooks';
 
 export const history = createBrowserHistory();
 

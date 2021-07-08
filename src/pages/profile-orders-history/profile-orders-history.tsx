@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { TRootState } from '../../services/reducers';
 import OrdersList from '../../components/orders-list/orders-list';
 import { feedSocketClose, myFeedSocketInit } from '../../services/slices/feed/feed';
+import { useDispatch, useSelector } from '../../utils/hooks';
 
 const ProfileOrdersHistory: React.FC = () => {
   const dispatch = useDispatch();

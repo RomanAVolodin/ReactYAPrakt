@@ -8,6 +8,7 @@ import { ingredientsSliceReducer } from '../slices/ingredients/ingredients';
 import { loginSliceReducer } from '../slices/login/login';
 import { feedSliceReducer } from '../slices/feed/feed';
 import { authSliceReducer } from '../slices/auth/auth';
+import { store } from '../store';
 
 export const rootReducer = combineReducers({
   ingredients: ingredientsSliceReducer,
@@ -20,4 +21,4 @@ export const rootReducer = combineReducers({
   auth: authSliceReducer,
 });
 
-export type TRootState = ReturnType<typeof rootReducer>;
+export type TRootState = ReturnType<typeof store.getState>;

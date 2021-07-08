@@ -3,7 +3,6 @@ import { Link, useHistory, useLocation } from 'react-router-dom';
 import styles from '../login/login.module.css';
 
 import validator from 'validator';
-import { useDispatch, useSelector } from 'react-redux';
 import { TRootState } from '../../services/reducers';
 import {
   changeEmailFieldError,
@@ -12,6 +11,7 @@ import {
   switchOffDataTransferStatus,
 } from '../../services/slices/login/login';
 import { Button, Input, Logo } from '@ya.praktikum/react-developer-burger-ui-components';
+import { useDispatch, useSelector } from '../../utils/hooks';
 
 const ForgotPasswordPage: React.FC = () => {
   const {

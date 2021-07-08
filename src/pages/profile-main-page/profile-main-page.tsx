@@ -1,8 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './profile.module.css';
-import { useDispatch } from 'react-redux';
 import { logoutUser } from '../../services/slices/auth/auth';
+import { useDispatch } from '../../utils/hooks';
 
 export const ProfileMainPage: React.FC = ({ children }) => {
   const dispatch = useDispatch();

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { getUser } from '../services/slices/auth/auth';
 import { Route, Redirect, useHistory, RouteProps } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import { TRootState } from '../services/reducers';
+import { useDispatch, useSelector } from '../utils/hooks';
 
 export const ProtectedRoute: React.FC<RouteProps> = ({ children, ...rest }) => {
   const { user, isUserFetching } = useSelector((state: TRootState) => state.auth);

@@ -6,7 +6,6 @@ import {
   Counter,
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useDispatch, useSelector } from 'react-redux';
 import { useDrag } from 'react-dnd';
 import { TRootState } from '../../services/reducers';
 import { ADD_INGREDIENT_TO_CONSTRUCTOR } from '../../services/actions/burger-constructor';
@@ -15,6 +14,7 @@ import {
   SET_INGREDIENT_DRAGGING,
 } from '../../services/actions/ingredient-dragging';
 import { useHistory, useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from '../../utils/hooks';
 
 const Ingredient = ({ ingredient }: { ingredient: IIngredientModel }) => {
   const ingredients = useSelector((state: TRootState) => state.burgerConstructor.ingredients);

@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo } from 'react';
 import { useLocation, useParams, useRouteMatch } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import { feedSocketInit, getOrderFromFeed, myFeedSocketInit } from '../../services/slices/feed/feed';
 import { TRootState } from '../../services/reducers';
 import styles from './order-detailed-page.module.css';
@@ -9,6 +8,7 @@ import IngredientWithAmountForFeed from '../../components/ingredient-with-amount
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import OrderStatusTitle from '../../components/order-status-title/order-status-title';
 import { TLocationState } from '../../models/location-state';
+import { useDispatch, useSelector } from '../../utils/hooks';
 
 const OrderDetailedPage: React.FC = () => {
   const { order_id } = useParams<{ order_id: string }>();

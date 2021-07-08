@@ -3,7 +3,6 @@ import { Link, useHistory, useLocation } from 'react-router-dom';
 import styles from './login.module.css';
 import { Button, Input, Logo } from '@ya.praktikum/react-developer-burger-ui-components';
 import validator from 'validator';
-import { useDispatch, useSelector } from 'react-redux';
 import { TRootState } from '../../services/reducers';
 import {
   changeEmailFieldError,
@@ -15,6 +14,7 @@ import {
 import { loginUser } from '../../services/slices/auth/auth';
 import { IUser } from '../../models/user';
 import { TLocationState } from '../../models/location-state';
+import { useDispatch, useSelector } from '../../utils/hooks';
 
 const LoginPage: React.FC = () => {
   const history = useHistory();

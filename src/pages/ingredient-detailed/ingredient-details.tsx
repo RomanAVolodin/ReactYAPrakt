@@ -1,10 +1,10 @@
 import styles from './modal-detailed.module.css';
 import React, { useEffect } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import { TRootState } from '../../services/reducers';
 import { getIngredientById } from '../../services/reducers/ingredient-detail/ingredient-detail';
 import { TLocationState } from '../../models/location-state';
+import { useDispatch, useSelector } from '../../utils/hooks';
 
 const IngredientDetails: React.FC = () => {
   const location = useLocation();
