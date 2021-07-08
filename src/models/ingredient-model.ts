@@ -1,4 +1,4 @@
-export interface IngredientModel {
+export interface IIngredientModel {
   _id: string;
   name: string;
   type: string;
@@ -14,13 +14,13 @@ export interface IngredientModel {
   __v: number;
 }
 
-export enum IngredientTypes {
+export enum EIngredientTypes {
   Bun = 'bun',
   Sause = 'sauce',
   Main = 'main',
 }
 
-export interface IngredientWithAmount {
-  ingredient: IngredientModel;
+export interface IIngredientWithAmount {
+  ingredient: IIngredientModel;
   amount: number;
 }

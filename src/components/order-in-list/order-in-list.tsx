@@ -1,19 +1,17 @@
 import React, { useMemo } from 'react';
-import { Order } from '../../models/order';
+import { IOrder } from '../../models/order';
 import styles from './order-in-list.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useHistory, useLocation, useRouteMatch } from 'react-router-dom';
 import OrderStatusTitle from '../order-status-title/order-status-title';
 
-const OrderInList = ({ order }: { order: Order }) => {
+const OrderInList = ({ order }: { order: IOrder }) => {
   const match = useRouteMatch();
   const location = useLocation();
   const history = useHistory();
 
   const totalPrice = useMemo(() => {
-    return order.ingredients
-      .map((ing) => (ing ? ing.price : 0))
-      .reduce((a, b) => a + b, 0);
+    return order.ingredients.map((ing) => (ing ? ing.price : 0)).reduce((a, b) => a + b, 0);
   }, [order.ingredients]);
 
   const MAX_ELEMENTS_AMOUNT = 6;

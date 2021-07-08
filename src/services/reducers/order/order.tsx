@@ -1,26 +1,15 @@
 import { ORDER_COMPLETED, ORDER_IS_PROCESSING, ORDER_PROCESS_FAILED } from '../../actions/order';
 import { toast } from 'react-toastify';
-import { Order } from '../../../models/order';
+import { TOrderActions, TOrderStateType } from './types';
 
-interface OrderFetchingAction {
-  type: string;
-  order: Order;
-  message?: string;
-}
 
-interface OrderStateType {
-  order: Order;
-  isFetching: boolean;
-  isErrorWhileFetching: boolean;
-}
-
-export const initialState: OrderStateType = {
+export const initialState: TOrderStateType = {
   order: { name: '', number: '', status: 'pending', ingredients: [], createdAt: '', updatedAt: '' },
   isFetching: false,
   isErrorWhileFetching: false,
 };
 
-export const orderReducer = (state = initialState, action: OrderFetchingAction) => {
+export const orderReducer = (state = initialState, action: TOrderActions): TOrderStateType => {
   switch (action.type) {
     case ORDER_IS_PROCESSING: {
       return { ...state, isFetching: true, isErrorWhileFetching: false };

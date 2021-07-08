@@ -3,8 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import styles from '../login/login.module.css';
 import { Button, Input, Logo } from '@ya.praktikum/react-developer-burger-ui-components';
 import validator from 'validator';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../services/reducers';
+import { TRootState } from '../../services/reducers';
 import {
   changeEmailFieldError,
   changeEmailFieldValue,
@@ -15,8 +14,9 @@ import {
   changePaswordFieldValue,
   switchOffDataTransferStatus,
 } from '../../services/slices/login/login';
-import { User } from '../../models/user';
+import { IUser } from '../../models/user';
 import { registerUser } from '../../services/slices/auth/auth';
+import { useDispatch, useSelector } from '../../utils/hooks';
 
 const RegisterPage: React.FC = () => {
   const {
@@ -26,7 +26,7 @@ const RegisterPage: React.FC = () => {
     isErrorWhileDataTransfer,
     isDataTransfering,
     isDataTransferingCompleted,
-  } = useSelector((state: RootState) => state.login);
+  } = useSelector((state: TRootState) => state.login);
 
   const dispatcher = useDispatch();
   const history = useHistory();
@@ -70,7 +70,7 @@ const RegisterPage: React.FC = () => {
     ) {
       return;
     }
-    const user: User = {
+    const user: IUser = {
       email: email.value,
       password: password.value,
       name: name.value,

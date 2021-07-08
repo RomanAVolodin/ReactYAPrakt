@@ -1,29 +1,25 @@
-import { IngredientModel } from '../../../models/ingredient-model';
-import { SET_INGREDIENT_AS_PREVIEW, CLEAR_INGREDIENT_PREVIEW } from '../../actions/ingredient-detail';
-import { Dispatch } from 'redux';
+import { IIngredientModel } from '../../../models/ingredient-model';
+import {
+  SET_INGREDIENT_AS_PREVIEW,
+  CLEAR_INGREDIENT_PREVIEW,
+} from '../../actions/ingredient-detail';
 import { toast } from 'react-toastify';
-import { RootState } from '../index';
+import { TRootState } from '../index';
+import { TAppDispatch } from '../../types/app-dispatch';
+import { TIngredientsDetailViewActions, TIngredientsDetailViewStateType } from './types';
 
-interface IngredientsDetailviewAction {
-  type: string;
-  ingredient: IngredientModel;
-}
 
-export interface IngredientsDetailviewStateType {
-  ingredient: IngredientModel | null;
-}
-
-export const initialState: IngredientsDetailviewStateType = {
+export const initialState: TIngredientsDetailViewStateType = {
   ingredient: null,
 };
 
 export const getIngredientById = (id: string) => (
-  dispatch: Dispatch,
-  getState: () => RootState,
+  dispatch: TAppDispatch,
+  getState: () => TRootState,
 ) => {
   const ingredients = getState().ingredients.ingredients;
   dispatch({ type: CLEAR_INGREDIENT_PREVIEW });
-  return new Promise<IngredientModel>((resolve, reject) => {
+  return new Promise<IIngredientModel>((resolve, reject) => {
     const ingredient = ingredients.find((i) => i._id === id);
     if (ingredient) {
       resolve(ingredient);
@@ -41,8 +37,8 @@ export const getIngredientById = (id: string) => (
 
 export const ingredientsDetailedReducer = (
   state = initialState,
-  action: IngredientsDetailviewAction,
-) => {
+  action: TIngredientsDetailViewActions,
+): TIngredientsDetailViewStateType => {
   switch (action.type) {
     case SET_INGREDIENT_AS_PREVIEW: {
       return { ...state, ingredient: action.ingredient };

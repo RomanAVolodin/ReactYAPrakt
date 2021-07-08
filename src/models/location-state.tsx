@@ -1,5 +1,5 @@
 import { Location } from 'history';
 
-export type LocationState = {
+export type TLocationState = {
   from: Location;
 };

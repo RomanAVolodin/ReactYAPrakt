@@ -1,7 +1,7 @@
 import React from 'react';
-import { Order } from '../../models/order';
+import { IOrder } from '../../models/order';
 
-export const OrderStatusTitle = ({ order }: { order: Order }) => {
+export const OrderStatusTitle = ({ order }: { order: IOrder }) => {
   return order.status === 'done' ? (
     <p className="text text_type_main-medium text_success_color mt-1" style={{ fontSize: 14 }}>
       Выполнен

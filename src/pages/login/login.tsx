@@ -3,8 +3,7 @@ import { Link, useHistory, useLocation } from 'react-router-dom';
 import styles from './login.module.css';
 import { Button, Input, Logo } from '@ya.praktikum/react-developer-burger-ui-components';
 import validator from 'validator';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../services/reducers';
+import { TRootState } from '../../services/reducers';
 import {
   changeEmailFieldError,
   changeEmailFieldValue,
@@ -13,15 +12,16 @@ import {
   changePaswordFieldValue,
 } from '../../services/slices/login/login';
 import { loginUser } from '../../services/slices/auth/auth';
-import { User } from '../../models/user';
-import { LocationState } from '../../models/location-state';
+import { IUser } from '../../models/user';
+import { TLocationState } from '../../models/location-state';
+import { useDispatch, useSelector } from '../../utils/hooks';
 
 const LoginPage: React.FC = () => {
   const history = useHistory();
   const location = useLocation();
   const dispatcher = useDispatch();
   const { email, password, isErrorWhileDataTransfer, isDataTransfering } = useSelector(
-    (state: RootState) => state.login,
+    (state: TRootState) => state.login,
   );
 
   const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
@@ -54,11 +54,11 @@ const LoginPage: React.FC = () => {
     ) {
       return;
     }
-    const user: User = {
+    const user: IUser = {
       email: email.value,
       password: password.value,
     };
-    const customLocation = location.state as LocationState;
+    const customLocation = location.state as TLocationState;
     dispatcher(
       loginUser(user, () => {
         history.replace(

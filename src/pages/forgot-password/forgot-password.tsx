@@ -3,8 +3,7 @@ import { Link, useHistory, useLocation } from 'react-router-dom';
 import styles from '../login/login.module.css';
 
 import validator from 'validator';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../services/reducers';
+import { TRootState } from '../../services/reducers';
 import {
   changeEmailFieldError,
   changeEmailFieldValue,
@@ -12,6 +11,7 @@ import {
   switchOffDataTransferStatus,
 } from '../../services/slices/login/login';
 import { Button, Input, Logo } from '@ya.praktikum/react-developer-burger-ui-components';
+import { useDispatch, useSelector } from '../../utils/hooks';
 
 const ForgotPasswordPage: React.FC = () => {
   const {
@@ -19,7 +19,7 @@ const ForgotPasswordPage: React.FC = () => {
     isErrorWhileDataTransfer,
     isDataTransfering,
     isDataTransferingCompleted,
-  } = useSelector((state: RootState) => state.login);
+  } = useSelector((state: TRootState) => state.login);
   const dispatcher = useDispatch();
   const history = useHistory();
   const location = useLocation();

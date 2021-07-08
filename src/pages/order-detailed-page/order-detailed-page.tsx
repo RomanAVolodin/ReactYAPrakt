@@ -1,32 +1,31 @@
 import React, { useEffect, useMemo } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { feedSocketInit, getOrderFromFeed } from '../../services/slices/feed/feed';
-import { RootState } from '../../services/reducers';
+import { useLocation, useParams, useRouteMatch } from 'react-router-dom';
+import { feedSocketInit, getOrderFromFeed, myFeedSocketInit } from '../../services/slices/feed/feed';
+import { TRootState } from '../../services/reducers';
 import styles from './order-detailed-page.module.css';
-import { IngredientModel, IngredientWithAmount } from '../../models/ingredient-model';
+import { IIngredientModel, IIngredientWithAmount } from '../../models/ingredient-model';
 import IngredientWithAmountForFeed from '../../components/ingredient-with-amount-for-feed/ingredient-with-amount-for-feed';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import OrderStatusTitle from '../../components/order-status-title/order-status-title';
-import { LocationState } from '../../models/location-state';
+import { TLocationState } from '../../models/location-state';
+import { useDispatch, useSelector } from '../../utils/hooks';
 
 const OrderDetailedPage: React.FC = () => {
   const { order_id } = useParams<{ order_id: string }>();
-  const { order, isErrorWhileFetchingOrder } = useSelector(
-    (state: RootState) => state.feed,
-  );
+  const { order, isErrorWhileFetchingOrder } = useSelector((state: TRootState) => state.feed);
   const dispatch = useDispatch();
   const location = useLocation();
+  const match = useRouteMatch();
 
-  const { from } = location.state ? (location.state as LocationState) : { from: null };
+  const { from } = location.state ? (location.state as TLocationState) : { from: null };
 
-  const ingredients: IngredientWithAmount[] = useMemo(() => {
-    const result: IngredientWithAmount[] = [];
+  const ingredients: IIngredientWithAmount[] = useMemo(() => {
+    const result: IIngredientWithAmount[] = [];
 
     if (!order) return [];
 
     const ingredients = order.ingredients;
-    ingredients.forEach((ingredient: IngredientModel | undefined) => {
+    ingredients.forEach((ingredient: IIngredientModel | undefined) => {
       const index = result.findIndex((ingrWA) => ingrWA.ingredient._id === ingredient?._id);
       if (index === -1) {
         if (ingredient) result.push({ ingredient: ingredient, amount: 1 });
@@ -37,17 +36,15 @@ const OrderDetailedPage: React.FC = () => {
     return result;
   }, [order]);
 
-  const { orders } = useSelector(
-    (state: RootState) => state.feed,
-  );
+  const { orders } = useSelector((state: TRootState) => state.feed);
 
-  const allIngredients = useSelector( (state: RootState) => state.ingredients.ingredients);
+  const allIngredients = useSelector((state: TRootState) => state.ingredients.ingredients);
 
   useEffect(() => {
     if (allIngredients.length && !orders.length) {
-      dispatch(feedSocketInit());
+      match.path === '/feed/:order_id' ? dispatch(feedSocketInit()) : dispatch(myFeedSocketInit());
     }
-  }, [dispatch, allIngredients, orders]);
+  }, [dispatch, allIngredients, orders, match]);
 
   useEffect(() => {
     if (orders.length) {
@@ -56,9 +53,7 @@ const OrderDetailedPage: React.FC = () => {
   }, [dispatch, order_id, orders]);
 
   const totalPrice = useMemo(() => {
-    return ingredients
-      .map((ing) => ing.ingredient.price * ing.amount)
-      .reduce((a, b) => a + b, 0);
+    return ingredients.map((ing) => ing.ingredient.price * ing.amount).reduce((a, b) => a + b, 0);
   }, [ingredients]);
 
   const LoaderOrError: React.FC = () =>
@@ -77,7 +72,7 @@ const OrderDetailedPage: React.FC = () => {
       [],
     );
 
-  return !order  ? (
+  return !order ? (
     <LoaderOrError />
   ) : (
     <div className={styles.container}>
@@ -98,7 +93,9 @@ const OrderDetailedPage: React.FC = () => {
         </div>
 
         <div className={styles.date_price}>
-          <p className="text text_type_main-default text_color_inactive">{order.createdAt} i-GMT+3</p>
+          <p className="text text_type_main-default text_color_inactive">
+            {order.createdAt} i-GMT+3
+          </p>
           <div className={styles.price}>
             <p className="text text_type_digits-default mr-3">{totalPrice}</p>
             <CurrencyIcon type="primary" />

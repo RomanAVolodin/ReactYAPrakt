@@ -1,13 +1,13 @@
-import { InputFieldStateType } from '../models/input-field-state-type';
+import { IInputFieldStateType } from '../models/input-field-state-type';
 
-export const EmailFieldInitialState: InputFieldStateType = {
+export const EmailFieldInitialState: IInputFieldStateType = {
   type: 'email',
   value: '',
   name: 'email',
   placeholder: 'E-mail',
   isError: false,
 };
-export const PasswordFieldInitialState: InputFieldStateType = {
+export const PasswordFieldInitialState: IInputFieldStateType = {
   type: 'password',
   value: '',
   name: 'password',
@@ -15,7 +15,7 @@ export const PasswordFieldInitialState: InputFieldStateType = {
   isError: false,
   icon: 'ShowIcon',
 };
-export const NameFieldInitialState: InputFieldStateType = {
+export const NameFieldInitialState: IInputFieldStateType = {
   type: 'text',
   value: '',
   name: 'name',
@@ -23,7 +23,7 @@ export const NameFieldInitialState: InputFieldStateType = {
   isError: false,
 };
 
-export const CodeFieldInitialState: InputFieldStateType = {
+export const CodeFieldInitialState: IInputFieldStateType = {
   type: 'text',
   value: '',
   name: 'code',

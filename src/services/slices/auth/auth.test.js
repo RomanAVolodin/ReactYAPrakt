@@ -1,9 +1,18 @@
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
-import { authSlice as slice, getUser, initialState, loginUser, logoutUser, registerUser, updateUser } from './auth';
+import {
+  authSlice as slice,
+  getUser,
+  initialState,
+  loginUser,
+  logoutUser,
+  registerUser,
+  updateUser,
+} from './auth';
 import fetchMock from 'fetch-mock';
 import {
-  createUserApiUrl, getUserApiUrl,
+  createUserApiUrl,
+  getUserApiUrl,
   loginUserApiUrl,
   logoutUserApiUrl,
   updateUserApiUrl,
@@ -21,8 +30,10 @@ describe('Auth slice', () => {
     email: 'user@mail.ru',
     password: '123123',
   };
-  const tokenResponse = { success: true, data: { accessToken: '6664466644',
-      refreshToken: '7747474747' } };
+  const tokenResponse = {
+    success: true,
+    data: { accessToken: '6664466644', refreshToken: '7747474747' },
+  };
 
   afterEach(() => {
     fetchMock.restore();
@@ -82,14 +93,13 @@ describe('Auth slice', () => {
       { type: 'login/isDataTransfering', payload: undefined },
       {
         type: 'login/dataTransferCompletedSuccessfully',
-        payload: undefined
+        payload: undefined,
       },
       {
         type: 'auth/loginSuccessfullyCompleted',
-        payload: tokenResponse
+        payload: tokenResponse,
       },
-      { type: 'login/errorWhileDataTransfer', payload: undefined }
-
+      { type: 'login/errorWhileDataTransfer', payload: undefined },
     ];
     const store = mockStore(initialState);
     return store.dispatch(loginUser(fakeUser)).then(() => {
@@ -99,13 +109,13 @@ describe('Auth slice', () => {
 
   it('Ошибка при аутентификация пользователя', () => {
     fetchMock.postOnce(loginUserApiUrl, {
-      body: {...tokenResponse, success: false},
+      body: { ...tokenResponse, success: false },
       headers: { 'content-type': 'application/json' },
     });
 
     const expectedActions = [
       { type: 'login/isDataTransfering', payload: undefined },
-      { type: 'login/errorWhileDataTransfer', payload: undefined }
+      { type: 'login/errorWhileDataTransfer', payload: undefined },
     ];
     const store = mockStore(initialState);
     return store.dispatch(loginUser(fakeUser)).then(() => {
@@ -121,12 +131,12 @@ describe('Auth slice', () => {
       { type: 'login/isDataTransfering', payload: undefined },
       {
         type: 'login/dataTransferCompletedSuccessfully',
-        payload: undefined
+        payload: undefined,
       },
       {
         type: 'auth/userUpdateSuccessfullyCompleted',
-        payload: { success: true, data: fakeUser }
-      }
+        payload: { success: true, data: fakeUser },
+      },
     ];
     const store = mockStore(initialState);
     return store.dispatch(updateUser(fakeUser)).then(() => {
@@ -140,8 +150,7 @@ describe('Auth slice', () => {
 
     const expectedActions = [
       { type: 'login/isDataTransfering', payload: undefined },
-      { type: 'login/errorWhileDataTransfer', payload: undefined }
-
+      { type: 'login/errorWhileDataTransfer', payload: undefined },
     ];
     const store = mockStore(initialState);
     return store.dispatch(updateUser(fakeUser)).then(() => {
@@ -151,16 +160,16 @@ describe('Auth slice', () => {
 
   it('Выход - логаут пользователя', () => {
     fetchMock.postOnce(logoutUserApiUrl, {
-      body: {success: true},
+      body: { success: true },
       headers: { 'content-type': 'application/json' },
     });
     const expectedActions = [
       { type: 'login/isDataTransfering', payload: undefined },
       {
         type: 'login/dataTransferCompletedSuccessfully',
-        payload: undefined
+        payload: undefined,
       },
-      { type: 'auth/loggedOut', payload: undefined }
+      { type: 'auth/loggedOut', payload: undefined },
     ];
     const store = mockStore(initialState);
     return store.dispatch(logoutUser()).then(() => {
@@ -170,12 +179,12 @@ describe('Auth slice', () => {
 
   it('Выход - логаут пользователя - завершено с ошибкой', () => {
     fetchMock.postOnce(logoutUserApiUrl, {
-      body: {success: false},
+      body: { success: false },
       headers: { 'content-type': 'application/json' },
     });
     const expectedActions = [
       { type: 'login/isDataTransfering', payload: undefined },
-      { type: 'login/errorWhileDataTransfer', payload: undefined }
+      { type: 'login/errorWhileDataTransfer', payload: undefined },
     ];
     const store = mockStore(initialState);
     return store.dispatch(logoutUser()).then(() => {
@@ -192,14 +201,14 @@ describe('Auth slice', () => {
       { type: 'login/isDataTransfering', payload: undefined },
       {
         type: 'login/dataTransferCompletedSuccessfully',
-        payload: undefined
+        payload: undefined,
       },
       { type: 'login/changeEmailFieldValue', payload: 'user@mail.ru' },
       { type: 'login/changeNameFieldValue', payload: 'User' },
       {
         type: 'auth/userFetched',
-        payload: { success: true, user: fakeUser }
-      }
+        payload: { success: true, user: fakeUser },
+      },
     ];
 
     Object.defineProperty(document, 'cookie', {
@@ -230,58 +239,73 @@ describe('Auth slice', () => {
   });
 
   it('Регистрация завершена - стейт', () => {
-    expect(reducer(initialState, { type: 'auth/registerCompleted', payload: {user: fakeUser} })).toEqual({
+    expect(
+      reducer(initialState, { type: 'auth/registerCompleted', payload: { user: fakeUser } }),
+    ).toEqual({
       ...initialState,
-      user: fakeUser
+      user: fakeUser,
     });
   });
 
   it('Вход осуществлен - стейт', () => {
-    expect(reducer(initialState, { type: 'auth/loginSuccessfullyCompleted', payload: {user: fakeUser} })).toEqual({
+    expect(
+      reducer(initialState, {
+        type: 'auth/loginSuccessfullyCompleted',
+        payload: { user: fakeUser },
+      }),
+    ).toEqual({
       ...initialState,
-      user: fakeUser
+      user: fakeUser,
     });
   });
 
   it('Пользователь обновлен - стейт', () => {
-    expect(reducer(initialState, { type: 'auth/userUpdateSuccessfullyCompleted', payload: {user: fakeUser} })).toEqual({
+    expect(
+      reducer(initialState, {
+        type: 'auth/userUpdateSuccessfullyCompleted',
+        payload: { user: fakeUser },
+      }),
+    ).toEqual({
       ...initialState,
-      user: fakeUser
+      user: fakeUser,
     });
   });
 
   it('Пользователь вышел - стейт', () => {
-    expect(reducer(initialState, { type: 'auth/loggedOut'})).toEqual({
+    expect(reducer(initialState, { type: 'auth/loggedOut' })).toEqual({
       ...initialState,
-      user: null
+      user: null,
     });
   });
 
   it('Токен обновлен - стейт', () => {
-    expect(reducer(initialState, { type: 'auth/tokenRefreshed', payload: {accessToken: 'token'}})).toEqual({
+    expect(
+      reducer(initialState, { type: 'auth/tokenRefreshed', payload: { accessToken: 'token' } }),
+    ).toEqual({
       ...initialState,
     });
   });
 
   it('Пользователь получен - стейт', () => {
-    expect(reducer(initialState, { type: 'auth/userFetched', payload: {user: fakeUser}})).toEqual({
+    expect(
+      reducer(initialState, { type: 'auth/userFetched', payload: { user: fakeUser } }),
+    ).toEqual({
       ...initialState,
-      user: fakeUser
+      user: fakeUser,
     });
   });
 
   it('Начало загрузки пользователя - стейт', () => {
-    expect(reducer(initialState, { type: 'auth/userStartFetching'})).toEqual({
+    expect(reducer(initialState, { type: 'auth/userStartFetching' })).toEqual({
       ...initialState,
-      isUserFetching: true
+      isUserFetching: true,
     });
   });
 
   it('Окончание загрузки пользователя - стейт', () => {
-    expect(reducer(initialState, { type: 'auth/userCompletedFetchingWithError'})).toEqual({
+    expect(reducer(initialState, { type: 'auth/userCompletedFetchingWithError' })).toEqual({
       ...initialState,
-      isUserFetching: false
+      isUserFetching: false,
     });
   });
-
 });

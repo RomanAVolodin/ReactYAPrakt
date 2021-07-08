@@ -3,12 +3,12 @@ import FeedList from '../../components/feed-list/feed-list';
 import { FeedSummary } from '../../components/feed-summary/feed-summary';
 import styles from './feed.module.css';
 import { feedSocketClose, feedSocketInit } from '../../services/slices/feed/feed';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../services/reducers';
+import { TRootState } from '../../services/reducers';
+import { useDispatch, useSelector } from '../../utils/hooks';
 
 export const Feed: React.FC = () => {
   const dispatch = useDispatch();
-  const { ingredients } = useSelector( (state: RootState) => state.ingredients);
+  const { ingredients } = useSelector((state: TRootState) => state.ingredients);
 
   useEffect(() => {
     if (ingredients.length) {
@@ -16,7 +16,7 @@ export const Feed: React.FC = () => {
     }
     return () => {
       dispatch(feedSocketClose());
-    }
+    };
   }, [dispatch, ingredients]);
 
   return (

@@ -1,12 +1,12 @@
 import React from 'react';
-import { IngredientWithAmount } from '../../models/ingredient-model';
+import { IIngredientWithAmount } from '../../models/ingredient-model';
 import styles from './ingredient-with-amount-for-feed.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
 const IngredientWithAmountForFeed = ({
   ingredientWithAmount,
 }: {
-  ingredientWithAmount: IngredientWithAmount;
+  ingredientWithAmount: IIngredientWithAmount;
 }) => {
   return (
     <div className={styles.container}>

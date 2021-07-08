@@ -3,7 +3,6 @@ import { Router, Switch, Route } from 'react-router-dom';
 import AppHeader from '../app-header/app-header';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useDispatch } from 'react-redux';
 import { getIngredients } from '../../services/slices/ingredients/ingredients';
 import {
   Feed,
@@ -20,12 +19,13 @@ import {
 } from '../../pages';
 import { ProtectedRoute } from '../ProtectedRoute';
 import { OnlyUnauthRoute } from '../OnlyUnauthRoute';
-import { LocationState } from '../../models/location-state';
+import { TLocationState } from '../../models/location-state';
 import Modal from '../modal-window/modal';
 import IngredientDetails from '../../pages/ingredient-detailed/ingredient-details';
 import ClearHistoryStateComponent from '../clear-history-state/clear-history-state';
 import { createBrowserHistory } from 'history';
 import { getUser } from '../../services/slices/auth/auth';
+import { useDispatch } from '../../utils/hooks';
 
 export const history = createBrowserHistory();
 
@@ -50,7 +50,7 @@ function App() {
             path="/ingredients/:id"
             exact={true}
             render={({ location, history, match }) => {
-              const { from } = location.state ? (location.state as LocationState) : { from: null };
+              const { from } = location.state ? (location.state as TLocationState) : { from: null };
               if (from?.pathname === '/') {
                 return (
                   <>
@@ -87,7 +87,7 @@ function App() {
             path="/feed/:order_id"
             exact={true}
             render={({ location, history, match }) => {
-              const { from } = location.state ? (location.state as LocationState) : { from: null };
+              const { from } = location.state ? (location.state as TLocationState) : { from: null };
               if (from?.pathname === '/feed') {
                 return (
                   <>
@@ -119,7 +119,7 @@ function App() {
                   exact={true}
                   render={({ location, history, match }) => {
                     const { from } = location.state
-                      ? (location.state as LocationState)
+                      ? (location.state as TLocationState)
                       : { from: null };
                     if (from?.pathname === '/profile/orders') {
                       return (

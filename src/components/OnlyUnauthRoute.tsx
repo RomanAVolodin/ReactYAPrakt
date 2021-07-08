@@ -1,11 +1,11 @@
 import { Route, Redirect, useHistory, RouteProps } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../services/reducers';
+import { TRootState } from '../services/reducers';
 import React, { useEffect, useState } from 'react';
 import { getUser } from '../services/slices/auth/auth';
+import { useDispatch, useSelector } from '../utils/hooks';
 
 export const OnlyUnauthRoute: React.FC<RouteProps> = ({ children, ...rest }) => {
-  const { user, isUserFetching } = useSelector((state: RootState) => state.auth);
+  const { user, isUserFetching } = useSelector((state: TRootState) => state.auth);
   const dispatch = useDispatch();
   const history = useHistory();
   const [isUserLoaded, setUserLoaded] = useState(false);
@@ -37,4 +37,4 @@ export const OnlyUnauthRoute: React.FC<RouteProps> = ({ children, ...rest }) => 
       }
     />
   );
-}
+};

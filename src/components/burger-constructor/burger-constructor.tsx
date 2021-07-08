@@ -4,13 +4,12 @@ import {
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import React, { useMemo, useState } from 'react';
-import { IngredientModel, IngredientTypes } from '../../models/ingredient-model';
+import { IIngredientModel, EIngredientTypes } from '../../models/ingredient-model';
 import styles from './burger-constructor.module.css';
 import Modal from '../modal-window/modal';
 import OrderDetails from '../order-details/order-details';
 import { toast } from 'react-toastify';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../services/reducers';
+import { TRootState } from '../../services/reducers';
 import {
   ADD_INGREDIENT_TO_CONSTRUCTOR,
   WRAP_INGREDIENTS_IN_CONSTRUCTOR,
@@ -19,19 +18,22 @@ import { useDrop } from 'react-dnd';
 import IngredientInConstructor from '../ingredient-in-constructor/ingredient-in-constructor';
 import { SortableContainer } from 'react-sortable-hoc';
 import { useHistory, useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from '../../utils/hooks';
 
 const BurgerConstructor: React.FC = () => {
   const [orderCompleted, setOrderCompleted] = useState<boolean>(false);
-  const { ingredients, finalPrice } = useSelector((state: RootState) => state.burgerConstructor);
-  const draggingIngredient = useSelector((state: RootState) => state.draggingIngredient.ingredient);
+  const { ingredients, finalPrice } = useSelector((state: TRootState) => state.burgerConstructor);
+  const draggingIngredient = useSelector(
+    (state: TRootState) => state.draggingIngredient.ingredient,
+  );
   const dispatcher = useDispatch();
-  const user = useSelector((state: RootState) => state.auth.user);
+  const user = useSelector((state: TRootState) => state.auth.user);
   const history = useHistory();
   const location = useLocation();
 
   const [{ isHover }, dropTarget] = useDrop({
     accept: 'ingredients',
-    drop(ingredient: IngredientModel) {
+    drop(ingredient: IIngredientModel) {
       dispatcher({ type: ADD_INGREDIENT_TO_CONSTRUCTOR, ingredient: { ...ingredient } });
     },
     collect: (monitor) => ({
@@ -40,7 +42,7 @@ const BurgerConstructor: React.FC = () => {
   });
 
   const placeOrder = (): void => {
-    if (!ingredients.find((ing) => ing.type === IngredientTypes.Bun)) {
+    if (!ingredients.find((ing) => ing.type === EIngredientTypes.Bun)) {
       toast.warn('Заказ не может быть сформирован, не выбрана булка :(');
       return;
     }
@@ -56,17 +58,17 @@ const BurgerConstructor: React.FC = () => {
   };
 
   const chosenBun =
-    ingredients[0] && ingredients[0].type === IngredientTypes.Bun ? ingredients[0] : null;
+    ingredients[0] && ingredients[0].type === EIngredientTypes.Bun ? ingredients[0] : null;
 
-  const SortableList = SortableContainer(({ items }: { items: IngredientModel[] }) => {
+  const SortableList = SortableContainer(({ items }: { items: IIngredientModel[] }) => {
     return (
       <div>
         {items.map((ing, index) => (
-            <IngredientInConstructor
-              key={`${index}-${ing._id}`}
-              index={chosenBun ? index + 1 : index}
-              ingredient={ing}
-            />
+          <IngredientInConstructor
+            key={`${index}-${ing._id}`}
+            index={chosenBun ? index + 1 : index}
+            ingredient={ing}
+          />
         ))}
       </div>
     );
@@ -80,25 +82,25 @@ const BurgerConstructor: React.FC = () => {
   };
 
   const chosenInnerIngredients = useMemo(() => {
-    return ingredients.filter(i => i.type !== IngredientTypes.Bun)
+    return ingredients.filter((i) => i.type !== EIngredientTypes.Bun);
   }, [ingredients]);
 
   return (
-    <section
-      onDrop={(e) => e.preventDefault()}
-      className={styles.container}
-      ref={dropTarget}
-    >
-      { !chosenBun &&
-        <div className={`constructor-element 
+    <section onDrop={(e) => e.preventDefault()} className={styles.container} ref={dropTarget}>
+      {!chosenBun && (
+        <div
+          className={`constructor-element 
         constructor-element_pos_top 
         ${styles.fake_ingredient} 
-        ${draggingIngredient && draggingIngredient.type === IngredientTypes.Bun && styles.on_drag_ready}`}>
-          <span className="constructor-element__row">
-            Выберите булку для Вашего бургера
-          </span>
+        ${
+          draggingIngredient &&
+          draggingIngredient.type === EIngredientTypes.Bun &&
+          styles.on_drag_ready
+        }`}
+        >
+          <span className="constructor-element__row">Выберите булку для Вашего бургера</span>
         </div>
-      }
+      )}
 
       {chosenBun && (
         <div className="mt-1">
@@ -115,37 +117,39 @@ const BurgerConstructor: React.FC = () => {
       <div
         className={[
           styles.ingredients_scrollable_container,
-          chosenInnerIngredients.length > 5
-            ? styles.scrollbar_appeared
-            : null,
+          chosenInnerIngredients.length > 5 ? styles.scrollbar_appeared : null,
         ].join(' ')}
       >
-        {! chosenInnerIngredients.length &&
-          <div className={`constructor-element 
+        {!chosenInnerIngredients.length && (
+          <div
+            className={`constructor-element 
           ${styles.fake_ingredient} 
-          ${draggingIngredient && draggingIngredient.type !== IngredientTypes.Bun && styles.on_drag_ready}`}>
-            <span className="constructor-element__row">
-              Добавьте ингредиенты
-            </span>
+          ${
+            draggingIngredient &&
+            draggingIngredient.type !== EIngredientTypes.Bun &&
+            styles.on_drag_ready
+          }`}
+          >
+            <span className="constructor-element__row">Добавьте ингредиенты</span>
           </div>
-        }
-          <SortableList
-            items={chosenInnerIngredients}
-            onSortEnd={onSortEnd}
-            distance={1}
-          />
+        )}
+        <SortableList items={chosenInnerIngredients} onSortEnd={onSortEnd} distance={1} />
       </div>
 
-      { !chosenBun &&
-      <div className={`constructor-element 
+      {!chosenBun && (
+        <div
+          className={`constructor-element 
         constructor-element_pos_bottom
         ${styles.fake_ingredient} 
-        ${draggingIngredient && draggingIngredient.type === IngredientTypes.Bun && styles.on_drag_ready}`}>
-          <span className="constructor-element__row">
-            Выберите булку для Вашего бургера
-          </span>
-      </div>
-      }
+        ${
+          draggingIngredient &&
+          draggingIngredient.type === EIngredientTypes.Bun &&
+          styles.on_drag_ready
+        }`}
+        >
+          <span className="constructor-element__row">Выберите булку для Вашего бургера</span>
+        </div>
+      )}
 
       {chosenBun && (
         <div className="mt-1">
@@ -177,8 +181,10 @@ const BurgerConstructor: React.FC = () => {
       </Modal>
 
       {draggingIngredient && (
-        <div className={`text text_type_digits-default ${styles.empty_dropzone} ${styles.drop_sign}`}>
-          { !isHover ? <p>Перетаскивай дальше...</p> : <p>Бросай</p> }
+        <div
+          className={`text text_type_digits-default ${styles.empty_dropzone} ${styles.drop_sign}`}
+        >
+          {!isHover ? <p>Перетаскивай дальше...</p> : <p>Бросай</p>}
         </div>
       )}
     </section>

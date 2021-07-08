@@ -1,13 +1,12 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../services/reducers';
+import { TRootState } from '../../services/reducers';
 import OrdersList from '../orders-list/orders-list';
 import styles from './feed-list.module.css';
 
 const FeedList: React.FC = () => {
-
   const { orders, isFetchingFeed, isErrorWhileFetchingFeed } = useSelector(
-    (state: RootState) => state.feed,
+    (state: TRootState) => state.feed,
   );
 
   return (

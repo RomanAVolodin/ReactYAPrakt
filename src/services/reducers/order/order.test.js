@@ -1,5 +1,10 @@
 import { orderReducer as reducer, initialState } from './order';
-import { ORDER_COMPLETED, ORDER_IS_PROCESSING, ORDER_PROCESS_FAILED, placeOrder } from '../../actions/order';
+import {
+  ORDER_COMPLETED,
+  ORDER_IS_PROCESSING,
+  ORDER_PROCESS_FAILED,
+  placeOrder,
+} from '../../actions/order';
 import feedFakeData from '../../../utils/feed-fake-data';
 import fetchMock from 'fetch-mock';
 import { orderApiUrl } from '../../../utils/apiURLs';
@@ -7,7 +12,6 @@ import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
 import MockAdapter from 'axios-mock-adapter';
 import http from '../../../utils/http';
-
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -55,17 +59,16 @@ describe('Order редюсер', () => {
   it('Отправка заказа в работу - ошибка', () => {
     const axiosMock = new MockAdapter(http);
     axiosMock.onPost(orderApiUrl, {
-      body: {success: false, name: 'order', order: {number: '555'}},
+      body: { success: false, name: 'order', order: { number: '555' } },
       headers: { 'content-type': 'application/json' },
     });
     const expectedActions = [
       { type: 'ORDER_IS_PROCESSING' },
-      { type: 'ORDER_PROCESS_FAILED', message: 'Request failed with status code 404' }
+      { type: 'ORDER_PROCESS_FAILED', message: 'Request failed with status code 404' },
     ];
     const store = mockStore(initialState);
     return store.dispatch(placeOrder(feedFakeData[0].ingredients)).then(() => {
       expect(store.getActions()).toEqual(expectedActions);
     });
   });
-
 });

@@ -1,33 +1,33 @@
 import React, { useState, useRef, RefObject, useEffect } from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
-import { IngredientTypes } from '../../models/ingredient-model';
+import { EIngredientTypes } from '../../models/ingredient-model';
 import Ingredient from '../ingredient/ingredient';
 import styles from '../ingredient/ingredient.module.css';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../services/reducers';
+import { TRootState } from '../../services/reducers';
 
 const BurgerIngredients: React.FC = () => {
   const { ingredients, isFetching, isErrorWhileFetching } = useSelector(
-    (state: RootState) => state.ingredients,
+    (state: TRootState) => state.ingredients,
   );
 
-  const [currentIngredientType, setCurrentIngredientType] = useState<string>(IngredientTypes.Bun);
+  const [currentIngredientType, setCurrentIngredientType] = useState<string>(EIngredientTypes.Bun);
 
   let ingredientsTypes = [
     {
-      type: IngredientTypes.Bun,
+      type: EIngredientTypes.Bun,
       name: 'Булки',
       headerRef: useRef<HTMLDivElement>(null),
       offsetTop: 999,
     },
     {
-      type: IngredientTypes.Sause,
+      type: EIngredientTypes.Sause,
       name: 'Соусы',
       headerRef: useRef<HTMLDivElement>(null),
       offsetTop: 999,
     },
     {
-      type: IngredientTypes.Main,
+      type: EIngredientTypes.Main,
       name: 'Начинки',
       headerRef: useRef<HTMLDivElement>(null),
       offsetTop: 999,
@@ -122,7 +122,7 @@ const BurgerIngredients: React.FC = () => {
               {ingredientsType.name}
             </div>
             {ingredients
-              .filter(ing => ing.type === ingredientsType.type)
+              .filter((ing) => ing.type === ingredientsType.type)
               .map((ing) => (
                 <Ingredient key={ing._id} ingredient={ing} />
               ))}

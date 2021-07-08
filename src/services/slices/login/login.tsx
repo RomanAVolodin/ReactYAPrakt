@@ -5,12 +5,15 @@ import {
   NameFieldInitialState,
   PasswordFieldInitialState,
 } from '../../../utils/initial-states';
-import { Dispatch } from 'redux';
+import { Reducer } from 'redux';
 import { toast } from 'react-toastify';
-import { RootState } from '../../reducers';
+import { TRootState } from '../../reducers';
 import { doPasswordResetRequest, passwordResetRequest } from '../../../utils/api';
+import { TAppDispatch } from '../../types/app-dispatch';
+import { TLoginSliceActionsType, TLoginStateType } from './types';
 
-export const initialState = {
+
+export const initialState: TLoginStateType = {
   email: EmailFieldInitialState,
   password: PasswordFieldInitialState,
   name: NameFieldInitialState,
@@ -21,8 +24,8 @@ export const initialState = {
 };
 
 export const proceedPasswordResetRequest = () => (
-  dispatch: Dispatch,
-  getState: () => RootState,
+  dispatch: TAppDispatch,
+  getState: () => TRootState,
 ) => {
   const {
     dataTransferCompletedSuccessfully,
@@ -47,7 +50,7 @@ export const proceedPasswordResetRequest = () => (
     });
 };
 
-export const proceedPasswordReset = () => (dispatch: Dispatch, getState: () => RootState) => {
+export const proceedPasswordReset = () => (dispatch: TAppDispatch, getState: () => TRootState) => {
   const {
     dataTransferCompletedSuccessfully,
     isDataTransfering,
@@ -77,39 +80,39 @@ export const loginSlice = createSlice({
   name: 'login',
   initialState,
   reducers: {
-    changeEmailFieldValue(state, action: PayloadAction<string>) {
+    changeEmailFieldValue(state: TLoginStateType, action: PayloadAction<string>): void {
       state.email.value = action.payload;
       state.email.isError = false;
     },
-    changePaswordFieldValue(state, action: PayloadAction<string>) {
+    changePaswordFieldValue(state: TLoginStateType, action: PayloadAction<string>): void {
       state.password.value = action.payload;
       state.password.isError = false;
     },
-    changeNameFieldValue(state, action: PayloadAction<string>) {
+    changeNameFieldValue(state: TLoginStateType, action: PayloadAction<string>): void {
       state.name.value = action.payload;
       state.name.isError = false;
     },
-    changeCodeFieldValue(state, action: PayloadAction<string>) {
+    changeCodeFieldValue(state: TLoginStateType, action: PayloadAction<string>): void {
       state.verification_code.value = action.payload;
       state.verification_code.isError = false;
     },
-    changeEmailFieldError(state, action: PayloadAction<string>) {
+    changeEmailFieldError(state: TLoginStateType, action: PayloadAction<string>): void {
       state.email.errorText = action.payload;
       state.email.isError = true;
     },
-    changePaswordFieldError(state, action: PayloadAction<string>) {
+    changePaswordFieldError(state: TLoginStateType, action: PayloadAction<string>): void {
       state.password.errorText = action.payload;
       state.password.isError = true;
     },
-    changeNameFieldError(state, action: PayloadAction<string>) {
+    changeNameFieldError(state: TLoginStateType, action: PayloadAction<string>): void {
       state.name.errorText = action.payload;
       state.name.isError = true;
     },
-    changeCodeFieldError(state, action: PayloadAction<string>) {
+    changeCodeFieldError(state: TLoginStateType, action: PayloadAction<string>): void {
       state.verification_code.errorText = action.payload;
       state.verification_code.isError = true;
     },
-    changePaswordFieldIcon(state) {
+    changePaswordFieldIcon(state: TLoginStateType): void {
       if (state.password.type === 'password') {
         state.password.type = 'text';
         state.password.icon = 'HideIcon';
@@ -118,20 +121,20 @@ export const loginSlice = createSlice({
         state.password.icon = 'ShowIcon';
       }
     },
-    dataTransferCompletedSuccessfully(state) {
+    dataTransferCompletedSuccessfully(state: TLoginStateType): void {
       state.isDataTransfering = false;
       state.isErrorWhileDataTransfer = false;
       state.isDataTransferingCompleted = true;
     },
-    switchOffDataTransferStatus(state) {
+    switchOffDataTransferStatus(state: TLoginStateType): void {
       state.isDataTransferingCompleted = false;
     },
-    isDataTransfering(state) {
+    isDataTransfering(state: TLoginStateType): void {
       state.isDataTransfering = true;
       state.isErrorWhileDataTransfer = false;
       state.isDataTransferingCompleted = false;
     },
-    errorWhileDataTransfer(state) {
+    errorWhileDataTransfer(state: TLoginStateType): void {
       state.isDataTransfering = false;
       state.isErrorWhileDataTransfer = true;
       state.isDataTransferingCompleted = true;
@@ -143,7 +146,6 @@ export const {
   changeEmailFieldValue,
   changePaswordFieldValue,
   changePaswordFieldIcon,
-  dataTransferCompletedSuccessfully,
   isDataTransfering,
   errorWhileDataTransfer,
   changeEmailFieldError,
@@ -154,3 +156,8 @@ export const {
   changeCodeFieldError,
   switchOffDataTransferStatus,
 } = loginSlice.actions;
+
+export const loginSliceReducer = loginSlice.reducer as Reducer<
+  TLoginStateType,
+  TLoginSliceActionsType
+  >;

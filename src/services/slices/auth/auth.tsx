@@ -1,6 +1,6 @@
-import { User } from '../../../models/user';
-import { Dispatch } from 'redux';
-import { RootState } from '../../reducers';
+import { IUser } from '../../../models/user';
+import { Reducer } from 'redux';
+import { TRootState } from '../../reducers';
 import { toast } from 'react-toastify';
 import { changeEmailFieldValue, changeNameFieldValue, loginSlice } from '../login/login';
 import {
@@ -19,20 +19,17 @@ import {
   saveToLocalStorage,
   setCookie,
 } from '../../../utils/utils';
+import { SliceActions } from '../../types/slice-actions-type';
+import { TAppDispatch } from '../../types/app-dispatch';
+import { TAuthStateType } from './types';
 
-interface AuthStateType {
-  user: User | null;
-  isUserFetching: boolean;
-  accessToken?: string;
-  refreshToken?: string;
-}
 
-export const initialState: AuthStateType = {
+export const initialState: TAuthStateType = {
   user: null,
   isUserFetching: false,
 };
 
-export const registerUser = (user: User) => (dispatch: Dispatch) => {
+export const registerUser = (user: IUser) => (dispatch: TAppDispatch) => {
   const {
     dataTransferCompletedSuccessfully,
     isDataTransfering,
@@ -58,7 +55,7 @@ export const registerUser = (user: User) => (dispatch: Dispatch) => {
     });
 };
 
-export const loginUser = (user: User, cb: CallableFunction) => (dispatch: Dispatch) => {
+export const loginUser = (user: IUser, cb: CallableFunction) => (dispatch: TAppDispatch) => {
   const {
     dataTransferCompletedSuccessfully,
     isDataTransfering,
@@ -84,7 +81,7 @@ export const loginUser = (user: User, cb: CallableFunction) => (dispatch: Dispat
     });
 };
 
-export const updateUser = (user: User) => (dispatch: Dispatch) => {
+export const updateUser = (user: IUser) => (dispatch: TAppDispatch) => {
   const {
     dataTransferCompletedSuccessfully,
     isDataTransfering,
@@ -109,7 +106,7 @@ export const updateUser = (user: User) => (dispatch: Dispatch) => {
     });
 };
 
-export const logoutUser = () => (dispatch: Dispatch) => {
+export const logoutUser = () => (dispatch: TAppDispatch) => {
   const {
     dataTransferCompletedSuccessfully,
     isDataTransfering,
@@ -134,7 +131,7 @@ export const logoutUser = () => (dispatch: Dispatch) => {
     });
 };
 
-export const getUser = () => async (dispatch: Dispatch, getState: () => RootState) => {
+export const getUser = () => async (dispatch: TAppDispatch, getState: () => TRootState) => {
   const { dataTransferCompletedSuccessfully, isDataTransfering } = loginSlice.actions;
 
   const { userFetched, userStartFetching } = authSlice.actions;
@@ -162,37 +159,43 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    registerCompleted(state, action: PayloadAction<AuthStateType>) {
+    registerCompleted(state: TAuthStateType, action: PayloadAction<TAuthStateType>): void {
       state.user = action.payload.user;
       setCookie('accessToken', getTokenFromPayload(action.payload.accessToken));
       saveToLocalStorage('refreshToken', action.payload.refreshToken);
     },
-    loginSuccessfullyCompleted(state, action: PayloadAction<AuthStateType>) {
+    loginSuccessfullyCompleted(state: TAuthStateType, action: PayloadAction<TAuthStateType>): void  {
       state.user = action.payload.user;
       setCookie('accessToken', getTokenFromPayload(action.payload.accessToken));
       saveToLocalStorage('refreshToken', action.payload.refreshToken);
     },
-    userUpdateSuccessfullyCompleted(state, action: PayloadAction<AuthStateType>) {
+    userUpdateSuccessfullyCompleted(state: TAuthStateType, action: PayloadAction<TAuthStateType>): void  {
       state.user = action.payload.user;
     },
-    loggedOut(state) {
+    loggedOut(state: TAuthStateType): void  {
       state.user = null;
       deleteCookie('accessToken');
       removeFromLocalStorage('refreshToken');
     },
-    tokenRefreshed(state, action: PayloadAction<AuthStateType>) {
+    tokenRefreshed(state: TAuthStateType, action: PayloadAction<TAuthStateType>): void  {
       setCookie('accessToken', getTokenFromPayload(action.payload.accessToken));
       saveToLocalStorage('refreshToken', action.payload.refreshToken);
     },
-    userFetched(state, action: PayloadAction<AuthStateType>) {
+    userFetched(state: TAuthStateType, action: PayloadAction<TAuthStateType>): void {
       state.user = action.payload.user;
       state.isUserFetching = false;
     },
-    userStartFetching(state) {
+    userStartFetching(state: TAuthStateType): void  {
       state.isUserFetching = true;
     },
-    userCompletedFetchingWithError(state) {
+    userCompletedFetchingWithError(state: TAuthStateType): void  {
       state.isUserFetching = false;
     },
   },
 });
+
+export type TAuthSliceActionsType = SliceActions<typeof authSlice.actions>;
+export const authSliceReducer = authSlice.reducer as Reducer<
+  TAuthStateType,
+  TAuthSliceActionsType
+  >;

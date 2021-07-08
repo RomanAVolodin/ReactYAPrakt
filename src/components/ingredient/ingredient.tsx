@@ -1,23 +1,23 @@
 import React, { useEffect } from 'react';
-import { IngredientModel } from '../../models/ingredient-model';
+import { IIngredientModel } from '../../models/ingredient-model';
 import styles from './ingredient.module.css';
 import {
   CheckMarkIcon,
   Counter,
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useDispatch, useSelector } from 'react-redux';
 import { useDrag } from 'react-dnd';
-import { RootState } from '../../services/reducers';
+import { TRootState } from '../../services/reducers';
 import { ADD_INGREDIENT_TO_CONSTRUCTOR } from '../../services/actions/burger-constructor';
 import {
   CLEAR_INGREDIENT_DRAGGING,
   SET_INGREDIENT_DRAGGING,
 } from '../../services/actions/ingredient-dragging';
 import { useHistory, useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from '../../utils/hooks';
 
-const Ingredient = ({ ingredient }: { ingredient: IngredientModel }) => {
-  const ingredients = useSelector((state: RootState) => state.burgerConstructor.ingredients);
+const Ingredient = ({ ingredient }: { ingredient: IIngredientModel }) => {
+  const ingredients = useSelector((state: TRootState) => state.burgerConstructor.ingredients);
   const dispatcher = useDispatch();
 
   const [{ opacity, isDragging }, dragRef] = useDrag({

@@ -14,56 +14,58 @@ describe('Feed slice', () => {
   });
 
   it('Список получен - стейт', () => {
-    expect(reducer(initialState, {
-      type: 'feed/feedFetched',
-      payload: {orders: [], total: 0, totalToday: 0}})).toEqual({
+    expect(
+      reducer(initialState, {
+        type: 'feed/feedFetched',
+        payload: { orders: [], total: 0, totalToday: 0 },
+      }),
+    ).toEqual({
       ...initialState,
       isFetchingFeed: false,
-      isErrorWhileFetchingFeed: false
+      isErrorWhileFetchingFeed: false,
     });
   });
 
   it('Список в процессе получения - стейт', () => {
-    expect(reducer(initialState, { type: 'feed/feedSocketInit'})).toEqual({
+    expect(reducer(initialState, { type: 'feed/feedSocketInit' })).toEqual({
       ...initialState,
       isFetchingFeed: true,
-      isErrorWhileFetchingFeed: false
+      isErrorWhileFetchingFeed: false,
     });
   });
 
   it('Ошибка при получения списка - стейт', () => {
-    expect(reducer(initialState, { type: 'feed/feedFetchError'})).toEqual({
+    expect(reducer(initialState, { type: 'feed/feedFetchError' })).toEqual({
       ...initialState,
       isFetchingFeed: false,
       isErrorWhileFetchingFeed: true,
-      orders: []
+      orders: [],
     });
   });
 
   it('Заказ получен из списка - стейт', () => {
-    expect(reducer(initialState, { type: 'feed/orderFetched', payload: feedFakeData[0]})).toEqual({
+    expect(reducer(initialState, { type: 'feed/orderFetched', payload: feedFakeData[0] })).toEqual({
       ...initialState,
       isFetchingOrder: false,
       isErrorWhileFetchingOrder: false,
-      order: feedFakeData[0]
+      order: feedFakeData[0],
     });
   });
 
   it('Заказ получается из списка - стейт', () => {
-    expect(reducer(initialState, { type: 'feed/orderIsFetching'})).toEqual({
+    expect(reducer(initialState, { type: 'feed/orderIsFetching' })).toEqual({
       ...initialState,
       isFetchingOrder: true,
-      isErrorWhileFetchingOrder: false
+      isErrorWhileFetchingOrder: false,
     });
   });
 
   it('Ошибка получения заказа из списка - стейт', () => {
-    expect(reducer(initialState, { type: 'feed/orderFetchError'})).toEqual({
+    expect(reducer(initialState, { type: 'feed/orderFetchError' })).toEqual({
       ...initialState,
       isFetchingOrder: false,
       isErrorWhileFetchingOrder: true,
-      order: undefined
+      order: undefined,
     });
   });
-
 });

@@ -1,21 +1,12 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
-import { Dispatch } from 'redux';
-import { Order } from '../../../models/order';
-import { RootState } from '../../reducers';
+import { Reducer } from 'redux';
+import { IOrder } from '../../../models/order';
+import { TRootState } from '../../reducers';
+import { TAppDispatch } from '../../types/app-dispatch';
+import { TFeedFetchedType, TFeedSliceActionsType, TFeedStateType } from './types';
 
-interface FeedStateType {
-  orders: Order[];
-  isFetchingFeed: boolean;
-  isErrorWhileFetchingFeed: boolean;
-  order?: Order;
-  isFetchingOrder: boolean;
-  isErrorWhileFetchingOrder: boolean;
-  total: number,
-  totalToday: number
-}
-
-export const initialState: FeedStateType = {
+export const initialState: TFeedStateType = {
   orders: [],
   isFetchingFeed: false,
   isErrorWhileFetchingFeed: false,
@@ -23,22 +14,25 @@ export const initialState: FeedStateType = {
   isFetchingOrder: false,
   isErrorWhileFetchingOrder: false,
   total: 0,
-  totalToday: 0
+  totalToday: 0,
 };
 
-export const getFeed = () => (dispatch: Dispatch) => {
+export const getFeed = () => (dispatch: TAppDispatch) => {
   const { feedSocketInit } = feedSlice.actions;
   dispatch(feedSocketInit());
 };
 
-export const getOrderFromFeed = (id: string) => (dispatch: Dispatch, getState: () => RootState) => {
+export const getOrderFromFeed = (id: string) => (
+  dispatch: TAppDispatch,
+  getState: () => TRootState,
+) => {
   const { orderFetched, orderFetchError, orderIsFetching } = feedSlice.actions;
-  const feedOrders = getState().feed.orders as Order[];
+  const feedOrders = getState().feed.orders as IOrder[];
   if (!feedOrders.length) {
-    return
+    return;
   }
   dispatch(orderIsFetching());
-  const order = feedOrders.find( fo => fo.number === id);
+  const order = feedOrders.find((fo) => fo.number === id);
   if (!order) {
     dispatch(orderFetchError());
     toast.error('Заказ не найден среди всех заказов');
@@ -51,45 +45,45 @@ export const feedSlice = createSlice({
   name: 'feed',
   initialState,
   reducers: {
-    feedFetched(state, { payload }) {
+    feedFetched(state: TFeedStateType, action: PayloadAction<TFeedFetchedType>) {
       state.isFetchingFeed = false;
       state.isErrorWhileFetchingFeed = false;
-      state.orders = payload.orders;
-      state.total = payload.total;
-      state.totalToday = payload.totalToday;
+      state.orders = action.payload.orders;
+      state.total = action.payload.total;
+      state.totalToday = action.payload.totalToday;
     },
-    feedSocketInit(state) {
+    feedSocketInit(state: TFeedStateType) {
       state.isFetchingFeed = true;
       state.isErrorWhileFetchingFeed = false;
     },
-    feedSocketClose(state) {
+    feedSocketClose(state: TFeedStateType) {
       state.isFetchingFeed = false;
       state.isErrorWhileFetchingFeed = false;
       state.orders = [];
       state.total = 0;
       state.totalToday = 0;
     },
-    myFeedSocketInit(state) {
+    myFeedSocketInit(state: TFeedStateType) {
       state.isFetchingFeed = true;
       state.isErrorWhileFetchingFeed = false;
     },
-    feedFetchError(state) {
+    feedFetchError(state: TFeedStateType) {
       state.isFetchingFeed = false;
       state.isErrorWhileFetchingFeed = true;
       state.orders = [];
       state.total = 0;
       state.totalToday = 0;
     },
-    orderFetched(state, { payload }) {
+    orderFetched(state: TFeedStateType, action: PayloadAction<IOrder>) {
       state.isFetchingOrder = false;
       state.isErrorWhileFetchingOrder = false;
-      state.order = payload;
+      state.order = action.payload;
     },
-    orderIsFetching(state) {
+    orderIsFetching(state: TFeedStateType) {
       state.isFetchingOrder = true;
       state.isErrorWhileFetchingOrder = false;
     },
-    orderFetchError(state) {
+    orderFetchError(state: TFeedStateType) {
       state.isFetchingOrder = false;
       state.isErrorWhileFetchingOrder = true;
       state.order = undefined;
@@ -97,10 +91,9 @@ export const feedSlice = createSlice({
   },
 });
 
+export const { feedSocketInit, myFeedSocketInit, feedFetched, feedSocketClose } = feedSlice.actions;
 
-export const {
-  feedSocketInit,
-  myFeedSocketInit,
-  feedFetched,
-  feedSocketClose
-} = feedSlice.actions;
+export const feedSliceReducer = feedSlice.reducer as Reducer<
+  TFeedStateType,
+  TFeedSliceActionsType
+  >;
