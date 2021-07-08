@@ -2,6 +2,7 @@
   "name": "react-burger",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://romanavolodin.github.io/ReactYAPrakt/",
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.0",
     "@testing-library/jest-dom": "^5.11.4",
@@ -42,7 +43,9 @@
     "test-e2e": "./node_modules/.bin/cypress open",
     "test-coverage": "npm run test -- --coverage --watchAll=false --collectCoverageFrom=src/services/**",
     "eject": "react-scripts eject",
-    "pretty": "npx prettier --write ."
+    "pretty": "npx prettier --write .",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -77,6 +80,7 @@
     "enzyme": "^3.11.0",
     "eslint-plugin-cypress": "^2.11.3",
     "fetch-mock": "^9.11.0",
+    "gh-pages": "^3.2.3",
     "prettier": "2.2.1",
     "prop-types": "^15.7.2",
     "redux-mock-store": "^1.5.4"
